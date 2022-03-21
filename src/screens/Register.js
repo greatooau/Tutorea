@@ -16,22 +16,28 @@ const Register = ({navigation}) => {
                 </TouchableOpacity>
                 
                 <Text style={[styles.text, styles.h1]}>Registrar</Text>
-                <Text style={styles.text}>Ingresa tus credenciales</Text>
+                <Text style={styles.text}>Ingresa tus datos para el registro</Text>
             </View>
 
             <View style={styles.form}>
                 <FormTextInput placeholder="Escribe tu nombre de usuario" fieldName="Nombre de usuario"/>
+                <FormTextInput placeholder="Escribe tu correo electrónico" fieldName="Correo Electrónico" isPassword={true}/>
                 <FormTextInput placeholder="Escribe tu contraseña" fieldName="Contraseña" isPassword={true}/>
+                <FormTextInput placeholder="Confirmar contraseña" fieldName="Confirmar contraseña" isPassword={true}/>
+                <FormTextInput placeholder="Selecciona tu sexo" fieldName="Sexo"/>
+                <FormTextInput placeholder="Selecciona tu fecha de nacimiento" fieldName="Fecha de nacimiento"/>
+                <FormTextInput placeholder="Escribe tu número de teléfono" fieldName="Número de teléfono"/>
             </View>
 
             <TouchableOpacity style={{marginLeft:50, marginVertical:10}} onPress={() => navigation.navigate('Register')}>
                 <Text style={styles.link}>¿Olvidaste tu contraseña?</Text>
             </TouchableOpacity>
 
-            <AppButton buttonText='Ingresar'/>
+            <View style={{flexDirection:'row', justifyContent:'center'}}><AppButton buttonText='Ingresar'/></View>
+            
             <View style={styles.buttonTextDown}>
                 <Text style={{color: '#1c3252'}}>¿Ya tienes una cuenta?</Text>
-                <TouchableOpacity  onPress={() => navigation.navigate('Register')}>
+                <TouchableOpacity  onPress={() => navigation.navigate('Login')}>
                     <Text style={styles.link}>Ingresa aquí</Text>
                 </TouchableOpacity>
             </View>
@@ -73,7 +79,8 @@ const styles = StyleSheet.create({
     buttonTextDown: {
         flexDirection:'column',
         alignItems:'center',
-        marginTop:20
+        marginTop:20,
+        paddingBottom:50
     },
     bottomTextContainer: {
         flex:1,

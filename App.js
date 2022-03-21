@@ -2,6 +2,8 @@
 import LoginRegister from './src/screens/LoginRegister';
 import Register from './src/screens/Register';
 import Login from './src/screens/Login';
+import ResetPassword from './src/screens/ResetPassword';
+import VerifyEmail from './src/screens/VerifyEmail';
 
 //Navigation
 import { NavigationContainer } from '@react-navigation/native';
@@ -38,6 +40,8 @@ export default App = () => {
         <Stack.Screen component={LoginRegister} name="LoginRegister" options={{ headerShown: false }}/>
         <Stack.Screen component={Register} name="Register" options={{ headerShown: false }}/>
         <Stack.Screen component={Login} name="Login" options={{ headerShown: false }}/>
+        <Stack.Screen component={ResetPassword} name="ResetPassword" options={{headerShown:false}}/>
+        <Stack.Screen component={VerifyEmail} name="VerifyEmail" options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   )

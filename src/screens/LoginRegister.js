@@ -15,9 +15,11 @@ const LoginRegister = ({ navigation }) => {
             <View style={styles.imageContainer}>
               <Image style={styles.image} source={require('../../assets/img/welcome.png')}/>
             </View>
-
-            <AppButton buttonText="Ingresar" onPress={() => navigation.navigate('Login')}/>
-            <AppButton buttonText="Registrar" onPress={() => navigation.navigate('Register')}/>
+            <View style={{flexDirection:'column', alignItems:'center'}}>
+              <AppButton buttonText="Ingresar" onPress={() => navigation.navigate('Login')}/>
+              <AppButton buttonText="Registrar" onPress={() => navigation.navigate('Register')}/>
+            </View>
+            
 
             <View style={styles.bottomTextContainer}>
               <Text style={styles.bottomText}>Tutorea</Text>

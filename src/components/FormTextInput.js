@@ -2,14 +2,13 @@ import { StyleSheet, View, TextInput, Text, Touchable } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { useState } from 'react';
 
-const FormTextInput = ({ placeholder, fieldName, isPassword }) => {
-
+const FormTextInput = ({ placeholder, fieldName, fieldNameColor, isPassword }) => {
     const [ visible, setVisible ] = useState(false);
-
+    const [text, setText] = useState('');
     return(
 
         <View style={styles.container}>
-            <Text style={styles.fieldName}>{fieldName}</Text>
+            <Text style={[styles.fieldName, {color: fieldNameColor ? fieldNameColor : '#fff',}]}>{fieldName}</Text>
 
             <View style={[styles.form, styles.shadowProp]}>
                 
@@ -22,12 +21,13 @@ const FormTextInput = ({ placeholder, fieldName, isPassword }) => {
     );
 };
 
+export default FormTextInput;
+
 const styles = StyleSheet.create({
     container:{
         marginBottom:10
     },
     fieldName:{
-        color: '#fff',
         fontSize:14,
         marginVertical:10
     },
@@ -54,5 +54,3 @@ const styles = StyleSheet.create({
         marginLeft:15
     }
 });
-
-export default FormTextInput;
