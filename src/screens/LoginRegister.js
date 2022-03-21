@@ -15,10 +15,9 @@ const LoginRegister = ({ navigation }) => {
             <View style={styles.imageContainer}>
               <Image style={styles.image} source={require('../../assets/img/welcome.png')}/>
             </View>
-            <View style={styles.buttons}>
-              <AppButton buttonText="Ingresar" onPress={() => navigation.navigate('Login')}/>
-              <AppButton buttonText="Registrar" onPress={() => navigation.navigate('Register')}/>
-            </View>
+
+            <AppButton buttonText="Ingresar" onPress={() => navigation.navigate('Login')}/>
+            <AppButton buttonText="Registrar" onPress={() => navigation.navigate('Register')}/>
 
             <View style={styles.bottomTextContainer}>
               <Text style={styles.bottomText}>Tutorea</Text>
@@ -54,12 +53,12 @@ const styles = StyleSheet.create({
       maxHeight:170,
       maxWidth: 350,
     },
-    buttons: {
-      paddingBottom: '40%'
-    },
     bottomTextContainer: {
-      flexDirection: 'row',
-      justifyContent: 'center',
+      flex:1,
+      flexDirection: 'column',
+      alignItems:'center',
+      justifyContent: 'flex-end',
+      marginBottom:20
     },
     bottomText: {
       fontFamily: 'lato-bold',

@@ -1,70 +1,93 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image} from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-//Components
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import FormTextInput from '../components/FormTextInput';
 import AppButton from '../components/AppButton';
+import { LinearGradient } from 'expo-linear-gradient';
+import Arrow from '../components/Arrow';
+import { StatusBar } from 'expo-status-bar';
 
-export default Register = ({ navigation }) => {
-    return (
-        <LinearGradient colors={['rgb(28,50,82)', 'transparent']} style={styles.page}>
+const Register = ({navigation}) => {
+    return(
+        <ScrollView>
+          <LinearGradient colors={['rgb(28,50,82)', 'transparent']} style={styles.page}>
 
-            <View style={styles.titleContainer}>
-              <Text style={styles.titleText}>Bienvenido a Tutorea!</Text>
+            <View style={styles.arrow}>
+                <TouchableOpacity onPress={() => navigation.navigate('LoginRegister')}>
+                    <Arrow color="#fff"/>
+                </TouchableOpacity>
+                
+                <Text style={[styles.text, styles.h1]}>Registrar</Text>
+                <Text style={styles.text}>Ingresa tus credenciales</Text>
             </View>
 
-            <View style={styles.imageContainer}>
-              <Image style={styles.image} source={require('../../assets/img/welcome.png')}/>
-            </View>
-            <View style={styles.buttons}>
-              <AppButton buttonText="Ingresar"/>
-              <AppButton buttonText="Registrar"/>
+            <View style={styles.form}>
+                <FormTextInput placeholder="Escribe tu nombre de usuario" fieldName="Nombre de usuario"/>
+                <FormTextInput placeholder="Escribe tu contraseña" fieldName="Contraseña" isPassword={true}/>
             </View>
 
+            <TouchableOpacity style={{marginLeft:50, marginVertical:10}} onPress={() => navigation.navigate('Register')}>
+                <Text style={styles.link}>¿Olvidaste tu contraseña?</Text>
+            </TouchableOpacity>
+
+            <AppButton buttonText='Ingresar'/>
+            <View style={styles.buttonTextDown}>
+                <Text style={{color: '#1c3252'}}>¿Ya tienes una cuenta?</Text>
+                <TouchableOpacity  onPress={() => navigation.navigate('Register')}>
+                    <Text style={styles.link}>Ingresa aquí</Text>
+                </TouchableOpacity>
+            </View>
             <View style={styles.bottomTextContainer}>
               <Text style={styles.bottomText}>Tutorea</Text>
             </View>
             <StatusBar style="auto" />
-
-        </LinearGradient>
-    );
-}
-
+          </LinearGradient>
+        </ScrollView>
+       
+    )
+};
 
 const styles = StyleSheet.create({
-    page: {
-      flex:1,
+    page:{
+        flex:1,
     },
-    titleContainer: {
-      flexDirection: 'row',
-      marginTop: 50,
-      justifyContent: 'center',
-      paddingHorizontal:50
+    text: {
+        color: '#fff'
     },
-    titleText: {
-      fontSize: 35,
-      color: '#ffff',
-      textAlign:'center'
+    link:{
+        color: '#1c3252',
+        textDecorationLine: 'underline',
+        textDecorationColor: '#1c3252'
     },
-    imageContainer: {
-      flexDirection: 'row',
-      justifyContent:'center',
-      paddingVertical:65,
+    h1: {
+        fontSize:30
     },
-    image: {
-      maxHeight:170,
-      maxWidth: 350,
+    arrow:{
+        flexDirection:'column',
+        marginLeft:50,
+        marginTop:'30%'
     },
-    buttons: {
-      paddingBottom: '40%'
+    form: {
+        flexDirection:'column',
+        alignItems:'center',
+        marginTop:60
+    },
+    buttonTextDown: {
+        flexDirection:'column',
+        alignItems:'center',
+        marginTop:20
     },
     bottomTextContainer: {
-      flexDirection: 'row',
-      justifyContent: 'center',
+        flex:1,
+        flexDirection: 'column',
+        alignItems:'center',
+        justifyContent: 'flex-end',
+        marginBottom:20
+
     },
     bottomText: {
-      fontFamily: 'lato-bold',
-      color: '#1c3252',
-      fontSize: 35,
-      fontWeight: '700'
+        fontFamily: 'lato-bold',
+        color: '#1c3252',
+        fontSize: 35,
     }
 });
+
+export default Register;
