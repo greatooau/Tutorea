@@ -4,7 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 //Components
 import AppButton from '../components/AppButton';
 
-export default Login = () => {
+const LoginRegister = ({ navigation }) => {
     return (
         <LinearGradient colors={['rgb(28,50,82)', 'transparent']} style={styles.page}>
 
@@ -13,11 +13,11 @@ export default Login = () => {
             </View>
 
             <View style={styles.imageContainer}>
-              <Image style={styles.image} source={require('../assets/img/welcome.png')}/>
+              <Image style={styles.image} source={require('../../assets/img/welcome.png')}/>
             </View>
             <View style={styles.buttons}>
-              <AppButton buttonText="Ingresar"/>
-              <AppButton buttonText="Registrar"/>
+              <AppButton buttonText="Ingresar" onPress={() => navigation.navigate('Login')}/>
+              <AppButton buttonText="Registrar" onPress={() => navigation.navigate('Register')}/>
             </View>
 
             <View style={styles.bottomTextContainer}>
@@ -55,16 +55,17 @@ const styles = StyleSheet.create({
       maxWidth: 350,
     },
     buttons: {
-      paddingBottom: 180
+      paddingBottom: '40%'
     },
     bottomTextContainer: {
       flexDirection: 'row',
       justifyContent: 'center',
     },
     bottomText: {
-      fontFamily: 'Lato',
+      fontFamily: 'lato-bold',
       color: '#1c3252',
       fontSize: 35,
-      fontWeight: '700'
     }
 });
+
+export default LoginRegister;

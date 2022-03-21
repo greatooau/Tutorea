@@ -1,8 +1,8 @@
 import { TouchableOpacity, Text, StyleSheet } from 'react-native'
 
-export default AppButton = ({ buttonText }) => {
+export default AppButton = ({ buttonText, onPress}) => {
     return (
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={onPress}>
             <Text style={styles.buttonText}>{buttonText}</Text>
         </TouchableOpacity>
     );
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         marginTop:17
     },
     buttonText: {
-        fontFamily:'Lato',
+        fontFamily:'lato-regular',
         color:'#fff',
         fontSize:20,
     }
