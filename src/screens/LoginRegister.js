@@ -1,28 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image} from 'react-native';
+
+import { StyleSheet, Text, View, Image, StatusBar } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 //Components
 import AppButton from '../components/AppButton';
 
+
+
 const LoginRegister = ({ navigation }) => {
     return (
         <LinearGradient colors={['rgb(28,50,82)', 'transparent']} style={styles.page}>
-
+            <StatusBar backgroundColor="black"/>
             <View style={styles.titleContainer}>
               <Text style={styles.titleText}>Bienvenido a Tutorea!</Text>
             </View>
-
             <View style={styles.imageContainer}>
-              <Image style={styles.image} source={require('../../assets/img/welcome.png')}/>
+              <Image style={styles.image} source={require('../../assets/img/png/welcome.png')}/>
             </View>
-
-            <AppButton buttonText="Ingresar" onPress={() => navigation.navigate('Login')}/>
-            <AppButton buttonText="Registrar" onPress={() => navigation.navigate('Register')}/>
+            <View style={{flexDirection:'column', alignItems:'center'}}>
+              <AppButton buttonText="Ingresar" onPress={() => navigation.navigate('Login')}/>
+              <AppButton buttonText="Registrar" onPress={() => navigation.navigate('Register')}/>
+            </View>
+            
 
             <View style={styles.bottomTextContainer}>
               <Text style={styles.bottomText}>Tutorea</Text>
             </View>
-            <StatusBar style="auto" />
 
         </LinearGradient>
     );

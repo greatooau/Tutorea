@@ -1,21 +1,20 @@
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, StatusBar} from 'react-native';
 import FormTextInput from '../components/FormTextInput';
 import AppButton from '../components/AppButton';
 import { LinearGradient } from 'expo-linear-gradient';
 import Arrow from '../components/Arrow';
-import { StatusBar } from 'expo-status-bar';
 
 const Login = ({navigation}) => {
     return(
         <LinearGradient colors={['rgb(28,50,82)', 'transparent']} style={styles.page}>
-
+            <StatusBar backgroundColor="black"/>
             <View style={styles.arrow}>
                 <TouchableOpacity onPress={() => navigation.navigate('LoginRegister')}>
                     <Arrow color="#fff"/>
                 </TouchableOpacity>
                 
                 <Text style={[styles.text, styles.h1]}>Ingresar</Text>
-                <Text style={styles.text}>Ingresa tus credenciales</Text>
+                <Text style={[styles.text, {fontFamily: 'lato-regular'}]}>Ingresa tus credenciales</Text>
             </View>
 
             <View style={styles.form}>
@@ -23,11 +22,12 @@ const Login = ({navigation}) => {
                 <FormTextInput placeholder="Escribe tu contraseña" fieldName="Contraseña" isPassword={true}/>
             </View>
 
-            <TouchableOpacity style={{marginLeft:50, marginVertical:10}} onPress={() => navigation.navigate('Register')}>
+            <TouchableOpacity style={{marginLeft:50, marginVertical:10}} onPress={() => navigation.navigate('ResetPassword')}>
                 <Text style={styles.link}>¿Olvidaste tu contraseña?</Text>
             </TouchableOpacity>
 
-            <AppButton buttonText='Ingresar'/>
+            <View style={{flexDirection:'row', justifyContent:'center'}}><AppButton buttonText='Ingresar' onPress={() => navigation.navigate('Home')}/></View>
+            
             <View style={styles.buttonTextDown}>
                 <Text style={{color: '#1c3252'}}>¿No tienes una cuenta?</Text>
                 <TouchableOpacity  onPress={() => navigation.navigate('Register')}>
@@ -37,7 +37,6 @@ const Login = ({navigation}) => {
             <View style={styles.bottomTextContainer}>
               <Text style={styles.bottomText}>Tutorea</Text>
             </View>
-            <StatusBar style="auto" />
         </LinearGradient>
     )
 };
