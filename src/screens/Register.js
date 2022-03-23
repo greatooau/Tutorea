@@ -1,51 +1,60 @@
-import { StyleSheet, View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView, StatusBar } from 'react-native';
 import FormTextInput from '../components/FormTextInput';
 import AppButton from '../components/AppButton';
 import { LinearGradient } from 'expo-linear-gradient';
 import Arrow from '../components/Arrow';
-import { StatusBar } from 'expo-status-bar';
+import { useState } from 'react';
 
 const Register = ({navigation}) => {
+
+    const [userName, setUserName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [name, setName] = useState('');
+    const [lastname, setLastname] = useState('');
+    const [sex, setSex] = useState('');
+    const [bornDate, setBornDate] = useState('');
+    const [phone, setPhone] = useState('');
     return(
         <ScrollView>
-          <LinearGradient colors={['rgb(28,50,82)', 'transparent']} style={styles.page}>
+            <StatusBar backgroundColor="black"/>
+            <LinearGradient colors={['rgb(28,50,82)', 'transparent']} style={styles.page}>
+          
+                <View style={styles.arrow}>
+                    <TouchableOpacity onPress={() => navigation.navigate('LoginRegister')}>
+                        <Arrow color="#fff"/>
+                    </TouchableOpacity>
+                    
+                    <Text style={[styles.text, styles.h1]}>Registrar</Text>
+                    <Text style={styles.text}>Ingresa tus datos para el registro</Text>
+                </View>
 
-            <View style={styles.arrow}>
-                <TouchableOpacity onPress={() => navigation.navigate('LoginRegister')}>
-                    <Arrow color="#fff"/>
-                </TouchableOpacity>
+                <View style={styles.form}>
+                    <FormTextInput placeholder="Escribe tu nombre de usuario" fieldName="Nombre de usuario" set={setUserName} value={userName}/>
+                    <FormTextInput placeholder="Escribe tu correo electrónico" fieldName="Correo Electrónico" isPassword={true} set={setEmail} value={email}/>
+                    <FormTextInput placeholder="Escribe tu contraseña" fieldName="Contraseña" isPassword={true} set={setPassword} value={password}/>
+                    <FormTextInput placeholder="Confirmar contraseña" fieldName="Confirmar contraseña" isPassword={true} set={setConfirmPassword} value={confirmPassword}/>
+                    <FormTextInput placeholder="Escribe tu nombre" fieldName="Nombre" set={setName} value={userName}/>
+                    <FormTextInput placeholder="Escribe tu apellido" fieldName="Apellido" set={setLastname} value={userName}/>
+                    <FormTextInput placeholder="Selecciona tu sexo" fieldName="Sexo" set={setSex} value={sex}/>
+                    <FormTextInput placeholder="Selecciona tu fecha de nacimiento" fieldName="Fecha de nacimiento" set={setBornDate} value={bornDate}/>
+                    <FormTextInput placeholder="Escribe tu número de teléfono" fieldName="Número de teléfono" set={setPhone} value={phone}/>
+                </View>
+
+                <View style={{flexDirection:'row', justifyContent:'center'}}><AppButton buttonText='Ingresar'/></View>
                 
-                <Text style={[styles.text, styles.h1]}>Registrar</Text>
-                <Text style={styles.text}>Ingresa tus datos para el registro</Text>
-            </View>
-
-            <View style={styles.form}>
-                <FormTextInput placeholder="Escribe tu nombre de usuario" fieldName="Nombre de usuario"/>
-                <FormTextInput placeholder="Escribe tu correo electrónico" fieldName="Correo Electrónico" isPassword={true}/>
-                <FormTextInput placeholder="Escribe tu contraseña" fieldName="Contraseña" isPassword={true}/>
-                <FormTextInput placeholder="Confirmar contraseña" fieldName="Confirmar contraseña" isPassword={true}/>
-                <FormTextInput placeholder="Selecciona tu sexo" fieldName="Sexo"/>
-                <FormTextInput placeholder="Selecciona tu fecha de nacimiento" fieldName="Fecha de nacimiento"/>
-                <FormTextInput placeholder="Escribe tu número de teléfono" fieldName="Número de teléfono"/>
-            </View>
-
-            <TouchableOpacity style={{marginLeft:50, marginVertical:10}} onPress={() => navigation.navigate('Register')}>
-                <Text style={styles.link}>¿Olvidaste tu contraseña?</Text>
-            </TouchableOpacity>
-
-            <View style={{flexDirection:'row', justifyContent:'center'}}><AppButton buttonText='Ingresar'/></View>
+                <View style={styles.buttonTextDown}>
+                    <Text style={{color: '#1c3252'}}>¿Ya tienes una cuenta?</Text>
+                    <TouchableOpacity  onPress={() => navigation.navigate('Login')}>
+                        <Text style={styles.link}>Ingresa aquí</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.bottomTextContainer}>
+                <Text style={styles.bottomText}>Tutorea</Text>
+                </View>
             
-            <View style={styles.buttonTextDown}>
-                <Text style={{color: '#1c3252'}}>¿Ya tienes una cuenta?</Text>
-                <TouchableOpacity  onPress={() => navigation.navigate('Login')}>
-                    <Text style={styles.link}>Ingresa aquí</Text>
-                </TouchableOpacity>
-            </View>
-            <View style={styles.bottomTextContainer}>
-              <Text style={styles.bottomText}>Tutorea</Text>
-            </View>
-            <StatusBar style="auto" />
-          </LinearGradient>
+            </LinearGradient>
         </ScrollView>
        
     )

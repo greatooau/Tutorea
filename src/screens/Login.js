@@ -1,14 +1,13 @@
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, StatusBar} from 'react-native';
 import FormTextInput from '../components/FormTextInput';
 import AppButton from '../components/AppButton';
 import { LinearGradient } from 'expo-linear-gradient';
 import Arrow from '../components/Arrow';
-import { StatusBar } from 'expo-status-bar';
 
 const Login = ({navigation}) => {
     return(
         <LinearGradient colors={['rgb(28,50,82)', 'transparent']} style={styles.page}>
-
+            <StatusBar backgroundColor="black"/>
             <View style={styles.arrow}>
                 <TouchableOpacity onPress={() => navigation.navigate('LoginRegister')}>
                     <Arrow color="#fff"/>
@@ -27,7 +26,7 @@ const Login = ({navigation}) => {
                 <Text style={styles.link}>¿Olvidaste tu contraseña?</Text>
             </TouchableOpacity>
 
-            <View style={{flexDirection:'row', justifyContent:'center'}}><AppButton buttonText='Ingresar'/></View>
+            <View style={{flexDirection:'row', justifyContent:'center'}}><AppButton buttonText='Ingresar' onPress={() => navigation.navigate('Home')}/></View>
             
             <View style={styles.buttonTextDown}>
                 <Text style={{color: '#1c3252'}}>¿No tienes una cuenta?</Text>
@@ -38,7 +37,6 @@ const Login = ({navigation}) => {
             <View style={styles.bottomTextContainer}>
               <Text style={styles.bottomText}>Tutorea</Text>
             </View>
-            <StatusBar style="auto" />
         </LinearGradient>
     )
 };

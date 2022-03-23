@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, StatusBar } from 'react-native';
 import React from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import FormTextInput from '../components/FormTextInput';
@@ -6,10 +6,10 @@ import AppButton from '../components/AppButton';
 const ResetPassword = ({navigation}) => {
   return (
     <LinearGradient colors={['rgb(28,50,82)', 'transparent']} style={styles.page}>
+        <StatusBar backgroundColor="black"/>
         <View style={styles.title}>
             <Text style={styles.titleText}>Tutorea</Text>
         </View>
-
         <View style={styles.rectangle}>
             <View style={styles.rectangleTitleContainer}>
                 <Text style={[styles.rectangleText, styles.titleRectangleText]}>Reestablecer contraseña</Text>
@@ -29,11 +29,11 @@ export default ResetPassword;
 
 const styles = StyleSheet.create({
     page:{
-        flex:1
+        flex:1,
     },
     title:{
         marginLeft:20,
-        marginTop:40,
+        marginTop:20,
         marginBottom:10
     },
     titleText:{

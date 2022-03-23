@@ -2,7 +2,7 @@ import { StyleSheet, View, TextInput, Text, Touchable } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { useState } from 'react';
 
-const FormTextInput = ({ placeholder, fieldName, fieldNameColor, isPassword }) => {
+const FormTextInput = ({ placeholder, fieldName, fieldNameColor, isPassword, set, value}) => {
     const [ visible, setVisible ] = useState(false);
     const [text, setText] = useState('');
     return(
@@ -12,8 +12,7 @@ const FormTextInput = ({ placeholder, fieldName, fieldNameColor, isPassword }) =
 
             <View style={[styles.form, styles.shadowProp]}>
                 
-                
-                <TextInput secureTextEntry={isPassword} style={styles.textInput} placeholder={placeholder}/>
+                <TextInput secureTextEntry={isPassword} style={styles.textInput} placeholder={placeholder} onChangeText={(text) => set(...value, text)}/>
             
             </View>
         </View>

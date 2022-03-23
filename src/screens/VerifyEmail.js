@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, StatusBar } from 'react-native';
 import React from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import AppButton from '../components/AppButton';
@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 const VerifyEmail = ({navigation}) => {
   return (
     <LinearGradient colors={['rgb(28,50,82)', 'transparent']} style={styles.page}>
+        <StatusBar backgroundColor="black"/>
         <View style={styles.title}>
             <Text style={styles.titleText}>Tutorea</Text>
         </View>
@@ -33,11 +34,11 @@ export default VerifyEmail;
 
 const styles = StyleSheet.create({
     page:{
-        flex:1
+        flex:1,
     },
     title:{
         marginLeft:20,
-        marginTop:40,
+        marginTop:20,
         marginBottom:10
     },
     titleText:{
