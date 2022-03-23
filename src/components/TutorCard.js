@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, FlatList } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -13,7 +13,7 @@ const TutorCard = ({name, lastname, middleName, profilePhoto, stars, specializat
     }
   }
   return (
-    <View style={styles.card}>
+    <TouchableOpacity style={styles.card}>
       <View style={styles.imageContainer}>
         <Image source={{uri: profilePhoto}} style={styles.image}/>
       </View>
@@ -24,7 +24,7 @@ const TutorCard = ({name, lastname, middleName, profilePhoto, stars, specializat
         <Text style={{color:'#707070'}}>Especialización</Text>
         <Text>{specialization}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 

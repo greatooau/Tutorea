@@ -1,8 +1,11 @@
-import { StyleSheet, Text, View, StatusBar, Image, FlatList } from 'react-native'
-import React from 'react'
-import TutorCard from '../components/TutorCard'
-import { LinearGradient } from 'expo-linear-gradient'
-
+import { StyleSheet, Text, View, StatusBar, Image, FlatList, ScrollView } from 'react-native';
+import React from 'react';
+import TutorCard from '../components/TutorCard';
+import { LinearGradient } from 'expo-linear-gradient';
+import TutorsList from '../components/TutorsList';
+import Category from '../components/Category';
+import primaryColor from '../../constants/Colors';
+import SearchBar from '../components/SearchBar';
 const tutors = [
   {
     id:'fernanelcrackcarajo',
@@ -30,7 +33,6 @@ const tutors = [
     specialization:'Basktetball',
     profilePic: 'https://imgs.search.brave.com/SMswVKwY3R1-mQWMHp7o9aDseLC-7VeMWJ0l9u379Ls/rs:fit:1200:800:1/g:ce/aHR0cHM6Ly90b3du/c3F1YXJlLm1lZGlh/L3NpdGUvODEyL2Zp/bGVzLzIwMTcvMDMv/bWV0aG9kLW1hbjEu/anBnP3c9MTIwMCZo/PTAmemM9MSZzPTAm/YT10JnE9ODk',
     stars:2
-  
   },
   {
     id:'fernanelcrack2carajo',
@@ -58,30 +60,42 @@ const tutors = [
     specialization:'Basktetball',
     profilePic: 'https://imgs.search.brave.com/SMswVKwY3R1-mQWMHp7o9aDseLC-7VeMWJ0l9u379Ls/rs:fit:1200:800:1/g:ce/aHR0cHM6Ly90b3du/c3F1YXJlLm1lZGlh/L3NpdGUvODEyL2Zp/bGVzLzIwMTcvMDMv/bWV0aG9kLW1hbjEu/anBnP3c9MTIwMCZo/PTAmemM9MSZzPTAm/YT10JnE9ODk',
     stars:4
-  
   }
 ]
 
+const user = {
+  name: 'Eugenio',
+  middleName:'',
+  lastname: 'Torres'
+}
 
 const Home = ({navigation}) => {
   return (
-    <LinearGradient colors={['rgb(28,50,82)', 'transparent']} style={styles.page}>
+      <LinearGradient colors={['rgb(28,50,82)', 'transparent']} style={styles.page}>
+          
+          <StatusBar backgroundColor="black"/>
 
-        <StatusBar backgroundColor="black"/>
+          <View style={styles.title}>
+              <Text style={styles.titleText}>Tutorea</Text>
+          </View>
+          
+          <View style={styles.rectangle}>
+            <View style={styles.greeting}>
+              <Text style={[styles.greetingText, {fontSize:14, marginBottom:5}]}>Bienvenido,</Text>
+              <Text style={[styles.greetingText, {fontSize:30}]}>{user.name} {user.lastname} !</Text>
+            </View>
+            <SearchBar placeholder="Busque un tutor"/>
+            <View style={styles.categories}>
+              <Category categoryName="Tecnología" iconName="laptop" iconSource="Ent" color='#000000'/>
+              <Category categoryName="Ciencia" iconName="science" iconSource="Mat" color='#126D15'/>
+              <Category categoryName="Ciencias sociales"  iconName="book" iconSource="fa" color="#2587be" />
+              <Category categoryName="Idiomas" iconName="language" iconSource="Ent" color='#9A0D0D'/>
+            </View>
+            
 
-        <View style={styles.title}>
-            <Text style={styles.titleText}>Tutorea</Text>
-        </View>
-        
-        <View style={styles.rectangle}>
-            <FlatList contentContainerStyle={{flexGrow:0 ,justifyContent:'center'}}
-              data={tutors}
-              renderItem={({item})=>{return <View style={{flexDirection:'row', justifyContent:'center'}}><TutorCard profilePhoto={item.profilePic} name={item.name} middleName={item.middleName} lastname={item.lastname} stars={item.stars} specialization={item.specialization}/></View>}}
-              keyExtractor={(item) => item.id}
-            />
-        </View>
-      
-    </LinearGradient>
+            <TutorsList tutors={tutors}/>
+          </View>
+      </LinearGradient>
   )
 }
 
@@ -105,4 +119,19 @@ const styles = StyleSheet.create({
     flex:1,
     backgroundColor:'#ececec',
   },
+  greeting: {
+    marginVertical:'5%',
+    paddingLeft:'5%'
+  },
+  greetingText: {
+    color: primaryColor,
+    fontFamily: 'lato-regular'
+  },
+  categories:{
+    borderWidth:1,
+    flexDirection:'row',
+    justifyContent:'center',
+    height:'60%',
+    flexWrap:'wrap',
+  }
 })
