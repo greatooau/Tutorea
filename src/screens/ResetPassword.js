@@ -16,7 +16,7 @@ const ResetPassword = ({navigation}) => {
                 <Text style={[styles.rectangleText, styles.description]}>Ingresa el correo que está asociado a esta cuenta para enviar un correo con las instrucciones para reestablecer tu contraseña.</Text>
                 <FormTextInput fieldName="Correo electronico" fieldNameColor="#000" placeholder="Escribe un correo electrónico"/>
                 <AppButton buttonText="Enviar" onPress={() => navigation.navigate('VerifyEmail')}/>
-                <AppButton buttonText="Regresar" onPress={() => navigation.navigate('Login')}/>
+                <AppButton buttonText="Regresar" onPress={() => navigation.goBack()}/>
             </View>
         </View>
         

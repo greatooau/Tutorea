@@ -5,6 +5,9 @@ import { useState } from 'react';
 const FormTextInput = ({ placeholder, fieldName, fieldNameColor, isPassword, set, value}) => {
     const [ visible, setVisible ] = useState(false);
     const [text, setText] = useState('');
+
+    
+
     return(
 
         <View style={styles.container}>

@@ -9,7 +9,7 @@ const Login = ({navigation}) => {
         <LinearGradient colors={['rgb(28,50,82)', 'transparent']} style={styles.page}>
             <StatusBar backgroundColor="black"/>
             <View style={styles.arrow}>
-                <TouchableOpacity onPress={() => navigation.navigate('LoginRegister')}>
+                <TouchableOpacity onPress={() => navigation.popToTop()}>
                     <Arrow color="#fff"/>
                 </TouchableOpacity>
                 
@@ -26,7 +26,7 @@ const Login = ({navigation}) => {
                 <Text style={styles.link}>¿Olvidaste tu contraseña?</Text>
             </TouchableOpacity>
 
-            <View style={{flexDirection:'row', justifyContent:'center'}}><AppButton buttonText='Ingresar' onPress={() => navigation.navigate('Home')}/></View>
+            <View style={{flexDirection:'row', justifyContent:'center'}}><AppButton buttonText='Ingresar' onPress={() => navigation.navigate('Tab')}/></View>
             
             <View style={styles.buttonTextDown}>
                 <Text style={{color: '#1c3252'}}>¿No tienes una cuenta?</Text>

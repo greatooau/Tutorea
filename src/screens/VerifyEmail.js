@@ -17,7 +17,7 @@ const VerifyEmail = ({navigation}) => {
                 <Text style={[styles.rectangleText, styles.titleRectangleText]}>Verifica tu e-mail</Text>
                 <Text style={[styles.rectangleText, styles.description]}>Te hemos enviado las instrucciones para reestablecer tu contraseña.</Text>
                 <AppButton buttonText="He verificado mi e-mail" onPress={() => navigation.navigate('Login')}/>
-                <AppButton buttonText="Cancelar" onPress={() => navigation.navigate('Login')}/>
+                <AppButton buttonText="Cancelar" onPress={() => navigation.goBack()}/>
             </View>
             <View style={styles.bottomTextContainer}>
                 <Text style={styles.bottomText}>¿No recibiste el e-mail? Corrobora tu carpeta de spam o <Text onPress={() => navigation.navigate('ResetPassword')} style={{fontFamily: 'lato-bold', textDecorationLine:'underline'}}>intenta enviarlo nuevamente</Text> </Text>

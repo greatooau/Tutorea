@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import React from 'react';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import FaIcon from 'react-native-vector-icons/FontAwesome';
@@ -25,10 +25,10 @@ const Category = ({iconName, iconSource, categoryName, color}) => {
   }
 
   return (
-    <View style={styles.card}>
+    <TouchableOpacity style={styles.card}>
         {icon && icon}
         <Text style={styles.text}>{categoryName}</Text>
-    </View>
+    </TouchableOpacity>
   )
 }
 
@@ -40,14 +40,19 @@ const styles = StyleSheet.create({
         marginHorizontal:'1%',
         flexDirection:'column',
         alignItems:'center',
-        borderWidth:1,
+        borderBottomWidth:2,
+        borderRightWidth:1,
+        borderRightColor:'#d9d9d9',
+        borderBottomColor:'#d9d9d9',
         width:'45%',
-        height:'45%',
+        height:200,
         borderRadius:9,
         marginTop:'2%',
+        backgroundColor:'#fff'
     },
     text:{
       fontFamily:'lato-regular',
-      fontSize:14
+      fontSize:15,
+      marginVertical:10
     }
 })

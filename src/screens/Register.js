@@ -5,6 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Arrow from '../components/Arrow';
 import { useState } from 'react';
 
+
 const Register = ({navigation}) => {
 
     const [userName, setUserName] = useState('');
@@ -22,7 +23,7 @@ const Register = ({navigation}) => {
             <LinearGradient colors={['rgb(28,50,82)', 'transparent']} style={styles.page}>
           
                 <View style={styles.arrow}>
-                    <TouchableOpacity onPress={() => navigation.navigate('LoginRegister')}>
+                    <TouchableOpacity onPress={() => navigation.popToTop()}>
                         <Arrow color="#fff"/>
                     </TouchableOpacity>
                     

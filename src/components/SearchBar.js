@@ -1,20 +1,28 @@
-import { StyleSheet, View, TextInput, Text, Touchable } from 'react-native';
-import Icon from 'react-native-vector-icons/AntDesign';
+import { StyleSheet, View, TextInput, Text, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import IonIcon from 'react-native-vector-icons/Ionicons'
 import { useState } from 'react';
+import primaryColor from '../constants/Colors';
 
-const SearchBar = ({ placeholder, fieldName, fieldNameColor, isPassword, set, value}) => {
+const SearchBar = ({ placeholder, set, value}) => {
     const [ visible, setVisible ] = useState(false);
     const [text, setText] = useState('');
     return(
 
         <View style={styles.container}>
-            <Text style={[styles.fieldName, {color: fieldNameColor ? fieldNameColor : '#fff',}]}>{fieldName}</Text>
 
-            <View style={[styles.form, styles.shadowProp]}>
-                
-                <TextInput secureTextEntry={isPassword} style={styles.textInput} placeholder={placeholder}/>
-            
-            </View>
+                <View style={styles.searchSection}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder={placeholder}
+                        onChangeText={(searchString) => {this.setState({searchString})}}
+                        underlineColorAndroid="transparent"
+                    />
+                    <Icon style={styles.searchIcon} name="search" size={20} color="#000"/>
+                </View>
+                <TouchableOpacity style={styles.filter}>
+                    <IonIcon name="filter" size={25} color="#fff"/>
+                </TouchableOpacity>
         </View>
         
     );
@@ -24,32 +32,45 @@ export default SearchBar;
 
 const styles = StyleSheet.create({
     container:{
-        marginBottom:10
-    },
-    fieldName:{
-        fontSize:14,
-        marginVertical:10
-    },
-    form: {
-        
+        marginBottom:10,
         flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center',
+    },
+    searchSection: {
+        width:'75%',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: '#fff',
         borderRadius:9,
-        width:284,
-        height:40
+        borderBottomWidth:2,
+        borderRightWidth:1,
+        borderRightColor:'#d9d9d9',
+        borderBottomColor:'#d9d9d9',
     },
-    shadowProp: {
-        shadowColor: '#171717',
-        shadowOffset: {width: .2, height: 1},
-        shadowOpacity: 0.2,
-        shadowRadius: 3,
+    searchIcon: {
+        padding: 10,
+        marginRight:10
     },
-    icon:{
-        padding:10
+    input: {
+        flex: 1,
+        paddingTop: 10,
+        paddingRight: 10,
+        paddingBottom: 10,
+        paddingLeft: 15,
+        backgroundColor: '#fff',
+        color: '#424242',
+        borderRadius:9
     },
-    textInput: {
-        flex:1,
-        fontSize:14,
-        marginLeft:15
+    filter:{
+        backgroundColor:primaryColor,
+        flexDirection:'column',
+        justifyContent:'center',
+        alignItems:'center',
+        height:50,
+        width:50,
+        borderRadius:9,
+        marginLeft:10
     }
 });

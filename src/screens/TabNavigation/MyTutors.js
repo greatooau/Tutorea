@@ -1,11 +1,8 @@
-import { StyleSheet, Text, View, StatusBar, Image, FlatList, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
-import TutorCard from '../components/TutorCard';
-import { LinearGradient } from 'expo-linear-gradient';
-import TutorsList from '../components/TutorsList';
-import Category from '../components/Category';
 import primaryColor from '../../constants/Colors';
-import SearchBar from '../components/SearchBar';
+import { SearchBar, Category, TutorsList } from '../../components/Components';
+import IonIcon from 'react-native-vector-icons/Ionicons'
 const tutors = [
   {
     id:'fernanelcrackcarajo',
@@ -66,49 +63,49 @@ const tutors = [
 const user = {
   name: 'Eugenio',
   middleName:'',
-  lastname: 'Torres'
-}
+  lastname: 'Torres',
+  profilePic: 'https://imgs.search.brave.com/kJKQlgpWW1xyG9ktsinvjydfB1zC-gnHV6uZMG7-Mxw/rs:fit:439:493:1/g:ce/aHR0cHM6Ly9sYWNv/bHVtbmFyaWFibG9n/LmNvbS93cC1jb250/ZW50L3VwbG9hZHMv/MjAxNS8wNy9rb25h/bjAuanBn'
+};
 
-const Home = ({navigation}) => {
+const header = () => {
   return (
-      <LinearGradient colors={['rgb(28,50,82)', 'transparent']} style={styles.page}>
-          
+    <>
+      <View style={styles.title}>
+          <Text style={styles.titleText}>Tutorea</Text>
+          <View style={{flexDirection:'row',flex:1, justifyContent:'flex-end', alignItems:'center'}}>
+            <TouchableOpacity><IonIcon style={{marginRight:10}} size={30} name="notifications-outline" color="#fff"/></TouchableOpacity>
+            <TouchableOpacity><Image source={{uri: user.profilePic}} style={styles.userImage}/></TouchableOpacity>
+          </View>
+      </View>
+
+      <View style={styles.pinkRectangle}>
+        <Image style={styles.image} source={require('../../../assets/img/png/study.png')}/>
+        <Text style={{color:'#fff', fontFamily:'lato-bold', fontSize:35}}>Mis tutores</Text>
+      </View>
+    </>  
+  );
+};
+
+const MyTutors = ({navigation}) => {
+  return (
+      <>
           <StatusBar backgroundColor="black"/>
-
-          <View style={styles.title}>
-              <Text style={styles.titleText}>Tutorea</Text>
-          </View>
-          
           <View style={styles.rectangle}>
-            <View style={styles.greeting}>
-              <Text style={[styles.greetingText, {fontSize:14, marginBottom:5}]}>Bienvenido,</Text>
-              <Text style={[styles.greetingText, {fontSize:30}]}>{user.name} {user.lastname} !</Text>
-            </View>
-            <SearchBar placeholder="Busque un tutor"/>
-            <View style={styles.categories}>
-              <Category categoryName="Tecnología" iconName="laptop" iconSource="Ent" color='#000000'/>
-              <Category categoryName="Ciencia" iconName="science" iconSource="Mat" color='#126D15'/>
-              <Category categoryName="Ciencias sociales"  iconName="book" iconSource="fa" color="#2587be" />
-              <Category categoryName="Idiomas" iconName="language" iconSource="Ent" color='#9A0D0D'/>
-            </View>
-            
-
-            <TutorsList tutors={tutors}/>
+            <TutorsList tutors={tutors} header={header}/>
           </View>
-      </LinearGradient>
+      </>
   )
-}
+};
 
-export default Home
+export default MyTutors
 
 const styles = StyleSheet.create({
-  page:{
-    flex:1,
-  },
   title:{
-      marginLeft:20,
-      marginTop:20,
-      marginBottom:10
+      paddingLeft:20,
+      paddingTop:20,
+      paddingBottom:10,
+      backgroundColor:primaryColor,
+      flexDirection:'row'
   },
   titleText:{
       color:'#fff',
@@ -119,19 +116,21 @@ const styles = StyleSheet.create({
     flex:1,
     backgroundColor:'#ececec',
   },
-  greeting: {
-    marginVertical:'5%',
-    paddingLeft:'5%'
+  pinkRectangle:{
+    height:340,
+    backgroundColor: '#AF478C'.toLowerCase(),
+    flexDirection:'column',
+    alignItems:'center',
+    paddingTop:20
   },
-  greetingText: {
-    color: primaryColor,
-    fontFamily: 'lato-regular'
+  image:{
+    width:'80%',
+    height:250,
   },
-  categories:{
-    borderWidth:1,
-    flexDirection:'row',
-    justifyContent:'center',
-    height:'60%',
-    flexWrap:'wrap',
+  userImage:{
+    width:40,
+    height:40,
+    borderRadius:40,
+    marginHorizontal:20
   }
 })

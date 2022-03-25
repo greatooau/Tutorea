@@ -38,6 +38,10 @@ const styles = StyleSheet.create({
     borderRadius:9,
     flexDirection:'row',
     marginTop:30,
+    borderBottomWidth:2,
+    borderRightWidth:1,
+    borderRightColor:'#d9d9d9',
+    borderBottomColor:'#d9d9d9',
   },
   imageContainer:{
     width:'40%',

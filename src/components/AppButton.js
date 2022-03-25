@@ -1,12 +1,14 @@
 import { TouchableOpacity, Text, StyleSheet } from 'react-native'
 
-export default AppButton = ({ buttonText, onPress}) => {
+const AppButton = ({ buttonText, onPress}) => {
     return (
         <TouchableOpacity style={styles.button} onPress={onPress}>
             <Text style={styles.buttonText}>{buttonText}</Text>
         </TouchableOpacity>
     );
 };
+
+export default AppButton;
 
 const styles = StyleSheet.create({
     button: {
@@ -16,7 +18,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 50,
         borderRadius:15,
         height: 48,
-        width:227,
+        width:'75%',
         backgroundColor: '#1c3252',
         marginTop:17
     },
