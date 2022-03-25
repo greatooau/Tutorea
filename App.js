@@ -1,10 +1,4 @@
 //Screens
-/* import LoginRegister from './src/screens/LoginRegister';
-import Register from './src/screens/Register';
-import Login from './src/screens/Login';
-import ResetPassword from './src/screens/ResetPassword';
-import VerifyEmail from './src/screens/VerifyEmail';
-import Home from './src/screens/Home'; */
 import { Register, LoginRegister, Login, ResetPassword, VerifyEmail } from './src/screens/Screens'
 //Navigation
 import { NavigationContainer } from '@react-navigation/native';
@@ -35,19 +29,19 @@ export default App = () => {
   });
 
   if (!fontsLoaded) {
-    return <AppLoading />;
+    return <AppLoading  />;
   }
 
   return(
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen component={BottomBar} name="Tab"/>
+        
         <Stack.Screen component={LoginRegister} name="LoginRegister" />
         <Stack.Screen component={Register} name="Register" />
         <Stack.Screen component={Login} name="Login"/>
         <Stack.Screen component={ResetPassword} name="ResetPassword" />
         <Stack.Screen component={VerifyEmail} name="VerifyEmail"/>
-        
+        <Stack.Screen component={BottomBar} name="Tab"/>
       </Stack.Navigator>
     </NavigationContainer>
   )

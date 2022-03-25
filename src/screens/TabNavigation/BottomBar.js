@@ -3,7 +3,7 @@ import React from 'react'
 import Icon from 'react-native-vector-icons/Ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import {Home, MyProfile, MyTutors} from './TabScreens';
-import primaryColor from '../../constants/Colors';
+import {primaryColor} from '../../constants/Colors';
 
 const Tab = createBottomTabNavigator();
 const BottomBar = () => {
