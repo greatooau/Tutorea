@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, StatusBar, Image, FlatList, ScrollView, TouchableOpacity } from 'react-native';
 import React from 'react';
-import primaryColor from '../../constants/Colors';
+import {primaryColor} from '../../constants/Colors';
 import { SearchBar, Category, TutorsList } from '../../components/Components';
 import IonIcon from 'react-native-vector-icons/Ionicons'
 

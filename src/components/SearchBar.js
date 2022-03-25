@@ -2,7 +2,7 @@ import { StyleSheet, View, TextInput, Text, TouchableOpacity } from 'react-nativ
 import Icon from 'react-native-vector-icons/FontAwesome';
 import IonIcon from 'react-native-vector-icons/Ionicons'
 import { useState } from 'react';
-import primaryColor from '../constants/Colors';
+import {primaryColor} from '../constants/Colors';
 
 const SearchBar = ({ placeholder, set, value}) => {
     const [ visible, setVisible ] = useState(false);
