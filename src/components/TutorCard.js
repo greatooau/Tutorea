@@ -13,17 +13,17 @@ const TutorCard = ({name, lastname, middleName, profilePhoto, stars, specializat
     }
   }
   return (
-    <TouchableOpacity style={styles.card}>
-      <View style={styles.imageContainer}>
-        <Image source={{uri: profilePhoto}} style={styles.image}/>
-      </View>
+    <TouchableOpacity activeOpacity={0.7} delayPressIn={100} style={styles.card}>
+        <View style={styles.imageContainer}>
+          <Image source={{uri: profilePhoto}} style={styles.image}/>
+        </View>
 
-      <View style={styles.tutorInfo}>
-        <Text style={styles.tutorInfoText}>{name} {middleName !== '' ? middleName.charAt(0) + '. ' : ''}{lastname}</Text>
-        <View style={styles.starsContainer}>{starsDisplayed.map(element => element)}</View>
-        <Text style={{color:'#707070'}}>Especialización</Text>
-        <Text>{specialization}</Text>
-      </View>
+        <View style={styles.tutorInfo}>
+          <Text style={styles.tutorInfoText}>{name} {middleName !== '' ? middleName.charAt(0) + '. ' : ''}{lastname}</Text>
+          <View style={styles.starsContainer}>{starsDisplayed.map(element => element)}</View>
+          <Text style={{color:'#707070'}}>Especialización</Text>
+          <Text>{specialization}</Text>
+        </View>
     </TouchableOpacity>
   )
 }

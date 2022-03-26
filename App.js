@@ -1,5 +1,6 @@
 //Screens
 import { Register, LoginRegister, Login, ResetPassword, VerifyEmail } from './src/screens/Screens'
+import { EditProfile, ChangePassword, PayInfo } from './src/screens/TabNavigation/TabScreens';
 //Navigation
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -8,9 +9,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useFonts, } from '@expo-google-fonts/lato';
 import AppLoading from 'expo-app-loading';
 import BottomBar from './src/screens/TabNavigation/BottomBar';
-
-
-
+import  { AccountProvider }  from './src/context/AccountContext';
 const Stack = createNativeStackNavigator();
 
 export default App = () => {
@@ -29,21 +28,26 @@ export default App = () => {
   });
 
   if (!fontsLoaded) {
-    return <AppLoading  />;
+    return <AppLoading />;
   }
 
   return(
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        
-        <Stack.Screen component={LoginRegister} name="LoginRegister" />
-        <Stack.Screen component={Register} name="Register" />
-        <Stack.Screen component={Login} name="Login"/>
-        <Stack.Screen component={ResetPassword} name="ResetPassword" />
-        <Stack.Screen component={VerifyEmail} name="VerifyEmail"/>
-        <Stack.Screen component={BottomBar} name="Tab"/>
-      </Stack.Navigator>
-    </NavigationContainer>
+      <AccountProvider>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          
+          <Stack.Screen component={LoginRegister} name="LoginRegister" />
+          <Stack.Screen component={Register} name="Register" />
+          <Stack.Screen component={Login} name="Login"/>
+          <Stack.Screen component={ResetPassword} name="ResetPassword" />
+          <Stack.Screen component={VerifyEmail} name="VerifyEmail"/>
+          <Stack.Screen component={BottomBar} name="Tab"/>
+          <Stack.Screen component={EditProfile} name="EditProfile"/>
+          <Stack.Screen component={ChangePassword} name='ChangePassword'/>
+          <Stack.Screen component={PayInfo} name="PayInfo"/>
+        </Stack.Navigator>
+      </NavigationContainer>
+      </AccountProvider>
   )
 };
 

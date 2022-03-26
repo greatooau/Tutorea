@@ -5,6 +5,9 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Arrow from '../components/Arrow';
 
 const Login = ({navigation}) => {
+
+
+    
     return(
         <LinearGradient colors={['rgb(28,50,82)', 'transparent']} style={styles.page}>
             <StatusBar backgroundColor="black"/>

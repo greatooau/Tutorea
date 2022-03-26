@@ -2,48 +2,43 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import IonIcon from 'react-native-vector-icons/Ionicons'
 import MatIcon from 'react-native-vector-icons/MaterialIcons'
 import React from 'react'
-import{ primaryColor, secondaryColor }from '../../constants/Colors'
-
-const user = {
-  name: 'Eugenio',
-  middleName:'',
-  lastname: 'Torres',
-  profilePic: 'https://imgs.search.brave.com/kJKQlgpWW1xyG9ktsinvjydfB1zC-gnHV6uZMG7-Mxw/rs:fit:439:493:1/g:ce/aHR0cHM6Ly9sYWNv/bHVtbmFyaWFibG9n/LmNvbS93cC1jb250/ZW50L3VwbG9hZHMv/MjAxNS8wNy9rb25h/bjAuanBn'
-};
-
-const MyProfile = () => {
+import { primaryColor, secondaryColor }from '../../constants/Colors'
+import { AccountContext } from '../../context/AccountContext'
+import { useContext } from 'react'
+const MyProfile = ({navigation}) => {
+  const [user, setUser] = useContext(AccountContext);
   return (
     <>
       <View style={styles.title}>
           <Text style={styles.titleText}>Tutorea</Text>
           <View style={{flexDirection:'row',flex:1, justifyContent:'flex-end', alignItems:'center'}}>
-            <TouchableOpacity><IonIcon style={{marginRight:20}} size={30} name="notifications-outline" color="#fff"/></TouchableOpacity>
+            <TouchableOpacity activeOpacity={0.7}><IonIcon style={{marginRight:20}} size={30} name="notifications-outline" color="#fff"/></TouchableOpacity>
             
           </View>
       </View>
 
       <View style={styles.profile}>
-        <TouchableOpacity><Image source={{uri:user.profilePic}} style={styles.userImage}/></TouchableOpacity>
+        <TouchableOpacity activeOpacity={0.7}><Image source={{uri:user.profilePic}} style={styles.userImage}/></TouchableOpacity>
           <View style={{paddingTop:20}}>
-            <Text style={[styles.name, styles.profileText]}>{user.name} {user.lastname}</Text>
+            <Text style={[styles.name, styles.profileText]}>{user.name} {user.lastname.length > 7 ? user.lastname.charAt(0) + '.' : user.lastname}</Text>
             <Text style={styles.profileText}>Perfil</Text>
           </View>
       </View>
 
       <View style={styles.options}>
-        <TouchableOpacity style={styles.individualOption}>
+        <TouchableOpacity onPress={()=> navigation.navigate('EditProfile')} activeOpacity={0.7} style={styles.individualOption}>
           <IonIcon style={styles.icon} size={50} name="settings-outline" color={secondaryColor}/>
-          <Text style={styles.secondaryColorText}>Configuración</Text>
+          <Text style={styles.secondaryColorText}>Editar Perfil</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.individualOption}>
+        <TouchableOpacity onPress={()=> navigation.navigate('ChangePassword')} activeOpacity={0.7} style={styles.individualOption}>
           <IonIcon style={styles.icon} size={50} name="key-outline" color={secondaryColor}/>
           <Text style={styles.secondaryColorText}>Cambiar contraseña</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.individualOption}>
+        <TouchableOpacity onPress={()=> navigation.navigate('PayInfo')} activeOpacity={0.7} style={styles.individualOption}>
           <MatIcon style={styles.icon} size={50} name="payment" color={secondaryColor}/>
           <Text style={styles.secondaryColorText}>Información de pago</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.individualOption}>
+        <TouchableOpacity activeOpacity={0.7} style={styles.individualOption}>
           <MatIcon style={styles.icon} size={50} name="logout" color={secondaryColor}/>
           <Text style={styles.secondaryColorText}>Cerrar sesión</Text>
         </TouchableOpacity>

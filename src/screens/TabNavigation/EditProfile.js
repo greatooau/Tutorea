@@ -1,19 +1,27 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Image, StatusBar, ScrollView } from 'react-native'
 import IonIcon from 'react-native-vector-icons/Ionicons'
 import MatIcon from 'react-native-vector-icons/MaterialIcons'
 import React from 'react'
 import{ primaryColor, secondaryColor }from '../../constants/Colors'
+import {FormTextInput} from '../../components/Components'
+import { AppButton } from '../../components/Components'
+import { AccountContext } from '../../context/AccountContext';
+import { useContext, useState } from 'react';
+const EditProfile = ({navigation}) => {
 
-const user = {
-  name: 'Eugenio',
-  middleName:'',
-  lastname: 'Torres',
-  profilePic: 'https://imgs.search.brave.com/kJKQlgpWW1xyG9ktsinvjydfB1zC-gnHV6uZMG7-Mxw/rs:fit:439:493:1/g:ce/aHR0cHM6Ly9sYWNv/bHVtbmFyaWFibG9n/LmNvbS93cC1jb250/ZW50L3VwbG9hZHMv/MjAxNS8wNy9rb25h/bjAuanBn'
-};
+  const [user, setUser] = useContext(AccountContext);
 
-const MyProfile = () => {
+  const [userName, setUserName] = useState(user.userName);
+  const [email, setEmail] = useState(user.email);
+  const [name, setName] = useState(user.name);
+  const [lastname, setLastname] = useState(user.lastname);
+  const [sex, setSex] = useState(user.sex);
+  const [bornDate, setBornDate] = useState(user.bornDate);
+  const [phone, setPhone] = useState(user.phone);
+
   return (
-    <>
+    <ScrollView>
+      <StatusBar/>
       <View style={styles.title}>
           <Text style={styles.titleText}>Tutorea</Text>
           <View style={{flexDirection:'row',flex:1, justifyContent:'flex-end', alignItems:'center'}}>
@@ -23,37 +31,37 @@ const MyProfile = () => {
       </View>
 
       <View style={styles.profile}>
-        <TouchableOpacity><Image source={{uri:user.profilePic}} style={styles.userImage}/></TouchableOpacity>
+        <TouchableOpacity activeOpacity={0.7}><Image source={{uri:user.profilePic}} style={styles.userImage}/></TouchableOpacity>
           <View style={{paddingTop:20}}>
             <Text style={[styles.name, styles.profileText]}>{user.name} {user.lastname}</Text>
-            <Text style={styles.profileText}>Perfil</Text>
+            <Text style={styles.profileText}>Editar perfil</Text>
           </View>
       </View>
 
-      <View style={styles.options}>
-        <TouchableOpacity style={styles.individualOption}>
-          <IonIcon style={styles.icon} size={50} name="settings-outline" color={secondaryColor}/>
-          <Text style={styles.secondaryColorText}>Configuración</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.individualOption}>
-          <IonIcon style={styles.icon} size={50} name="key-outline" color={secondaryColor}/>
-          <Text style={styles.secondaryColorText}>Cambiar contraseña</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.individualOption}>
-          <MatIcon style={styles.icon} size={50} name="payment" color={secondaryColor}/>
-          <Text style={styles.secondaryColorText}>Información de pago</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.individualOption}>
-          <MatIcon style={styles.icon} size={50} name="logout" color={secondaryColor}/>
-          <Text style={styles.secondaryColorText}>Cerrar sesión</Text>
-        </TouchableOpacity>
+      <View style={styles.form}>
+      <FormTextInput placeholder="Escribe tu nombre de usuario" fieldName="Nombre de usuario" fieldNameColor={primaryColor} value={userName} setProp={setUserName}/>
+      <FormTextInput placeholder="Escribe tu correo electrónico" fieldName="Correo Electrónico" fieldNameColor={primaryColor} value={email} setProp={setEmail}/>
+      <FormTextInput placeholder="Escribe tu nombre" fieldName="Nombre" fieldNameColor={primaryColor} value={name} setProp={setName}/>
+      <FormTextInput placeholder="Escribe tu apellido" fieldName="Apellido" fieldNameColor={primaryColor} value={lastname} setProp={setLastname}/>
+      <FormTextInput placeholder="Selecciona tu sexo" fieldName="Sexo" fieldNameColor={primaryColor} value={sex} setProp={setSex}/>
+      <FormTextInput placeholder="Selecciona tu fecha de nacimiento" fieldName="Fecha de nacimiento" fieldNameColor={primaryColor} value={bornDate} setProp={setBornDate}/>
+      <FormTextInput placeholder="Escribe tu número de teléfono" fieldName="Número de teléfono" fieldNameColor={primaryColor} value={phone} setProp={setPhone}/>
+      
+      </View>
+      <View style={{flexDirection:'column', alignItems:'center',  paddingBottom:50}}>
+        <AppButton buttonText="Guardar" onPress={() => {
+          
+          setUser({...user, userName:userName, email:email, name:name, lastname: lastname, sex:sex, bornDate: bornDate, phone: phone})
+          navigation.goBack()
+        }}/>
+          <AppButton buttonText="Cancelar" onPress={() => navigation.goBack()}/>
       </View>
       
-    </>  
+    </ScrollView>  
   )
 }
 
-export default MyProfile
+export default EditProfile
 
 const styles = StyleSheet.create({
   title:{
@@ -93,21 +101,10 @@ const styles = StyleSheet.create({
     fontSize:30,
     marginLeft:-2
   },
-  options:{
+  form:{
     flexDirection:'column',
-    paddingTop:40
-  },
-  individualOption:{
-    flexDirection:'row',
     alignItems:'center',
-    marginBottom:30
+    paddingTop:20,
+    paddingBottom:50,
   },
-  secondaryColorText: {
-    color: secondaryColor,
-    fontSize:20
-  },
-  icon: {
-    marginLeft:50,
-    marginRight:35
-  }
 })

@@ -20,7 +20,7 @@ const SearchBar = ({ placeholder, set, value}) => {
                     />
                     <Icon style={styles.searchIcon} name="search" size={20} color="#000"/>
                 </View>
-                <TouchableOpacity style={styles.filter}>
+                <TouchableOpacity activeOpacity={0.7} style={styles.filter}>
                     <IonIcon name="filter" size={25} color="#fff"/>
                 </TouchableOpacity>
         </View>

@@ -25,7 +25,7 @@ const Category = ({iconName, iconSource, categoryName, color}) => {
   }
 
   return (
-    <TouchableOpacity style={styles.card}>
+    <TouchableOpacity activeOpacity={0.7} delayPressIn={100} style={styles.card}>
         {icon && icon}
         <Text style={styles.text}>{categoryName}</Text>
     </TouchableOpacity>
