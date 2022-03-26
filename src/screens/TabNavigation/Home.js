@@ -1,19 +1,18 @@
 import { StyleSheet, Text, View, StatusBar, Image, FlatList, ScrollView, TouchableOpacity } from 'react-native';
 import React from 'react';
 import {primaryColor} from '../../constants/Colors';
-import { SearchBar, Category, TutorsList } from '../../components/Components';
+import { SearchBar, Category, TutorsList, TutorCard } from '../../components/Components';
 import IonIcon from 'react-native-vector-icons/Ionicons'
 
 
 import { useContext } from 'react';
 import { AccountContext } from '../../context/AccountContext';
 
-
-
-
-
+import { TutorsContext } from '../../context/TutorsContext';
 const header = () => {
+  
   const [user, setUser] = useContext(AccountContext)
+
   return (
     <>
       <View style={styles.title}>
@@ -42,11 +41,23 @@ const header = () => {
 };
 
 const Home = ({navigation}) => {
+
+  
+  const tutors = useContext(TutorsContext);
+  console.log(tutors)
   return (
+    
       <>
           <StatusBar backgroundColor="black"/>
           <View style={styles.rectangle}>
-            <TutorsList header={header}/>
+          <FlatList
+            nestedScrollEnabled={true}
+              data={tutors}
+              renderItem={({item})=>{return <View style={{flexDirection:'row', justifyContent:'center'}}><TutorCard onPress={()=> navigation.navigate('DetailTutorPay',{id: item.id})} profilePhoto={item.profilePic} name={item.name} middleName={item.middleName} lastname={item.lastname} stars={item.stars} specialization={item.specialization}/></View>}}
+              keyExtractor={(item) => item.id}
+              ListHeaderComponent={header}
+              initialNumToRender={4}
+          />
           </View>
       </>
   )
@@ -55,9 +66,6 @@ const Home = ({navigation}) => {
 export default Home
 
 const styles = StyleSheet.create({
-  page:{
-    flex:1,
-  },
   title:{
       paddingLeft:20,
       paddingTop:20,

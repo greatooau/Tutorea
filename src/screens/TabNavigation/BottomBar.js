@@ -6,13 +6,12 @@ import {Home, MyProfile, MyTutors} from './TabScreens';
 import {primaryColor} from '../../constants/Colors';
 import { useFocusEffect } from '@react-navigation/native';
 const Tab = createBottomTabNavigator();
-import { TutorsProvider, TutorsContext } from '../../context/TutorsProvider';
 
 const BottomBar = () => {
 
   
   return (
-    <TutorsProvider>
+    
       <Tab.Navigator screenOptions={({route}) => ({
         tabBarIcon: ({focused, color, size}) => {
           let iconName;
@@ -40,7 +39,6 @@ const BottomBar = () => {
         <Tab.Screen name='Mis Tutores' component={MyTutors}></Tab.Screen>
         <Tab.Screen name='Mi Perfil' component={MyProfile}></Tab.Screen>
       </Tab.Navigator>
-    </TutorsProvider>
   )
 }
 

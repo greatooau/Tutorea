@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 const Arrow = ({ color }) => {
   return (
     <View>
-      <Icon name="arrowleft" size={20} color={color}/>
+      <Icon name="arrowleft" size={30} color={color}/>
     </View>
   );
 }

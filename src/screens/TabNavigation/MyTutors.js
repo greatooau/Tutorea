@@ -1,11 +1,11 @@
-import { StyleSheet, Text, View, StatusBar, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, Image, TouchableOpacity, FlatList } from 'react-native';
 import React from 'react';
 import {primaryColor} from '../../constants/Colors';
-import { SearchBar, Category, TutorsList } from '../../components/Components';
+import { SearchBar, Category, TutorCard } from '../../components/Components';
 import IonIcon from 'react-native-vector-icons/Ionicons'
 
 import { useContext } from 'react';
-import { TutorsContext } from '../../context/TutorsProvider';
+import { TutorsContext } from '../../context/TutorsContext';
 import { AccountContext } from '../../context/AccountContext';
 const header = () => {
   const [user, setUser] = useContext(AccountContext)
@@ -28,11 +28,19 @@ const header = () => {
 };
 
 const MyTutors = ({navigation}) => {
+  const tutors = useContext(TutorsContext)
   return (
       <>
           <StatusBar backgroundColor="black"/>
           <View style={styles.rectangle}>
-            <TutorsList  header={header}/>
+            <FlatList
+              nestedScrollEnabled={true}
+                data={tutors}
+                renderItem={({item})=>{return <View style={{flexDirection:'row', justifyContent:'center'}}><TutorCard onPress={()=> navigation.navigate('DetailTutorNoPay',{id: item.id})} profilePhoto={item.profilePic} name={item.name} middleName={item.middleName} lastname={item.lastname} stars={item.stars} specialization={item.specialization}/></View>}}
+                keyExtractor={(item) => item.id}
+                ListHeaderComponent={header}
+                initialNumToRender={4}
+            />
           </View>
       </>
   )

@@ -1,8 +1,9 @@
 import { TouchableOpacity, Text, StyleSheet } from 'react-native'
+import { primaryColor, secondaryColor } from '../constants/Colors';
 
-const AppButton = ({ buttonText, onPress}) => {
+const AppButton = ({ buttonText, onPress, secondary}) => {
     return (
-        <TouchableOpacity activeOpacity={0.7} style={styles.button} onPress={onPress}>
+        <TouchableOpacity activeOpacity={0.7} style={[styles.button, {backgroundColor: !secondary ? primaryColor : secondaryColor,}]} onPress={onPress}>
             <Text style={styles.buttonText}>{buttonText}</Text>
         </TouchableOpacity>
     );
@@ -19,7 +20,7 @@ const styles = StyleSheet.create({
         borderRadius:15,
         height: 48,
         width:'75%',
-        backgroundColor: '#1c3252',
+        
         marginTop:17
     },
     buttonText: {

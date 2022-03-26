@@ -5,4 +5,6 @@ import FormTextInput from "./FormTextInput";
 import SearchBar from "./SearchBar";
 import TutorCard from "./TutorCard";
 import TutorsList from "./TutorsList";
-export {AppButton,Arrow,Category, FormTextInput, SearchBar, TutorCard, TutorsList}
+import StudyCard from "./StudyCard";
+import Insights from "./Insights";
+export {AppButton,Arrow,Category, FormTextInput, SearchBar, TutorCard, TutorsList, StudyCard, Insights }

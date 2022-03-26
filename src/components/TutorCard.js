@@ -2,8 +2,8 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const TutorCard = ({name, lastname, middleName, profilePhoto, stars, specialization}) => {
-  let key = 0;
+const TutorCard = ({name, lastname, middleName, profilePhoto, stars, specialization, onPress}) => {
+  
   const starsDisplayed = [];
   for(let i = 0; i < 5; ++i){
     if (i < stars) {
@@ -13,7 +13,7 @@ const TutorCard = ({name, lastname, middleName, profilePhoto, stars, specializat
     }
   }
   return (
-    <TouchableOpacity activeOpacity={0.7} delayPressIn={100} style={styles.card}>
+    <TouchableOpacity onPress={onPress} activeOpacity={0.7} delayPressIn={100} style={styles.card}>
         <View style={styles.imageContainer}>
           <Image source={{uri: profilePhoto}} style={styles.image}/>
         </View>
