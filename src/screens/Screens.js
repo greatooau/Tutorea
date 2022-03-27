@@ -1,8 +1,8 @@
 
-import Login from "./Login";
-import LoginRegister from "./LoginRegister";
-import Register from "./Register";
-import ResetPassword from "./ResetPassword";
-import VerifyEmail from "./VerifyEmail";
+import Login from "./stackScreens/Login";
+import LoginRegister from "./stackScreens/LoginRegister";
+import Register from "./stackScreens/Register";
+import ResetPassword from "./stackScreens/ResetPassword";
+import VerifyEmail from "./stackScreens/VerifyEmail";
 
 export {Login, LoginRegister, Register, ResetPassword, VerifyEmail}

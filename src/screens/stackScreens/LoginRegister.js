@@ -2,7 +2,7 @@
 import { StyleSheet, Text, View, Image, StatusBar } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 //Components
-import AppButton from '../components/AppButton';
+import { Arrow, AppButton, FormTextInput } from '../../components/Components'
 
 
 
@@ -14,7 +14,7 @@ const LoginRegister = ({ navigation }) => {
               <Text style={styles.titleText}>Bienvenido a Tutorea!</Text>
             </View>
             <View style={styles.imageContainer}>
-              <Image style={styles.image} source={require('../../assets/img/png/welcome.png')}/>
+              <Image style={styles.image} source={require('../../../assets/img/png/welcome.png')}/>
             </View>
             <View style={{flexDirection:'column', alignItems:'center'}}>
               <AppButton buttonText="Ingresar" onPress={() => navigation.navigate('Login')}/>

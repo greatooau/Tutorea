@@ -1,10 +1,7 @@
 import { StyleSheet, View, Text, TouchableOpacity, ScrollView, StatusBar } from 'react-native';
-import FormTextInput from '../components/FormTextInput';
-import AppButton from '../components/AppButton';
 import { LinearGradient } from 'expo-linear-gradient';
-import Arrow from '../components/Arrow';
 import { useState } from 'react';
-
+import { Arrow, AppButton, FormTextInput } from '../../components/Components'
 
 const Register = ({navigation}) => {
 
@@ -32,15 +29,15 @@ const Register = ({navigation}) => {
                 </View>
 
                 <View style={styles.form}>
-                    <FormTextInput placeholder="Escribe tu nombre de usuario" fieldName="Nombre de usuario" set={setUserName} value={userName}/>
-                    <FormTextInput placeholder="Escribe tu correo electrónico" fieldName="Correo Electrónico" isPassword={true} set={setEmail} value={email}/>
-                    <FormTextInput placeholder="Escribe tu contraseña" fieldName="Contraseña" isPassword={true} set={setPassword} value={password}/>
-                    <FormTextInput placeholder="Confirmar contraseña" fieldName="Confirmar contraseña" isPassword={true} set={setConfirmPassword} value={confirmPassword}/>
-                    <FormTextInput placeholder="Escribe tu nombre" fieldName="Nombre" set={setName} value={userName}/>
-                    <FormTextInput placeholder="Escribe tu apellido" fieldName="Apellido" set={setLastname} value={userName}/>
-                    <FormTextInput placeholder="Selecciona tu sexo" fieldName="Sexo" set={setSex} value={sex}/>
-                    <FormTextInput placeholder="Selecciona tu fecha de nacimiento" fieldName="Fecha de nacimiento" set={setBornDate} value={bornDate}/>
-                    <FormTextInput placeholder="Escribe tu número de teléfono" fieldName="Número de teléfono" set={setPhone} value={phone}/>
+                    <FormTextInput placeholder="Escribe tu nombre de usuario" fieldName="Nombre de usuario" setProp={setUserName} value={userName}/>
+                    <FormTextInput placeholder="Escribe tu correo electrónico" fieldName="Correo Electrónico" setProp={setEmail} value={email}/>
+                    <FormTextInput placeholder="Escribe tu contraseña" fieldName="Contraseña" isPassword={true} setProp={setPassword} value={password}/>
+                    <FormTextInput placeholder="Confirmar contraseña" fieldName="Confirmar contraseña" isPassword={true} setProp={setConfirmPassword} value={confirmPassword}/>
+                    <FormTextInput placeholder="Escribe tu nombre" fieldName="Nombre" setProp={setName} value={name}/>
+                    <FormTextInput placeholder="Escribe tu apellido" fieldName="Apellido" setProp={setLastname} value={lastname}/>
+                    <FormTextInput placeholder="Selecciona tu sexo" fieldName="Sexo" setProp={setSex} value={sex}/>
+                    <FormTextInput placeholder="Selecciona tu fecha de nacimiento" fieldName="Fecha de nacimiento" setProp={setBornDate} value={bornDate}/>
+                    <FormTextInput placeholder="Escribe tu número de teléfono" fieldName="Número de teléfono" setProp={setPhone} value={phone}/>
                 </View>
 
                 <View style={{flexDirection:'row', justifyContent:'center'}}><AppButton buttonText='Ingresar'/></View>

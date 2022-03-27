@@ -1,10 +1,12 @@
 import { StyleSheet, View, Text, TouchableOpacity, StatusBar} from 'react-native';
-import FormTextInput from '../components/FormTextInput';
-import AppButton from '../components/AppButton';
 import { LinearGradient } from 'expo-linear-gradient';
-import Arrow from '../components/Arrow';
+import { Arrow, AppButton, FormTextInput } from '../../components/Components';
+import { useState } from 'react';
 
 const Login = ({navigation}) => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    
     return(
         <LinearGradient colors={['rgb(28,50,82)', 'transparent']} style={styles.page}>
             <StatusBar backgroundColor="black"/>
@@ -18,8 +20,8 @@ const Login = ({navigation}) => {
             </View>
 
             <View style={styles.form}>
-                <FormTextInput placeholder="Escribe tu nombre de usuario" fieldName="Nombre de usuario"/>
-                <FormTextInput placeholder="Escribe tu contraseña" fieldName="Contraseña" isPassword={true}/>
+                <FormTextInput value={username} setProp={setUsername} placeholder="Escribe tu nombre de usuario" fieldName="Nombre de usuario"/>
+                <FormTextInput value={password} setProp={setPassword} placeholder="Escribe tu contraseña" fieldName="Contraseña" isPassword={true}/>
             </View>
 
             <TouchableOpacity style={{marginLeft:50, marginVertical:10}} onPress={() => navigation.navigate('ResetPassword')}>
