@@ -38,7 +38,7 @@ const MyProfile = ({navigation}) => {
           <MatIcon style={styles.icon} size={50} name="payment" color={secondaryColor}/>
           <Text style={styles.secondaryColorText}>Información de pago</Text>
         </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.7} style={styles.individualOption}>
+        <TouchableOpacity onPress={()=> navigation.navigate('LoginRegister')} activeOpacity={0.7} style={styles.individualOption}>
           <MatIcon style={styles.icon} size={50} name="logout" color={secondaryColor}/>
           <Text style={styles.secondaryColorText}>Cerrar sesión</Text>
         </TouchableOpacity>

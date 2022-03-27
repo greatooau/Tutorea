@@ -40,7 +40,7 @@ const Register = ({navigation}) => {
                     <FormTextInput placeholder="Escribe tu número de teléfono" fieldName="Número de teléfono" setProp={setPhone} value={phone}/>
                 </View>
 
-                <View style={{flexDirection:'row', justifyContent:'center'}}><AppButton buttonText='Ingresar'/></View>
+                <View style={{flexDirection:'row', justifyContent:'center'}}><AppButton buttonText='Registrar'/></View>
                 
                 <View style={styles.buttonTextDown}>
                     <Text style={{color: '#1c3252'}}>¿Ya tienes una cuenta?</Text>

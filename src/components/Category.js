@@ -5,11 +5,11 @@ import FaIcon from 'react-native-vector-icons/FontAwesome';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 import MatIcon from 'react-native-vector-icons/MaterialIcons';
 
-const Category = ({iconName, iconSource, categoryName, color}) => {
+const Category = ({iconName, iconSource, categoryName, color, onPress}) => {
 
   let icon;
 
-  switch(iconSource){
+  switch(iconSource) {
     case 'fa':
       icon = <FaIcon name={iconName} size={72} color={color? color.toLowerCase() : '#000'}/>;
       break;
@@ -25,7 +25,7 @@ const Category = ({iconName, iconSource, categoryName, color}) => {
   }
 
   return (
-    <TouchableOpacity activeOpacity={0.7} delayPressIn={100} style={styles.card}>
+    <TouchableOpacity onPress={onPress} activeOpacity={0.7} delayPressIn={100} style={styles.card}>
         {icon && icon}
         <Text style={styles.text}>{categoryName}</Text>
     </TouchableOpacity>

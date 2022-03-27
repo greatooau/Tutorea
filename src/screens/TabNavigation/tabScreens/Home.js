@@ -9,39 +9,40 @@ import { useContext, useState } from 'react';
 import { AccountContext } from '../../../context/AccountContext';
 
 import { TutorsContext } from '../../../context/TutorsContext';
-const header = () => {
-  
-  
-  const [ user, setUser ] = useContext(AccountContext)
-  const [ search, setSearch ] = useState('');
-  return (
-    <>
-      <View style={styles.title}>
-          <Text style={styles.titleText}>Tutorea</Text>
-          <View style={{flexDirection:'row',flex:1, justifyContent:'flex-end', alignItems:'center'}}>
-            <TouchableOpacity activeOpacity={0.7}><IonIcon style={{marginRight:10}} size={30} name="notifications-outline" color="#fff"/></TouchableOpacity>
-            <TouchableOpacity activeOpacity={0.7}><Image source={{uri: user.profilePic}} style={styles.userImage}/></TouchableOpacity>
-          </View>
-      </View>
-      <View style={styles.greeting}>
-        <Text style={[styles.greetingText, {fontSize:14, marginBottom:5}]}>Bienvenido,</Text>
-        <Text style={[styles.greetingText, {fontSize:30}]}>{user.name} {user.lastname} !</Text>
-      </View>
 
-      <SearchBar placeholder="Busque un tutor" value={search} setProp={setSearch}/>
-      <Text style={[styles.interests, {fontSize:20, marginBottom:15}]}>Categorías</Text>
-      <View style={styles.categories}>
-        <Category categoryName="Tecnología" iconName="laptop" iconSource="Ent" color='#000000'/>
-        <Category categoryName="Ciencia" iconName="science" iconSource="Mat" color='#126D15'/>
-        <Category categoryName="Ciencias sociales"  iconName="book" iconSource="fa" color="#2587be" />
-        <Category categoryName="Idiomas" iconName="language" iconSource="Ent" color='#9A0D0D'/>
-      </View>
-      <Text style={styles.interests}>Tutores que te pueden interesar</Text>
-    </>  
-  );
-};
 
 const Home = ({navigation}) => {
+  const header = () => {
+  
+  
+    const [ user, setUser ] = useContext(AccountContext)
+    const [ search, setSearch ] = useState('');
+    return (
+      <>
+        <View style={styles.title}>
+            <Text style={styles.titleText}>Tutorea</Text>
+            <View style={{flexDirection:'row',flex:1, justifyContent:'flex-end', alignItems:'center'}}>
+              <TouchableOpacity activeOpacity={0.7}><IonIcon style={{marginRight:10}} size={30} name="notifications-outline" color="#fff"/></TouchableOpacity>
+              <TouchableOpacity activeOpacity={0.7}><Image source={{uri: user.profilePic}} style={styles.userImage}/></TouchableOpacity>
+            </View>
+        </View>
+        <View style={styles.greeting}>
+          <Text style={[styles.greetingText, {fontSize:14, marginBottom:5}]}>Bienvenido,</Text>
+          <Text style={[styles.greetingText, {fontSize:30}]}>{user.name} {user.lastname} !</Text>
+        </View>
+  
+        <SearchBar placeholder="Busque un tutor" value={search} setProp={setSearch}/>
+        <Text style={[styles.interests, {fontSize:20, marginBottom:15}]}>Categorías</Text>
+        <View style={styles.categories}>
+          <Category onPress={() => navigation.navigate('Categories', { icon:"laptop", category:"Tecnología", color:"#000", iconSource:"Ent" })} categoryName="Tecnología" iconName="laptop" iconSource="Ent" color='#000'/>
+          <Category onPress={() => navigation.navigate('Categories', { icon:"science", category:"Ciencia", color:"#126D15", iconSource:"Mat" })} categoryName="Ciencia" iconName="science" iconSource="Mat" color='#126D15'/>
+          <Category onPress={() => navigation.navigate('Categories', { icon:"book", category:"Ciencias sociales", color:"#2587be", iconSource:"fa" })} categoryName="Ciencias sociales"  iconName="book" iconSource="fa" color="#2587be" />
+          <Category onPress={() => navigation.navigate('Categories', { icon:"language", category:"Idiomas", color:"#9A0D0D", iconSource:"Ent" })} categoryName="Idiomas" iconName="language" iconSource="Ent" color='#9A0D0D'/>
+        </View>
+        <Text style={styles.interests}>Tutores que te pueden interesar</Text>
+      </>  
+    );
+  };
   const tutors = useContext(TutorsContext);
   return (
     

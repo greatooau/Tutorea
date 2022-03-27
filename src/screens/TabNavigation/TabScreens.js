@@ -7,4 +7,5 @@ import PayInfo from "./tabScreens/PayInfo";
 import DetailTutorNoPay from "./tabScreens/DetailTutorNoPay";
 import DetailTutorPay from "./tabScreens/DetailTutorPay";
 import Hiring from "./tabScreens/Hiring";
-export { MyProfile, MyTutors, Home, EditProfile, ChangePassword, PayInfo, DetailTutorNoPay, DetailTutorPay, Hiring }
+import Categories from "./tabScreens/Categories";
+export { MyProfile, MyTutors, Home, EditProfile, ChangePassword, PayInfo, DetailTutorNoPay, DetailTutorPay, Hiring, Categories }
