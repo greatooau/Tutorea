@@ -33,7 +33,7 @@ const PayInfo = ({navigation}) => {
       <View style={styles.profile}>
         <TouchableOpacity activeOpacity={0.7}><Image source={{uri:user.profilePic}} style={styles.userImage}/></TouchableOpacity>
           <View style={{paddingTop:20}}>
-            <Text style={[styles.name, styles.profileText]}>{user.name} {user.lastname}</Text>
+            <Text style={[styles.name, styles.profileText]}>{(user.name + ' ' + user.lastname).length > 18 ? user.name.charAt(0) + '. ' + user.lastname : user.name + ' ' + user.lastname}</Text>
             <Text style={styles.profileText}>Información de pago</Text>
           </View>
       </View>
@@ -43,7 +43,7 @@ const PayInfo = ({navigation}) => {
         <FormTextInput placeholder="Escribe el CVV" fieldName="CVV" fieldNameColor={primaryColor} value={CVV} setProp={setCVV}/>
         <FormTextInput placeholder="Escribe la fecha de expiración" fieldName="Fecha de expiración" fieldNameColor={primaryColor} value={expDate} setProp={setexpDate}/>
         <FormTextInput placeholder="Escribe el nombre del titular" fieldName="Nombre del titular" fieldNameColor={primaryColor} value={titularName} setProp={settitularName}/>
-        <FormTextInput placeholder="Selecciona el tipo de tarjeta" fieldName="cardTypeo" fieldNameColor={primaryColor} value={cardType} setProp={setcardType}/>
+        <FormTextInput placeholder="Selecciona el tipo de tarjeta" fieldName="Tipo de tarjeta" fieldNameColor={primaryColor} value={cardType} setProp={setcardType}/>
         <FormTextInput placeholder="Escribe la dirección de la tarjeta" fieldName="Fecha de nacimiento" fieldNameColor={primaryColor} value={cardAdress} setProp={setcardAdress}/>
         <FormTextInput placeholder="Escribe el código postal de la tarjeta" fieldName="Número de teléfono" fieldNameColor={primaryColor} value={cardPostalCode} setProp={setcardPostalCode}/>
         
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     width:80,
     height:80,
     borderRadius:40,
-    marginLeft:40,
+    marginLeft:20,
     marginRight:20
   },
   profile:{
@@ -112,7 +112,6 @@ const styles = StyleSheet.create({
   },
   form:{
     flexDirection:'column',
-    alignItems:'center',
     paddingTop:20,
     paddingBottom:10,
   },

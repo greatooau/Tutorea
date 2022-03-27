@@ -19,6 +19,7 @@ const SearchBar = ({ placeholder, setProp, value}) => {
                     />
                     <Icon style={styles.searchIcon} name="search" size={20} color="#000"/>
                 </View>
+
                 <TouchableOpacity activeOpacity={0.7} style={styles.filter}>
                     <IonIcon name="filter" size={25} color="#fff"/>
                 </TouchableOpacity>
@@ -42,6 +43,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#fff',
+        
         borderRadius:9,
         borderBottomWidth:2,
         borderRightWidth:1,

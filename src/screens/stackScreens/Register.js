@@ -39,7 +39,6 @@ const Register = ({navigation}) => {
                     <FormTextInput placeholder="Selecciona tu fecha de nacimiento" fieldName="Fecha de nacimiento" setProp={setBornDate} value={bornDate}/>
                     <FormTextInput placeholder="Escribe tu número de teléfono" fieldName="Número de teléfono" setProp={setPhone} value={phone}/>
                 </View>
-
                 <View style={{flexDirection:'row', justifyContent:'center'}}><AppButton buttonText='Registrar'/></View>
                 
                 <View style={styles.buttonTextDown}>
@@ -76,12 +75,11 @@ const styles = StyleSheet.create({
     arrow:{
         flexDirection:'column',
         marginLeft:50,
-        marginTop:'30%'
+        marginTop:'20%'
     },
     form: {
         flexDirection:'column',
-        alignItems:'center',
-        marginTop:60
+        marginTop:60,
     },
     buttonTextDown: {
         flexDirection:'column',

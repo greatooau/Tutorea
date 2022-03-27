@@ -18,11 +18,10 @@ const Login = ({navigation}) => {
                 <Text style={[styles.text, styles.h1]}>Ingresar</Text>
                 <Text style={[styles.text, {fontFamily: 'lato-regular'}]}>Ingresa tus credenciales</Text>
             </View>
-
-            <View style={styles.form}>
+                <View style={styles.form}>
                 <FormTextInput value={username} setProp={setUsername} placeholder="Escribe tu nombre de usuario" fieldName="Nombre de usuario"/>
                 <FormTextInput value={password} setProp={setPassword} placeholder="Escribe tu contraseña" fieldName="Contraseña" isPassword={true}/>
-            </View>
+                </View>
 
             <TouchableOpacity style={{marginLeft:50, marginVertical:10}} onPress={() => navigation.navigate('ResetPassword')}>
                 <Text style={styles.link}>¿Olvidaste tu contraseña?</Text>
@@ -61,17 +60,17 @@ const styles = StyleSheet.create({
     arrow:{
         flexDirection:'column',
         marginLeft:50,
-        marginTop:'30%'
+        marginTop:'20%'
     },
     form: {
         flexDirection:'column',
-        alignItems:'center',
         marginTop:60
     },
     buttonTextDown: {
         flexDirection:'column',
         alignItems:'center',
-        marginTop:20
+        marginTop:20,
+        paddingBottom:50
     },
     bottomTextContainer: {
         flex:1,

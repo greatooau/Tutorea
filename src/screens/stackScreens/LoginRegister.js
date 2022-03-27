@@ -52,8 +52,8 @@ const styles = StyleSheet.create({
       paddingVertical:65,
     },
     image: {
-      maxHeight:170,
-      maxWidth: 350,
+      width:'80%',
+      height:150,
     },
     bottomTextContainer: {
       flex:1,

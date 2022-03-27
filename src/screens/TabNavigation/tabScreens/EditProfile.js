@@ -33,7 +33,7 @@ const EditProfile = ({navigation}) => {
       <View style={styles.profile}>
         <TouchableOpacity activeOpacity={0.7}><Image source={{uri:user.profilePic}} style={styles.userImage}/></TouchableOpacity>
           <View style={{paddingTop:20}}>
-            <Text style={[styles.name, styles.profileText]}>{user.name} {user.lastname}</Text>
+            <Text style={[styles.name, styles.profileText]}>{(user.name + ' ' + user.lastname).length > 18 ? user.name.charAt(0) + '. ' + user.lastname : user.name + ' ' + user.lastname}</Text>
             <Text style={styles.profileText}>Editar perfil</Text>
           </View>
       </View>
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     width:80,
     height:80,
     borderRadius:40,
-    marginLeft:40,
+    marginLeft:20,
     marginRight:20
   },
   profile:{
@@ -103,7 +103,6 @@ const styles = StyleSheet.create({
   },
   form:{
     flexDirection:'column',
-    alignItems:'center',
     paddingTop:20,
     paddingBottom:50,
   },

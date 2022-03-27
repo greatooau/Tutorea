@@ -6,7 +6,7 @@ import { primaryColor, secondaryColor }from '../../../constants/Colors'
 import { AccountContext } from '../../../context/AccountContext'
 import { useContext } from 'react'
 const MyProfile = ({navigation}) => {
-  const [user, setUser] = useContext(AccountContext);
+  const [user, setUser] = useContext(AccountContext);//{user.name} {user.lastname.length > 7 ? user.lastname.charAt(0) + '.' : user.lastname}
   return (
     <>
       <View style={styles.title}>
@@ -20,7 +20,7 @@ const MyProfile = ({navigation}) => {
       <View style={styles.profile}>
         <TouchableOpacity activeOpacity={0.7}><Image source={{uri:user.profilePic}} style={styles.userImage}/></TouchableOpacity>
           <View style={{paddingTop:20}}>
-            <Text style={[styles.name, styles.profileText]}>{user.name} {user.lastname.length > 7 ? user.lastname.charAt(0) + '.' : user.lastname}</Text>
+            <Text style={[styles.name, styles.profileText]}>{(user.name + ' ' + user.lastname).length > 18 ? user.name.charAt(0) + '. ' + user.lastname : user.name + ' ' + user.lastname}</Text>
             <Text style={styles.profileText}>Perfil</Text>
           </View>
       </View>
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     width:80,
     height:80,
     borderRadius:40,
-    marginLeft:40,
+    marginLeft:20,
     marginRight:20
   },
   profile:{

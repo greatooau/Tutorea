@@ -23,7 +23,7 @@ const Hiring = ({navigation, route}) => {
 
         <View style={styles.titleJuan}>
           <Text style={[styles.titleJuanText, {fontSize:30, color:primaryColor, fontFamily:'lato-regular'}]}>Contratación</Text>
-          <FormTextInput maxLength={2} fieldName="Sesiones" fieldNameColor={primaryColor} setProp={setSesion} value={sesion}/>
+          <FormTextInput center={false} maxLength={2} fieldName="Sesiones" fieldNameColor={primaryColor} setProp={setSesion} value={sesion}/>
         </View>
         <View style={{flexDirection:'row', justifyContent:'center'}}>
           <View style={card.card}>
