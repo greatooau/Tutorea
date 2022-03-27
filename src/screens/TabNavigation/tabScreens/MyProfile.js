@@ -2,8 +2,8 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import IonIcon from 'react-native-vector-icons/Ionicons'
 import MatIcon from 'react-native-vector-icons/MaterialIcons'
 import React from 'react'
-import { primaryColor, secondaryColor }from '../../constants/Colors'
-import { AccountContext } from '../../context/AccountContext'
+import { primaryColor, secondaryColor }from '../../../constants/Colors'
+import { AccountContext } from '../../../context/AccountContext'
 import { useContext } from 'react'
 const MyProfile = ({navigation}) => {
   const [user, setUser] = useContext(AccountContext);

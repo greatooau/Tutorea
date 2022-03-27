@@ -2,10 +2,10 @@ import { StyleSheet, Text, View, TouchableOpacity, Image, StatusBar, ScrollView 
 import IonIcon from 'react-native-vector-icons/Ionicons'
 import MatIcon from 'react-native-vector-icons/MaterialIcons'
 import React from 'react'
-import{ primaryColor, secondaryColor }from '../../constants/Colors'
-import {FormTextInput} from '../../components/Components'
-import { AppButton } from '../../components/Components'
-import { AccountContext } from '../../context/AccountContext';
+import{ primaryColor, secondaryColor }from '../../../constants/Colors'
+import {FormTextInput} from '../../../components/Components'
+import { AppButton } from '../../../components/Components'
+import { AccountContext } from '../../../context/AccountContext';
 import { useContext, useState } from 'react';
 const ChangePassword = ({navigation}) => {
 

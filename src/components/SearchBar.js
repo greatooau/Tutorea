@@ -4,9 +4,7 @@ import IonIcon from 'react-native-vector-icons/Ionicons'
 import { useState } from 'react';
 import {primaryColor} from '../constants/Colors';
 
-const SearchBar = ({ placeholder, set, value}) => {
-    const [ visible, setVisible ] = useState(false);
-    const [text, setText] = useState('');
+const SearchBar = ({ placeholder, setProp, value}) => {
     return(
 
         <View style={styles.container}>
@@ -15,7 +13,8 @@ const SearchBar = ({ placeholder, set, value}) => {
                     <TextInput
                         style={styles.input}
                         placeholder={placeholder}
-                        onChangeText={(searchString) => {this.setState({searchString})}}
+                        value={value && value}
+                        onChangeText={(newText) => setProp(newText)}
                         underlineColorAndroid="transparent"
                     />
                     <Icon style={styles.searchIcon} name="search" size={20} color="#000"/>

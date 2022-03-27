@@ -1,13 +1,13 @@
 import { StyleSheet, Text, View, TouchableOpacity,Image, ImageBackground, StatusBar, FlatList } from 'react-native'
 import React, { useContext } from 'react'
 import IonIcon from 'react-native-vector-icons/Ionicons'
-import { primaryColor } from '../../constants/Colors'
+import { primaryColor } from '../../../constants/Colors'
 import FaIcon from 'react-native-vector-icons/FontAwesome';
-import { TutorsContext } from '../../context/TutorsContext'
-import { AccountContext } from '../../context/AccountContext'
-import { Arrow, AppButton, StudyCard, Insights }from '../../components/Components'
+import { TutorsContext } from '../../../context/TutorsContext'
+import { AccountContext } from '../../../context/AccountContext'
+import { Arrow, AppButton, StudyCard, Insights }from '../../../components/Components'
 
-const DetailTutorNoPay = ({navigation, route}) => {
+const DetailTutorPay = ({navigation, route}) => {
     const [user] = useContext(AccountContext);
     const tutor = useContext(TutorsContext).filter(tutor => tutor.id === route.params.id)[0];
 
@@ -63,7 +63,8 @@ const DetailTutorNoPay = ({navigation, route}) => {
                     <View style={styles.insights}>
                         {tutor.insights.map(element => <Insights key={element.id} name={element.name}/>)}
                     </View>
-                    
+                    <Text style={styles.studies}>Tarifa por sesión: {tutor.fee} MXN</Text>
+                    <View style={{paddingBottom:'20%', paddingTop:'10%'}}><AppButton buttonText="Contratar servicios" onPress={() => navigation.navigate('Hiring',{tutor:{...tutor}})} secondary={true}/></View>
                 </View>)}
                 initialNumToRender={4}
             />
@@ -75,7 +76,7 @@ const DetailTutorNoPay = ({navigation, route}) => {
 
 
 
-export default DetailTutorNoPay
+export default DetailTutorPay
 
 const styles = StyleSheet.create({
     title:{
@@ -134,7 +135,6 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'center',
         flexWrap:'wrap',
-        marginTop:30,
-        paddingBottom:'20%'
+        marginTop:30
     },
 })

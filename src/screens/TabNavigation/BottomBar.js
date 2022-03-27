@@ -2,8 +2,8 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import Icon from 'react-native-vector-icons/Ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import {Home, MyProfile, MyTutors} from './TabScreens';
-import {primaryColor} from '../../constants/Colors';
+import { Home, MyProfile, MyTutors } from './TabScreens';
+import { primaryColor } from '../../constants/Colors';
 import { useFocusEffect } from '@react-navigation/native';
 const Tab = createBottomTabNavigator();
 

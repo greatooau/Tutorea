@@ -1,12 +1,12 @@
 import { StyleSheet, Text, View, StatusBar, Image, TouchableOpacity, FlatList } from 'react-native';
 import React from 'react';
-import {primaryColor} from '../../constants/Colors';
-import { SearchBar, Category, TutorCard } from '../../components/Components';
+import {primaryColor} from '../../../constants/Colors';
+import { SearchBar, Category, TutorCard } from '../../../components/Components';
 import IonIcon from 'react-native-vector-icons/Ionicons'
 
 import { useContext } from 'react';
-import { TutorsContext } from '../../context/TutorsContext';
-import { AccountContext } from '../../context/AccountContext';
+import { TutorsContext } from '../../../context/TutorsContext';
+import { AccountContext } from '../../../context/AccountContext';
 const header = () => {
   const [user, setUser] = useContext(AccountContext)
   return (
@@ -20,7 +20,7 @@ const header = () => {
       </View>
 
       <View style={styles.pinkRectangle}>
-        <Image style={styles.image} source={require('../../../assets/img/png/study.png')}/>
+        <Image style={styles.image} source={require('../../../../assets/img/png/study.png')}/>
         <Text style={{color:'#fff', fontFamily:'lato-bold', fontSize:35}}>Mis tutores</Text>
       </View>
     </>  

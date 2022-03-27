@@ -146,7 +146,7 @@ export const TutorsProvider = ({ children }) => {
       fee:200
     },
     {
-      id:'fernanelcrack2carajo',
+      id:'feergerrnargergnelregercracrgergk2cagrraergerjo',
       name: 'Luis',
       middleName: 'Fernando',
       lastname:'Flores',
@@ -192,7 +192,7 @@ export const TutorsProvider = ({ children }) => {
       fee:200
     },
     {
-      id:'mamasitachulapreciosanalgona',
+      id:'mawefwefmwefasefwitaregergchulegrrgapreweefwefwefciwefosewefgerganawefweflgwefonefwa',
       name: 'Bryce',
       middleName: '',
       lastname:'Howard',
@@ -212,7 +212,30 @@ export const TutorsProvider = ({ children }) => {
           school:'Udemy',
           img:'https://imgs.search.brave.com/P8tgN3JjEO3M5UgZG_t4k8XKgJ8MKecubq1JiMRTuAU/rs:fit:1200:1200:1/g:ce/aHR0cHM6Ly9jZG4u/ZnJlZWJpZXN1cHBs/eS5jb20vbG9nb3Mv/bGFyZ2UvMngvZ2l0/LWljb24tbG9nby1w/bmctdHJhbnNwYXJl/bnQucG5n'
         }
-      ]
+      ],
+      insights:[
+        {
+          id:1,
+          name:'HTML'
+        },
+        {
+          id:2,
+          name:'React'
+        },
+        {
+          id:3,
+          name:'CSS'
+        },
+        {
+          id:4,
+          name:'REST API'
+        },
+        {
+          id:5,
+          name:'MongoDB'
+        },
+      ],
+      fee:200
     },
     {
       id:'asidfqpniewnipfoneiofe',

@@ -1,8 +1,7 @@
 import { StyleSheet, Text, View, StatusBar } from 'react-native';
 import React from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
-import FormTextInput from '../components/FormTextInput';
-import AppButton from '../components/AppButton';
+import { Arrow, AppButton, FormTextInput } from '../../components/Components'
 const ResetPassword = ({navigation}) => {
   return (
     <LinearGradient colors={['rgb(28,50,82)', 'transparent']} style={styles.page}>
