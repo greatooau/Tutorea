@@ -11,8 +11,10 @@ const ResetPassword = ({navigation}) => {
         </View>
         <View style={styles.rectangle}>
             <View style={styles.rectangleTitleContainer}>
-                <Text style={[styles.rectangleText, styles.titleRectangleText]}>Reestablecer contraseña</Text>
-                <Text style={[styles.rectangleText, styles.description]}>Ingresa el correo que está asociado a esta cuenta para enviar un correo con las instrucciones para reestablecer tu contraseña.</Text>
+                <View style={{flexDirection:'column', alignItems:'center'}}>
+                    <Text style={[styles.rectangleText, styles.titleRectangleText]}>Reestablecer contraseña</Text>
+                    <Text style={[styles.rectangleText, styles.description]}>Ingresa el correo que está asociado a esta cuenta para enviar un correo con las instrucciones para reestablecer tu contraseña.</Text>
+                </View>
                 <FormTextInput fieldName="Correo electronico" fieldNameColor="#000" placeholder="Escribe un correo electrónico"/>
                 <AppButton buttonText="Enviar" onPress={() => navigation.navigate('VerifyEmail')}/>
                 <AppButton buttonText="Regresar" onPress={() => navigation.goBack()}/>
@@ -45,7 +47,7 @@ const styles = StyleSheet.create({
         backgroundColor:'#ececec'
     },
     rectangleText: {
-        color:'#1c3252'
+        color:'#1c3252',
     },
     titleRectangleText: {
         fontSize:30,
@@ -54,7 +56,6 @@ const styles = StyleSheet.create({
     },
     rectangleTitleContainer: {
         flexDirection:'column',
-        alignItems:'center'
     },
     description: {
         width:322,
