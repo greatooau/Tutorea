@@ -1,8 +1,10 @@
 import { StyleSheet, Text, View, StatusBar } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Arrow, AppButton, FormTextInput } from '../../components/Components'
 const ResetPassword = ({navigation}) => {
+
+    const [email, setEmail] = useState('');
   return (
     <LinearGradient colors={['rgb(28,50,82)', 'transparent']} style={styles.page}>
         <StatusBar backgroundColor="black"/>
@@ -15,7 +17,7 @@ const ResetPassword = ({navigation}) => {
                     <Text style={[styles.rectangleText, styles.titleRectangleText]}>Reestablecer contraseña</Text>
                     <Text style={[styles.rectangleText, styles.description]}>Ingresa el correo que está asociado a esta cuenta para enviar un correo con las instrucciones para reestablecer tu contraseña.</Text>
                 </View>
-                <FormTextInput fieldName="Correo electronico" fieldNameColor="#000" placeholder="Escribe un correo electrónico"/>
+                <FormTextInput fieldName="Correo electronico" fieldNameColor="#000" placeholder="Escribe un correo electrónico" setProp={setEmail} value={email}/>
                 <AppButton buttonText="Enviar" onPress={() => navigation.navigate('VerifyEmail')}/>
                 <AppButton buttonText="Regresar" onPress={() => navigation.goBack()}/>
             </View>
