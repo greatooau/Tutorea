@@ -51,7 +51,19 @@ export const TutorsProvider = ({ children }) => {
           name:'MongoDB'
         },
       ],
-      fee:200
+      fee:200,
+      contacts: [
+        {
+          contact_id:'3ssdf4sdfsdf2sdsdfsdf8sdfdsfsdsdf9sdf2sdf3',
+          name: 'Discord',
+          contact: 'Emile#5967'
+        },
+        {
+          contact_id:'3ssdf4sdfsdf2sdsdfsdf8sdfdsfsdsdf9sdf2sdf3',
+          name: 'WhatsApp',
+          contact: '+52 8165359874'
+        },
+      ]
     },
     {
       id:'fgmamasdfgna',
@@ -97,7 +109,19 @@ export const TutorsProvider = ({ children }) => {
           name:'MongoDB'
         },
       ],
-      fee:200
+      fee:200,
+      contacts: [
+        {
+          contact_id:'3ssdf4sdfsdf2sdsdfsdf8sdfdsfsdsdf9sdf2sdf3',
+          name: 'Discord',
+          contact: 'Emile#5967'
+        },
+        {
+          contact_id:'3ssdf4sdfsdf2sdsdfsdf8sdfdsfsdsdf9sdf2sdf3',
+          name: 'WhatsApp',
+          contact: '+52 8165359874'
+        },
+      ]
     },
     {
       id:'asidfqpniewnipfone3iofe',
@@ -143,7 +167,19 @@ export const TutorsProvider = ({ children }) => {
           name:'MongoDB'
         },
       ],
-      fee:200
+      fee:200,
+      contacts: [
+        {
+          contact_id:'3ssdf4sdfsdf2sdsdfsdf8sdfdsfsdsdf9sdf2sdf3',
+          name: 'Discord',
+          contact: 'Emile#5967'
+        },
+        {
+          contact_id:'3ssdf4sdfsdf2sdsdfsdf8sdfdsfsdsdf9sdf2sdf3',
+          name: 'WhatsApp',
+          contact: '+52 8165359874'
+        },
+      ]
     },
     {
       id:'feergerrnargergnelregercracrgergk2cagrraergerjo',
@@ -189,7 +225,19 @@ export const TutorsProvider = ({ children }) => {
           name:'MongoDB'
         },
       ],
-      fee:200
+      fee:200,
+      contacts: [
+        {
+          contact_id:'3ssdf4sdfsdf2sdsdfsdf8sdfdsfsdsdf9sdf2sdf3',
+          name: 'Discord',
+          contact: 'Emile#5967'
+        },
+        {
+          contact_id:'3ssdf4sdfsdf2sdsdfsdf8sdfdsfsdsdf9sdf2sdf3',
+          name: 'WhatsApp',
+          contact: '+52 8165359874'
+        },
+      ]
     },
     {
       id:'mawefwefmwefasefwitaregergchulegrrgapreweefwefwefciwefosewefgerganawefweflgwefonefwa',
@@ -235,7 +283,19 @@ export const TutorsProvider = ({ children }) => {
           name:'MongoDB'
         },
       ],
-      fee:200
+      fee:200,
+      contacts: [
+        {
+          contact_id:'3ssdf4sdfsdf2sdsdfsdf8sdfdsfsdsdf9sdf2sdf3',
+          name: 'Discord',
+          contact: 'Emile#5967'
+        },
+        {
+          contact_id:'3ssdf4sdfsdf2sdsdfsdf8sdfdsfsdsdf9sdf2sdf3',
+          name: 'WhatsApp',
+          contact: '+52 8165359874'
+        },
+      ]
     },
     {
       id:'asidfqpniewnipfoneiofe',
@@ -281,7 +341,19 @@ export const TutorsProvider = ({ children }) => {
           name:'MongoDB'
         },
       ],
-      fee:200
+      fee:200,
+      contacts: [
+        {
+          contact_id:'3ssdf4sdfsdf2sdsdfsdf8sdfdsfsdsdf9sdf2sdf3',
+          name: 'Discord',
+          contact: 'Emile#5967'
+        },
+        {
+          contact_id:'3ssdf4sdfsdf2sdsdfsdf8sdfdsfsdsdf9sdf2sdf3',
+          name: 'WhatsApp',
+          contact: '+52 8165359874'
+        },
+      ]
     }
   ])
 

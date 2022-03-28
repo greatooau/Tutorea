@@ -17,12 +17,12 @@ const ChangePassword = ({navigation}) => {
 
     return (
         <ScrollView>
-            <StatusBar/>
+            <StatusBar backgroundColor="#000"/>
             <View style={styles.title}>
                 <Text style={styles.titleText}>Tutorea</Text>
                 <View style={{flexDirection:'row',flex:1, justifyContent:'flex-end', alignItems:'center'}}>
-                    <TouchableOpacity><IonIcon style={{marginRight:20}} size={30} name="notifications-outline" color="#fff"/></TouchableOpacity>
-                    
+{/*                     <TouchableOpacity onPress={() => navigation.navigate('Notifications')}><IonIcon style={{marginRight:20}} size={30} name="notifications-outline" color="#fff"/></TouchableOpacity>
+ */}                    
                 </View>
             </View>
 

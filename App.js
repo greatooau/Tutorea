@@ -1,6 +1,6 @@
 //Screens
 import { Register, LoginRegister, Login, ResetPassword, VerifyEmail } from './src/screens/Screens'
-import { EditProfile, ChangePassword, PayInfo, DetailTutorNoPay, DetailTutorPay, Hiring, Categories } from './src/screens/TabNavigation/TabScreens';
+import { EditProfile, ChangePassword, PayInfo, DetailTutorNoPay, DetailTutorPay, Hiring, Categories, Notifications } from './src/screens/TabNavigation/TabScreens';
 //Navigation
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -50,6 +50,7 @@ const App = () => {
               <Stack.Screen component={DetailTutorNoPay} name="DetailTutorNoPay"/>
               <Stack.Screen component={DetailTutorPay} name="DetailTutorPay" getId={({params}) => params.id}/>
               <Stack.Screen component={Hiring} name="Hiring" getId={({params}) => params.id}/>
+              
             </Stack.Navigator>
           </NavigationContainer>
         </TutorsProvider>

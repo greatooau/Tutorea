@@ -12,8 +12,8 @@ const MyProfile = ({navigation}) => {
       <View style={styles.title}>
           <Text style={styles.titleText}>Tutorea</Text>
           <View style={{flexDirection:'row',flex:1, justifyContent:'flex-end', alignItems:'center'}}>
-            <TouchableOpacity activeOpacity={0.7}><IonIcon style={{marginRight:20}} size={30} name="notifications-outline" color="#fff"/></TouchableOpacity>
-            
+{/*             <TouchableOpacity onPress={() => navigation.navigate('Notifications')} activeOpacity={0.7}><IonIcon style={{marginRight:20}} size={30} name="notifications-outline" color="#fff"/></TouchableOpacity>
+ */}            
           </View>
       </View>
 

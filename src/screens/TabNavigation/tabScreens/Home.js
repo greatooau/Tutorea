@@ -22,7 +22,7 @@ const Home = ({navigation}) => {
         <View style={styles.title}>
             <Text style={styles.titleText}>Tutorea</Text>
             <View style={{flexDirection:'row',flex:1, justifyContent:'flex-end', alignItems:'center'}}>
-              <TouchableOpacity activeOpacity={0.7}><IonIcon style={{marginRight:10}} size={30} name="notifications-outline" color="#fff"/></TouchableOpacity>
+              {/* <TouchableOpacity onPress={() => navigation.navigate('Notifications')} activeOpacity={0.7}><IonIcon style={{marginRight:10}} size={30} name="notifications-outline" color="#fff"/></TouchableOpacity> */}
               <TouchableOpacity activeOpacity={0.7}><Image source={{uri: user.profilePic}} style={styles.userImage}/></TouchableOpacity>
             </View>
         </View>

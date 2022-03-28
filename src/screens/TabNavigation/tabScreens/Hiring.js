@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView } from 'react-native'
 import IonIcon from 'react-native-vector-icons/Ionicons'
 import MatIcon from 'react-native-vector-icons/MaterialIcons'
 import React from 'react'
@@ -11,11 +11,11 @@ const Hiring = ({navigation, route}) => {
   const tutor = route.params.tutor
   const [sesion, setSesion] = useState('1')
   return (
-    <>
+    <ScrollView>
       <View style={styles.title}>
           <Text style={styles.titleText}>Tutorea</Text>
           <View style={{flexDirection:'row',flex:1, justifyContent:'flex-end', alignItems:'center'}}>
-            <TouchableOpacity activeOpacity={0.7}><IonIcon style={{marginRight:10}} size={30} name="notifications-outline" color="#fff"/></TouchableOpacity>
+            {/* <TouchableOpacity onPress={() => navigation.navigate('Notifications')} activeOpacity={0.7}><IonIcon style={{marginRight:10}} size={30} name="notifications-outline" color="#fff"/></TouchableOpacity> */}
             <TouchableOpacity activeOpacity={0.7}><Image source={{uri: user.profilePic}} style={styles.userImage}/></TouchableOpacity>
           </View>
       </View>
@@ -26,6 +26,7 @@ const Hiring = ({navigation, route}) => {
           <FormTextInput center={false} maxLength={2} fieldName="Sesiones" fieldNameColor={primaryColor} setProp={setSesion} value={sesion}/>
         </View>
         <View style={{flexDirection:'row', justifyContent:'center'}}>
+
           <View style={card.card}>
             <View style={card.imageContainer}>
               <Image 
@@ -42,14 +43,51 @@ const Hiring = ({navigation, route}) => {
           </View>
          
         </View>
-        <AppButton secondary={true} onPress={()=>navigation.navigate('Home')} buttonText="Confirmar pago"/>
+        <View style={{flexDirection:'row',justifyContent:'center'}}>
+          <View style={notice.noticeContainer}>
+              <Text style={notice.noticeHey}>Hey!</Text>
+              <Image source={require('../../../../assets/img/png/sms.png')} style={notice.noticeImage}/>
+              <Text style={notice.description}>Al concretarse el pago, un mensaje SMS llegará al número asociado a esta cuenta, con el contacto de tu tutor.</Text>
+          </View>
+        </View>
+        <View style={{paddingBottom:50}}><AppButton secondary={true} onPress={()=>navigation.navigate('Home')} buttonText="Confirmar pago"/></View>
+        
       </View>
       
-    </>  
+    </ScrollView>  
   )
 }
 
 export default Hiring
+
+const notice = StyleSheet.create({
+    noticeContainer:{
+      flexDirection:'column',
+      alignItems:'center',
+      borderWidth:1,
+      borderColor:'#bbbbbb',
+      width:'90%',
+      borderRadius:12,
+      marginVertical:20,
+      paddingVertical:50,
+      backgroundColor:'white'
+    },
+    noticeHey:{
+      fontSize:30,
+      fontFamily:'lato-bold'
+    },
+    noticeImage:{
+      width:150,
+      height:130
+    },
+    description:{
+      fontFamily:'lato-regular',
+      width:'70%',
+      textAlign:'center',
+      marginTop:40,
+      fontSize:16
+    }
+});
 
 const card = StyleSheet.create({
   card:{
