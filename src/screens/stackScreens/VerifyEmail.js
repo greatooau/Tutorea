@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, TouchableOpacity, StatusBar } from 'react-nativ
 import React from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Arrow, AppButton, FormTextInput } from '../../components/Components'
+import Icon from 'react-native-vector-icons/AntDesign'
 const VerifyEmail = ({navigation}) => {
   return (
     <LinearGradient colors={['rgb(28,50,82)', 'transparent']} style={styles.page}>
