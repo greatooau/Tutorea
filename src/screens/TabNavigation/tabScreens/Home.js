@@ -60,15 +60,6 @@ const Home = ({navigation}) => {
         );
     };
     const [elements, setElements] = useState(null);
-    function onChangeHandler(tutors) {
-        if(tutors.length > 0){
-            setElements(true)
-            return tutors.filter(tutor => (tutor.name + ' ' + tutor.lastname).toLowerCase().includes(search.toLowerCase()) && tutor)
-        }else {
-            setElements(false)
-            return
-        }
-    }
 
     return (
         
@@ -77,7 +68,7 @@ const Home = ({navigation}) => {
             <View style={styles.rectangle}>
             <FlatList
                 nestedScrollEnabled={true}
-                data={search === '' ? tutors : onChangeHandler(tutors)}
+                data={search === '' ? tutors : tutors.filter(tutor => (tutor.name + ' ' + tutor.lastname).toLowerCase().includes(search.toLowerCase()) && tutor)}
                 renderItem={({item})=>{
                     return (
                         <View style={{flexDirection:'row', justifyContent:'center'}}>
