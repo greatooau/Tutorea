@@ -31,7 +31,7 @@ const PayInfo = ({navigation}) => {
       </View>
 
       <View style={styles.profile}>
-        <TouchableOpacity activeOpacity={0.7}><Image source={{uri:user.profilePic}} style={styles.userImage}/></TouchableOpacity>
+        <TouchableOpacity activeOpacity={0.7}><Image source={{uri:user.profile_picture}} style={styles.userImage}/></TouchableOpacity>
           <View style={{paddingTop:20}}>
             <Text style={[styles.name, styles.profileText]}>{(user.name + ' ' + user.lastname).length > 18 ? user.name.charAt(0) + '. ' + user.lastname : user.name + ' ' + user.lastname}</Text>
             <Text style={styles.profileText}>Información de pago</Text>

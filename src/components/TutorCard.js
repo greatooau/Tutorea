@@ -19,7 +19,7 @@ const TutorCard = ({name, lastname, middleName, profilePhoto, stars, specializat
         </View>
 
         <View style={styles.tutorInfo}>
-          <Text style={styles.tutorInfoText}>{name} {middleName !== '' ? middleName.charAt(0) + '. ' : ''}{lastname}</Text>
+          <Text style={styles.tutorInfoText}>{name} {lastname}</Text>
           <View style={styles.starsContainer}>{starsDisplayed.map(element => element)}</View>
           <Text style={{color:'#707070'}}>Especialización</Text>
           <Text>{specialization}</Text>

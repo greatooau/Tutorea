@@ -15,7 +15,7 @@ const header = () => {
           <Text style={styles.titleText}>Tutorea</Text>
           <View style={{flexDirection:'row',flex:1, justifyContent:'flex-end', alignItems:'center'}}>
             {/* <TouchableOpacity onPress={() => navigation.navigate('Notifications')}><IonIcon style={{marginRight:10}} size={30} name="notifications-outline" color="#fff"/></TouchableOpacity> */}
-            <TouchableOpacity><Image source={{uri: user.profilePic}} style={styles.userImage}/></TouchableOpacity>
+            <TouchableOpacity><Image source={{uri: user.profile_picture}} style={styles.userImage}/></TouchableOpacity>
           </View>
       </View>
 
@@ -36,7 +36,7 @@ const MyTutors = ({navigation}) => {
             <FlatList
               nestedScrollEnabled={true}
                 data={tutors}
-                renderItem={({item})=>{return <View style={{flexDirection:'row', justifyContent:'center'}}><TutorCard onPress={()=> navigation.navigate('DetailTutorNoPay',{id: item.id})} profilePhoto={item.profilePic} name={item.name} middleName={item.middleName} lastname={item.lastname} stars={item.stars} specialization={item.specialization}/></View>}}
+                renderItem={({item})=>{return <View style={{flexDirection:'row', justifyContent:'center'}}><TutorCard onPress={()=> navigation.navigate('DetailTutorNoPay',{id: item.id})} profilePhoto={item.profile_picture} name={item.name}  lastname={item.lastname} stars={item.stars} specialization={item.specialization}/></View>}}
                 keyExtractor={(item) => item.id}
                 ListHeaderComponent={header}
                 initialNumToRender={4}
