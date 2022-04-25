@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, StatusBar, Image, FlatList, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, Image, FlatList, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
 import React from 'react';
 import {primaryColor} from '../../../constants/Colors';
 import { SearchBar, Category, TutorsList, TutorCard } from '../../../components/Components';
@@ -60,24 +60,15 @@ const Home = ({navigation}) => {
         );
     };
     const [elements, setElements] = useState(null);
-    function onChangeHandler(tutors) {
-        if(tutors.length > 0){
-            setElements(true)
-            return tutors.filter(tutor => (tutor.name + ' ' + tutor.lastname).toLowerCase().includes(search.toLowerCase()) && tutor)
-        }else {
-            setElements(false)
-            return
-        }
-    }
 
     return (
         
-        <>
+        tutors.length > 0 ?(<>
             <StatusBar backgroundColor="black"/>
             <View style={styles.rectangle}>
             <FlatList
                 nestedScrollEnabled={true}
-                data={search === '' ? tutors : onChangeHandler(tutors)}
+                data={search === '' ? tutors : tutors.filter(tutor => (tutor.name + ' ' + tutor.lastname).toLowerCase().includes(search.toLowerCase()) && tutor)}
                 renderItem={({item})=>{
                     return (
                         <View style={{flexDirection:'row', justifyContent:'center'}}>
@@ -89,7 +80,10 @@ const Home = ({navigation}) => {
                 initialNumToRender={4}
             />
             </View>
-        </>
+        </>):(
+            <View style={{flex:1, flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                <ActivityIndicator color={primaryColor} size={80}/>
+            </View>)
     )
 };
 

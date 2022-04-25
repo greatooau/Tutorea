@@ -1,15 +1,28 @@
-import { StyleSheet, Text, View, TouchableOpacity,Image, ImageBackground, StatusBar, FlatList } from 'react-native'
-import React, { useContext } from 'react'
+import { StyleSheet, Text, View, TouchableOpacity,Image, ImageBackground, StatusBar, FlatList, ActivityIndicator } from 'react-native'
+import React, { useContext, useState, useEffect } from 'react'
 import IonIcon from 'react-native-vector-icons/Ionicons'
 import { primaryColor } from '../../../constants/Colors'
 import FaIcon from 'react-native-vector-icons/FontAwesome';
 import { TutorsContext } from '../../../context/TutorsContext'
 import { AccountContext } from '../../../context/AccountContext'
 import { Arrow, AppButton, StudyCard, Insights }from '../../../components/Components'
+import { dataFetcher } from '../../../constants/dataFetcher';
 
 const DetailTutorNoPay = ({navigation, route}) => {
+    const [ tutor, setTutor] = useState({insights:[], studies:[]});
     const [user] = useContext(AccountContext);
-    const tutor = useContext(TutorsContext).filter(tutor => tutor.id === route.params.id)[0];
+    useEffect(() => {
+        const fetchTutors = async() =>{
+            const response = await dataFetcher.get(`api/tutors/${route.params.id}`,{
+                headers:{
+                    'Authorization': `Bearer ${user.token}`
+                }
+            });
+            const data = response.data;
+            setTutor(data.tutor)
+        };
+        fetchTutors();
+    },[])
 
     const starsDisplayed = [];
 
@@ -46,7 +59,7 @@ const DetailTutorNoPay = ({navigation, route}) => {
     }
     return (
               
-        <>
+        tutor.insights.length > 0 && tutor.studies.length > 0 ?(<>
             <StatusBar backgroundColor="black"/>
             <View style={styles.rectangle}>
             <FlatList
@@ -68,7 +81,10 @@ const DetailTutorNoPay = ({navigation, route}) => {
                 initialNumToRender={4}
             />
             </View>
-        </>
+        </>) : (
+            <View style={{flex:1, flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                <ActivityIndicator color={primaryColor} size={80}/>
+            </View>)
             
     )
 }
