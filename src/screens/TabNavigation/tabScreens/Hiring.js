@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, Alert } from 'react-native'
 import IonIcon from 'react-native-vector-icons/Ionicons'
 import MatIcon from 'react-native-vector-icons/MaterialIcons'
 import React from 'react'
@@ -6,10 +6,40 @@ import { primaryColor, secondaryColor }from '../../../constants/Colors'
 import { AccountContext } from '../../../context/AccountContext'
 import { useContext, useState } from 'react'
 import { FormTextInput, AppButton } from '../../../components/Components'
+import { dataFetcher } from '../../../constants/dataFetcher'
 const Hiring = ({navigation, route}) => {
   const [user, setUser] = useContext(AccountContext);
   const tutor = route.params.tutor
   const [sesion, setSesion] = useState('1')
+  const [ isLoading, setIsLoading ] = useState(null);
+
+  const onSubmitHandler = async (e) => {
+      setIsLoading(true);
+      try{
+          const response = await dataFetcher.post("api/users/mytutors", {
+              tutorId: tutor._id,
+          },{
+            headers:{
+              'Authorization': `Bearer ${user.token}`
+            }
+          });
+          if (response.status === 200) {
+              setIsLoading(false);
+              console.log('john')
+              navigation.navigate('Home')
+          }
+          else {
+              console.log(response.status)
+          }
+      }catch(error){
+          console.log(error)
+          Alert.alert("Error", "Ha ocurrido un error.", [{}])
+      }
+      finally{
+        setIsLoading(false)
+      }
+  };
+
   return (
     <ScrollView>
       <View style={styles.title}>
@@ -50,7 +80,7 @@ const Hiring = ({navigation, route}) => {
               <Text style={notice.description}>Al concretarse el pago, un mensaje SMS llegará al número asociado a esta cuenta, con el contacto de tu tutor.</Text>
           </View>
         </View>
-        <View style={{paddingBottom:50}}><AppButton secondary={true} onPress={()=>navigation.navigate('Home')} buttonText="Confirmar pago"/></View>
+        <View style={{paddingBottom:50}}><AppButton secondary={true} onPress={onSubmitHandler} buttonText="Confirmar pago"/></View>
         
       </View>
       
