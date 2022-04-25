@@ -5,7 +5,7 @@ import React from 'react'
 import { primaryColor, secondaryColor }from '../../../constants/Colors'
 import { AccountContext } from '../../../context/AccountContext'
 import { useContext, useState } from 'react'
-import { FormTextInput, AppButton } from '../../../components/Components'
+import { FormTextInput, AppButton, Arrow } from '../../../components/Components'
 import { dataFetcher } from '../../../constants/dataFetcher'
 const Hiring = ({navigation, route}) => {
   const [user, setUser] = useContext(AccountContext);
@@ -52,6 +52,7 @@ const Hiring = ({navigation, route}) => {
       <View style={styles.rectangle}>
 
         <View style={styles.titleJuan}>
+          <TouchableOpacity onPress={() => navigation.goBack()}><Arrow color={primaryColor}/></TouchableOpacity>
           <Text style={[styles.titleJuanText, {fontSize:30, color:primaryColor, fontFamily:'lato-regular'}]}>Contratación</Text>
           <FormTextInput center={false} maxLength={2} fieldName="Sesiones" fieldNameColor={primaryColor} setProp={setSesion} value={sesion}/>
         </View>
