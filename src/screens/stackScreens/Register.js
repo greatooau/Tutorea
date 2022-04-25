@@ -1,11 +1,13 @@
-import { StyleSheet, View, Text, TouchableOpacity, ScrollView, StatusBar } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView, StatusBar, ActivityIndicator, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useState } from 'react';
 import { Arrow, AppButton, FormTextInput } from '../../components/Components'
+import { dataFetcher } from '../../constants/dataFetcher';
+import { primaryColor } from '../../constants/Colors';
 
 const Register = ({navigation}) => {
 
-    const [userName, setUserName] = useState('');
+    const [username, setUserName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -14,6 +16,40 @@ const Register = ({navigation}) => {
     const [sex, setSex] = useState('');
     const [bornDate, setBornDate] = useState('');
     const [phone, setPhone] = useState('');
+    const [ isLoading, setIsLoading ] = useState(false);
+
+    const onSubmitHandler = async (e) => {
+        setIsLoading(true);
+        try{
+            const response = await dataFetcher.post("api/users/", {
+                username: username,
+                email:email,
+                password: password,
+                name: name,
+                lastname:lastname,
+                born_date:bornDate,
+                profile_picture:"https://imgs.search.brave.com/GBLxonEYI_OAMfApYU2-OV4YFKkMARAbq8mFZoscPbo/rs:fit:1200:1200:1/g:ce/aHR0cHM6Ly9jZWFj/b3BpbmlvbmVzLmVz/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDE5/LzAzL3VzZXItNi5w/bmc",
+                sex:sex,
+                phone:phone,
+                myTutors:[]
+            });
+            if (response.status === 201) {
+                setIsLoading(false);
+                setTimeout(() => {Alert.alert("Registro exitoso", "Ha sido registrado exitosamente.", [{}])}, 3000);
+                navigation.navigate('Login');
+            }
+            else {
+                console.log(response.status)
+            }
+        }catch(error){
+            
+            setIsLoading(false)
+            console.log(error)
+            console.log(2)
+        }
+    };
+
+
     return(
         <ScrollView>
             <StatusBar backgroundColor="black"/>
@@ -29,7 +65,7 @@ const Register = ({navigation}) => {
                 </View>
 
                 <View style={styles.form}>
-                    <FormTextInput placeholder="Escribe tu nombre de usuario" fieldName="Nombre de usuario" setProp={setUserName} value={userName}/>
+                    <FormTextInput placeholder="Escribe tu nombre de usuario" fieldName="Nombre de usuario" setProp={setUserName} value={username}/>
                     <FormTextInput placeholder="Escribe tu correo electrónico" fieldName="Correo Electrónico" setProp={setEmail} value={email}/>
                     <FormTextInput placeholder="Escribe tu contraseña" fieldName="Contraseña" isPassword={true} setProp={setPassword} value={password}/>
                     <FormTextInput placeholder="Confirmar contraseña" fieldName="Confirmar contraseña" isPassword={true} setProp={setConfirmPassword} value={confirmPassword}/>
@@ -39,7 +75,7 @@ const Register = ({navigation}) => {
                     <FormTextInput placeholder="Selecciona tu fecha de nacimiento" fieldName="Fecha de nacimiento" setProp={setBornDate} value={bornDate}/>
                     <FormTextInput placeholder="Escribe tu número de teléfono" fieldName="Número de teléfono" setProp={setPhone} value={phone}/>
                 </View>
-                <View style={{flexDirection:'row', justifyContent:'center'}}><AppButton buttonText='Registrar'/></View>
+                <View style={{flexDirection:'row', justifyContent:'center'}}><AppButton onPress={onSubmitHandler} buttonText='Registrar'/></View>
                 
                 <View style={styles.buttonTextDown}>
                     <Text style={{color: '#1c3252'}}>¿Ya tienes una cuenta?</Text>
@@ -47,6 +83,7 @@ const Register = ({navigation}) => {
                         <Text style={styles.link}>Ingresa aquí</Text>
                     </TouchableOpacity>
                 </View>
+                {isLoading && (<ActivityIndicator style={{}} size={70} color={primaryColor}/>)}
                 <View style={styles.bottomTextContainer}>
                 <Text style={styles.bottomText}>Tutorea</Text>
                 </View>

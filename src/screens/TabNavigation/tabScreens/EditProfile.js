@@ -11,7 +11,7 @@ const EditProfile = ({navigation}) => {
 
   const [user, setUser] = useContext(AccountContext);
 
-  const [userName, setUserName] = useState(user.userName);
+  const [username, setUserName] = useState(user.username);
   const [email, setEmail] = useState(user.email);
   const [name, setName] = useState(user.name);
   const [lastname, setLastname] = useState(user.lastname);
@@ -31,7 +31,7 @@ const EditProfile = ({navigation}) => {
       </View>
 
       <View style={styles.profile}>
-        <TouchableOpacity activeOpacity={0.7}><Image source={{uri:user.profilePic}} style={styles.userImage}/></TouchableOpacity>
+        <TouchableOpacity activeOpacity={0.7}><Image source={{uri:user.profile_picture}} style={styles.userImage}/></TouchableOpacity>
           <View style={{paddingTop:20}}>
             <Text style={[styles.name, styles.profileText]}>{(user.name + ' ' + user.lastname).length > 18 ? user.name.charAt(0) + '. ' + user.lastname : user.name + ' ' + user.lastname}</Text>
             <Text style={styles.profileText}>Editar perfil</Text>
@@ -39,7 +39,7 @@ const EditProfile = ({navigation}) => {
       </View>
 
       <View style={styles.form}>
-      <FormTextInput placeholder="Escribe tu nombre de usuario" fieldName="Nombre de usuario" fieldNameColor={primaryColor} value={userName} setProp={setUserName}/>
+      <FormTextInput placeholder="Escribe tu nombre de usuario" fieldName="Nombre de usuario" fieldNameColor={primaryColor} value={username} setProp={setUserName}/>
       <FormTextInput placeholder="Escribe tu correo electrónico" fieldName="Correo Electrónico" fieldNameColor={primaryColor} value={email} setProp={setEmail}/>
       <FormTextInput placeholder="Escribe tu nombre" fieldName="Nombre" fieldNameColor={primaryColor} value={name} setProp={setName}/>
       <FormTextInput placeholder="Escribe tu apellido" fieldName="Apellido" fieldNameColor={primaryColor} value={lastname} setProp={setLastname}/>
@@ -51,7 +51,7 @@ const EditProfile = ({navigation}) => {
       <View style={{flexDirection:'column', alignItems:'center',  paddingBottom:50}}>
         <AppButton buttonText="Guardar" onPress={() => {
           
-          setUser({...user, userName:userName, email:email, name:name, lastname: lastname, sex:sex, bornDate: bornDate, phone: phone})
+          setUser({...user, username:username, email:email, name:name, lastname: lastname, sex:sex, bornDate: bornDate, phone: phone})
           navigation.goBack()
         }}/>
           <AppButton buttonText="Cancelar" onPress={() => navigation.goBack()}/>

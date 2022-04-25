@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TouchableOpacity,Image, ImageBackground, StatusBar, FlatList } from 'react-native'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import IonIcon from 'react-native-vector-icons/Ionicons'
 import { primaryColor } from '../../../constants/Colors'
 import FaIcon from 'react-native-vector-icons/FontAwesome';
@@ -9,6 +9,7 @@ import { Arrow, AppButton, StudyCard, Insights }from '../../../components/Compon
 
 const DetailTutorPay = ({navigation, route}) => {
     const [user] = useContext(AccountContext);
+    useFe
     const tutor = useContext(TutorsContext).filter(tutor => tutor.id === route.params.id)[0];
 
     const starsDisplayed = [];
@@ -28,15 +29,15 @@ const DetailTutorPay = ({navigation, route}) => {
                 <Text style={styles.titleText}>Tutorea</Text>
                 <View style={{flexDirection:'row',flex:1, justifyContent:'flex-end', alignItems:'center'}}>
                     {/* <TouchableOpacity onPress={() => navigation.navigate('Notifications')} activeOpacity={0.7}><IonIcon style={{marginRight:10}} size={30} name="notifications-outline" color="#fff"/></TouchableOpacity> */}
-                    <TouchableOpacity activeOpacity={0.7}><Image source={{uri: user.profilePic}} style={styles.userImage}/></TouchableOpacity>
+                    <TouchableOpacity activeOpacity={0.7}><Image source={{uri: user.profile_picture}} style={styles.userImage}/></TouchableOpacity>
                 </View>
             </View>
 
             <View style={styles.tutorImage}>
-                <ImageBackground source={{uri: tutor.profilePic}} resizeMode='cover' style={{flex: 1,flexDirection:'column'}}>
+                <ImageBackground source={{uri: tutor.profile_picture}} resizeMode='cover' style={{flex: 1,flexDirection:'column'}}>
                     <View style={styles.arrow}><TouchableOpacity onPress={() => navigation.goBack()} ><Arrow color='#fff'></Arrow></TouchableOpacity></View>
                     
-                    <View style={styles.tutorImgTextContainer}><Text style={styles.tutorImgText}>{tutor.name} {tutor.middleName !== ''? (tutor.middleName).charAt(0) +'. ' : ''}{tutor.lastname}</Text></View>
+                    <View style={styles.tutorImgTextContainer}><Text style={styles.tutorImgText}>{tutor.name} {tutor.lastname}</Text></View>
                 </ImageBackground>
             </View>
 

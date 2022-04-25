@@ -10,7 +10,7 @@ const TutorsList = ({ header}) => {
       <FlatList
         nestedScrollEnabled={true}
           data={tutors}
-          renderItem={({item})=>{return <View style={{flexDirection:'row', justifyContent:'center'}}><TutorCard profilePhoto={item.profilePic} name={item.name} middleName={item.middleName} lastname={item.lastname} stars={item.stars} specialization={item.specialization}/></View>}}
+          renderItem={({item})=>{return <View style={{flexDirection:'row', justifyContent:'center'}}><TutorCard profilePhoto={item.profile_picture} name={item.name} middleName={item.middleName} lastname={item.lastname} stars={item.stars} specialization={item.specialization}/></View>}}
           keyExtractor={(item) => item.id}
           ListHeaderComponent={header}
           initialNumToRender={4}

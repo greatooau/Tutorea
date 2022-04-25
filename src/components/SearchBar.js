@@ -4,7 +4,7 @@ import IonIcon from 'react-native-vector-icons/Ionicons'
 import { useState } from 'react';
 import {primaryColor} from '../constants/Colors';
 
-const SearchBar = ({ placeholder, setProp, value}) => {
+const SearchBar = ({ placeholder, setProp, value, onSubmitEditing}) => {
     return(
 
         <View style={styles.container}>
@@ -16,6 +16,7 @@ const SearchBar = ({ placeholder, setProp, value}) => {
                         value={value && value}
                         onChangeText={(newText) => setProp(newText)}
                         underlineColorAndroid="transparent"
+                        onSubmitEditing={onSubmitEditing}
                     />
                     <Icon style={styles.searchIcon} name="search" size={20} color="#000"/>
                 </View>

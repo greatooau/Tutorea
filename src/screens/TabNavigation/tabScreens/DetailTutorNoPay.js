@@ -28,15 +28,15 @@ const DetailTutorNoPay = ({navigation, route}) => {
                 <Text style={styles.titleText}>Tutorea</Text>
                 <View style={{flexDirection:'row',flex:1, justifyContent:'flex-end', alignItems:'center'}}>
                     {/* <TouchableOpacity onPress={() => navigation.navigate('Notifications')} activeOpacity={0.7}><IonIcon style={{marginRight:10}} size={30} name="notifications-outline" color="#fff"/></TouchableOpacity> */}
-                    <TouchableOpacity activeOpacity={0.7}><Image source={{uri: user.profilePic}} style={styles.userImage}/></TouchableOpacity>
+                    <TouchableOpacity activeOpacity={0.7}><Image source={{uri: user.profile_picture}} style={styles.userImage}/></TouchableOpacity>
                 </View>
             </View>
 
             <View style={styles.tutorImage}>
-                <ImageBackground source={{uri: tutor.profilePic}} resizeMode='cover' style={{flex: 1,flexDirection:'column'}}>
+                <ImageBackground source={{uri: tutor.profile_picture}} resizeMode='cover' style={{flex: 1,flexDirection:'column'}}>
                     <View style={styles.arrow}><TouchableOpacity onPress={() => navigation.goBack()} ><Arrow color='#fff'></Arrow></TouchableOpacity></View>
                     
-                    <View style={styles.tutorImgTextContainer}><Text style={styles.tutorImgText}>{tutor.name} {tutor.middleName !== ''? (tutor.middleName).charAt(0) +'. ' : ''}{tutor.lastname}</Text></View>
+                    <View style={styles.tutorImgTextContainer}><Text style={styles.tutorImgText}>{tutor.name} {tutor.lastname}</Text></View>
                 </ImageBackground>
             </View>
 

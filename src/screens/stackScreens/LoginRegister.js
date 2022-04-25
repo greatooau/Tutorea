@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image, StatusBar } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 //Components
 import { Arrow, AppButton, FormTextInput } from '../../components/Components'
-
+import React from 'react'
 
 
 const LoginRegister = ({ navigation }) => {
