@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, StatusBar, Image, FlatList, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, Image, FlatList, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
 import React from 'react';
 import {primaryColor} from '../../../constants/Colors';
 import { SearchBar, Category, TutorsList, TutorCard } from '../../../components/Components';
@@ -63,7 +63,7 @@ const Home = ({navigation}) => {
 
     return (
         
-        <>
+        tutors.length > 0 ?(<>
             <StatusBar backgroundColor="black"/>
             <View style={styles.rectangle}>
             <FlatList
@@ -80,7 +80,10 @@ const Home = ({navigation}) => {
                 initialNumToRender={4}
             />
             </View>
-        </>
+        </>):(
+            <View style={{flex:1, flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                <ActivityIndicator color={primaryColor} size={80}/>
+            </View>)
     )
 };
 
