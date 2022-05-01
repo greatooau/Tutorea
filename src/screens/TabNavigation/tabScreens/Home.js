@@ -17,15 +17,21 @@ const Home = ({navigation}) => {
     const [ search, setSearch ] = useState('');
     
     useEffect(() => {
+        let isMounted = true; 
+
         const fetchTutors = async() =>{
+            
             const response = await dataFetcher.get('api/tutors',{
                 headers:{
                     'Authorization': `Bearer ${user.token}`
                 }
             });
-            setTutors(response.data.tutors)
+            if (isMounted){ setTutors(response.data.tutors)}
         };
+
         fetchTutors();
+
+        return () => { isMounted = false };
     },[])
     const header = () => {
         
@@ -39,7 +45,7 @@ const Home = ({navigation}) => {
                     </View>
                 </View>
                 <View style={styles.greeting}>
-                    <Text style={[styles.greetingText, {fontSize:14, marginBottom:5}]}>Bienvenido,</Text>
+                    <Text style={[styles.greetingText, {fontSize:14, marginBottom:5}]}>Bienvenid{user.sex === 'masculino' ? ''+'o' : ''+'a'},</Text>
                     <Text style={[styles.greetingText, {fontSize:30}]}>{user.name} {user.lastname} !</Text>
                 </View>
             

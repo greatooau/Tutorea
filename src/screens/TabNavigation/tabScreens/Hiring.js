@@ -24,8 +24,15 @@ const Hiring = ({navigation, route}) => {
             }
           });
           if (response.status === 200) {
+              const token = user.token
+              const response2 = await dataFetcher.get("api/users/me", {
+                headers:{
+                    'Authorization': `Bearer ${user.token}`
+                }
+              });
+              
+              setUser({...response2.data, token:token })
               setIsLoading(false);
-              console.log('john')
               navigation.navigate('Home')
           }
           else {

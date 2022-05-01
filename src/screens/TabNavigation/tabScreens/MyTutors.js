@@ -14,16 +14,18 @@ const MyTutors = ({navigation}) => {
   const [user, setUser] = useContext(AccountContext)
   const [tutors, setTutors] = useState([])
   useEffect(() => {
+    let isMounted = true; 
     const fetchTutors = async() =>{
         const response = await dataFetcher.get('api/users/mytutors',{
             headers:{
                 'Authorization': `Bearer ${user.token}`
             }
         });
-
-        setTutors(response.data.myTutors)
+        if (isMounted) setTutors(response.data.myTutors)
+        
     };
     fetchTutors();
+    return () => { isMounted = false };
   },[])
   const header = () => {
     

@@ -34,6 +34,8 @@ const App = () => {
   return(
       <AccountProvider>
         <TutorsProvider>
+
+
           <NavigationContainer>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
               
@@ -53,6 +55,8 @@ const App = () => {
               
             </Stack.Navigator>
           </NavigationContainer>
+
+          
         </TutorsProvider>
       </AccountProvider>
   )

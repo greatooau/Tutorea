@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         alignItems:'center',
     },
     searchSection: {
-        width:'75%',
+        width:'100%',
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
