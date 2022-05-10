@@ -28,7 +28,7 @@ const Categories = ({ navigation, route }) => {
                         'Authorization': `Bearer ${user.token}`
                     }
                 });
-                setTutors(response.data.tutors)
+                setTutors(response.data)
             }catch(error) {
                 console.log(error)
             }

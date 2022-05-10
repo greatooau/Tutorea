@@ -8,9 +8,11 @@ import { AccountContext } from '../../../context/AccountContext'
 import { Arrow, AppButton, StudyCard, Insights }from '../../../components/Components'
 import {dataFetcher} from '../../../constants/dataFetcher'
 
-const DetailTutorPay = ({navigation, route}) => {
-    const [ tutor, setTutor] = useState({insights:[], studies:[]});
+const DetailTutorPay = ({ navigation, route }) => {
+    const [tutors, setTutors] = useContext(TutorsContext)
+    const [ tutor, setTutor] = useState({insights:[], studies:[], stars:0});
     const [user] = useContext(AccountContext);
+
     useEffect(() => {
         const fetchTutors = async() =>{
             const response = await dataFetcher.get(`api/tutors/${route.params.id}`,{
@@ -19,23 +21,20 @@ const DetailTutorPay = ({navigation, route}) => {
                 }
             });
             const data = response.data;
-            setTutor(data.tutor)
+            setTutor(data)
         };
         fetchTutors();
     },[])
     /* const tutor = useContext(TutorsContext).filter(tutor => tutor.id === route.params.id)[0]; */
 
     const starsDisplayed = [];
-
-    for(let i = 0; i < 5; ++i){
-        if (i < tutor.stars) {
-            starsDisplayed.push(<FaIcon style={{marginHorizontal:1}} key={i} name="star" size={44} color="#f2ae00"/>);
-        } else {
-            starsDisplayed.push(<FaIcon style={{marginHorizontal:1}} key={i} name="star" size={44} color="#6e6e6d"/>);
+        for(let i = 0; i < 5; ++i){
+            if (i < tutor.stars) {
+                starsDisplayed.push(<FaIcon style={{marginHorizontal:1}} key={i} name="star" size={44} color="#f2ae00"/>);
+            } else {
+                starsDisplayed.push(<FaIcon style={{marginHorizontal:1}} key={i} name="star" size={44} color="#6e6e6d"/>);
+            }
         }
-    }
-
-    
     const header = () => {
         return (<>
             <View style={styles.title}>
@@ -78,7 +77,12 @@ const DetailTutorPay = ({navigation, route}) => {
                         {tutor.insights.map(element => <Insights key={element.id} name={element.name}/>)}
                     </View>
                     <Text style={styles.studies}>Tarifa por sesión: {tutor.fee} MXN</Text>
-                    <View style={{paddingBottom:'20%', paddingTop:'10%'}}><AppButton buttonText="Contratar servicios" onPress={() => navigation.navigate('Hiring',{tutor:{...tutor}})} secondary={true}/></View>
+                    <View style={{paddingBottom:'20%', paddingTop:'10%'}}>
+                        {user.myTutors.includes(route.params.id) ? 
+                        (<AppButton buttonText="Contratado" disabled={true} secondary={true}/>) :
+                        (<AppButton buttonText="Contratar servicios" onPress={() => navigation.navigate('Hiring',{tutor:{...tutor}})} secondary={true}/>)}
+                        
+                    </View>
                 </View>)}
                 initialNumToRender={4}
             />

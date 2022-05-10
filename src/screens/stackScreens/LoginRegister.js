@@ -25,7 +25,7 @@ const LoginRegister = ({ navigation }) => {
             <View style={styles.bottomTextContainer}>
               <Text style={styles.bottomText}>Tutorea</Text>
             </View>
-
+            
         </LinearGradient>
     );
 }

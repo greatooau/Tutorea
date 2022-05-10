@@ -26,7 +26,7 @@ const Home = ({navigation}) => {
                     'Authorization': `Bearer ${user.token}`
                 }
             });
-            if (isMounted){ setTutors(response.data.tutors)}
+            if (isMounted){ setTutors(response.data)}
         };
 
         fetchTutors();
@@ -45,7 +45,7 @@ const Home = ({navigation}) => {
                     </View>
                 </View>
                 <View style={styles.greeting}>
-                    <Text style={[styles.greetingText, {fontSize:14, marginBottom:5}]}>Bienvenid{user.sex === 'masculino' ? ''+'o' : ''+'a'},</Text>
+                    <Text style={[styles.greetingText, {fontSize:14, marginBottom:5}]}>Bienvenid{user.sex.toLowerCase() === 'masculino' ? ''+'o' : ''+'a'},</Text>
                     <Text style={[styles.greetingText, {fontSize:30}]}>{user.name} {user.lastname} !</Text>
                 </View>
             
@@ -59,8 +59,6 @@ const Home = ({navigation}) => {
                         <Category onPress={() => navigation.navigate('Categories', { icon:"book", category:"Ciencias sociales", color:"#2587be", iconSource:"fa" })} categoryName="Ciencias sociales"  iconName="book" iconSource="fa" color="#2587be" />
                         <Category onPress={() => navigation.navigate('Categories', { icon:"language", category:"Idiomas", color:"#9A0D0D", iconSource:"Ent" })} categoryName="Idiomas" iconName="language" iconSource="Ent" color='#9A0D0D'/>
                     </View>
-                    
-                    <Text style={styles.interests}>Tutores que te pueden interesar</Text>
                 </>)}
             </>  
         );
@@ -74,7 +72,7 @@ const Home = ({navigation}) => {
             <View style={styles.rectangle}>
             <FlatList
                 nestedScrollEnabled={true}
-                data={search === '' ? tutors : tutors.filter(tutor => (tutor.name + ' ' + tutor.lastname).toLowerCase().includes(search.toLowerCase()) && tutor)}
+                data={search !== '' && tutors.filter(tutor => (tutor.name + ' ' + tutor.lastname).toLowerCase().includes(search.toLowerCase()) && tutor)}
                 renderItem={({item})=>{
                     return (
                         <View style={{flexDirection:'row', justifyContent:'center'}}>

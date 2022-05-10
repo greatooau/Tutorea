@@ -19,33 +19,69 @@ const Register = ({navigation}) => {
     const [ isLoading, setIsLoading ] = useState(false);
 
     const onSubmitHandler = async (e) => {
-        setIsLoading(true);
-        try{
-            const response = await dataFetcher.post("api/users/", {
-                username: username,
-                email:email,
-                password: password,
-                name: name,
-                lastname:lastname,
-                born_date:bornDate,
-                profile_picture:"https://imgs.search.brave.com/GBLxonEYI_OAMfApYU2-OV4YFKkMARAbq8mFZoscPbo/rs:fit:1200:1200:1/g:ce/aHR0cHM6Ly9jZWFj/b3BpbmlvbmVzLmVz/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDE5/LzAzL3VzZXItNi5w/bmc",
-                sex:sex,
-                phone:phone,
-                myTutors:[]
-            });
-            if (response.status === 201) {
-                setIsLoading(false);
-                setTimeout(() => {Alert.alert("Registro exitoso", "Ha sido registrado exitosamente.", [{}])}, 3000);
-                navigation.navigate('Login');
+        
+        if (password !== confirmPassword) {
+            Alert.alert("Error", "La contraseñas no encajan")
+        }
+        else if (
+            password === '' || 
+            confirmPassword === '' || 
+            name === '' ||
+            username === '' ||
+            email === '' ||
+            lastname === '' ||
+            sex === '' ||
+            bornDate === ''||
+            phone === ''){
+                Alert.alert("Error", "Llene los campos correctamente")
+        }
+        else if (
+            password.length < 4 || 
+            confirmPassword.length < 4 || 
+            name.length < 1 ||
+            username.length < 5 ||
+            email.length < 6 ||
+            lastname .length < 1 ||
+            sex .length < 3 ||
+            bornDate.length < 6||
+            phone .length < 10
+        ){
+            Alert.alert("Error", "Llene los campos correctamente")
+        }
+        else if (!email.includes("@")){
+            Alert.alert("Email", "Tu email está incompleto, necesita un @")
+        }
+        else if (!email.includes(".")){
+            Alert.alert("Email", "Tu email está incompleto, necesita un .")
+        }else {
+            setIsLoading(true);
+            try{
+                
+                const response = await dataFetcher.post("api/users/", {
+                    username: username,
+                    email:email,
+                    password: password,
+                    name: name,
+                    lastname:lastname,
+                    born_date:bornDate,
+                    profile_picture:"https://imgs.search.brave.com/GBLxonEYI_OAMfApYU2-OV4YFKkMARAbq8mFZoscPbo/rs:fit:1200:1200:1/g:ce/aHR0cHM6Ly9jZWFj/b3BpbmlvbmVzLmVz/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDE5/LzAzL3VzZXItNi5w/bmc",
+                    sex:sex,
+                    phone:phone,
+                    myTutors:[],
+                });
+                if (response.status === 201) {
+                    setIsLoading(false);
+                    setTimeout(() => {Alert.alert("Registro exitoso", "Ha sido registrado exitosamente.", [{}])}, 3000);
+                    navigation.navigate('Login');
+                }
+                else {
+                    console.log(response.status)
+                }
+            }catch(error){
+                
+                setIsLoading(false)
+                console.log(error)
             }
-            else {
-                console.log(response.status)
-            }
-        }catch(error){
-            
-            setIsLoading(false)
-            console.log(error)
-            console.log(2)
         }
     };
 

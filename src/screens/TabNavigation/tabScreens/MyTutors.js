@@ -2,7 +2,6 @@ import { StyleSheet, Text, View, StatusBar, Image, TouchableOpacity, FlatList } 
 import React from 'react';
 import {primaryColor} from '../../../constants/Colors';
 import { SearchBar, Category, TutorCard } from '../../../components/Components';
-import IonIcon from 'react-native-vector-icons/Ionicons'
 
 import { useContext, useState, useEffect } from 'react';
 import { TutorsContext } from '../../../context/TutorsContext';
@@ -12,7 +11,7 @@ import {dataFetcher} from '../../../constants/dataFetcher'
 
 const MyTutors = ({navigation}) => {
   const [user, setUser] = useContext(AccountContext)
-  const [tutors, setTutors] = useState([])
+  const [tutors, setTutors] = useContext(TutorsContext)
   useEffect(() => {
     let isMounted = true; 
     const fetchTutors = async() =>{
@@ -21,7 +20,7 @@ const MyTutors = ({navigation}) => {
                 'Authorization': `Bearer ${user.token}`
             }
         });
-        if (isMounted) setTutors(response.data.myTutors)
+        if (isMounted) setTutors(response.data)
         
     };
     fetchTutors();
