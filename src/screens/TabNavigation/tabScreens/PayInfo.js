@@ -3,22 +3,59 @@ import IonIcon from 'react-native-vector-icons/Ionicons'
 import MatIcon from 'react-native-vector-icons/MaterialIcons'
 import React from 'react'
 import{ primaryColor, secondaryColor }from '../../../constants/Colors'
-import {FormTextInput} from '../../../components/Components'
+import { FormTextInput } from '../../../components/Components'
 import { AppButton } from '../../../components/Components'
 import { AccountContext } from '../../../context/AccountContext';
 import { useContext, useState } from 'react';
-const PayInfo = ({navigation}) => {
+import { dataFetcher } from '../../../constants/dataFetcher'
+const PayInfo = ({ navigation }) => {
 
   const [user, setUser] = useContext(AccountContext);
 
-  const [cardNumber, setcardNumber] = useState('');
-  const [CVV, setCVV] = useState('');
-  const [expDate, setexpDate] = useState('');
-  const [titularName, settitularName] = useState('');
-  const [cardType, setcardType] = useState('');
-  const [cardAdress, setcardAdress] = useState('');
-  const [cardPostalCode, setcardPostalCode] = useState('');
+  const [cardNumber, setCardNumber] = useState(user.payData ? user.payData.cardNumber : '');
+  const [CVV, setCVV] = useState(user.payData ? user.payData.CVV : '');
+  const [expDate, setExpDate] = useState(user.payData ? user.payData.expDate : '');
+  const [titularName, setTitularName] = useState(user.payData ? user.payData.titularName : '');
+  const [cardType, setCardType] = useState(user.payData ? user.payData.cardType : '');
+  const [cardAdress, setCardAdress] = useState(user.payData ? user.payData.cardAdress : '');
+  const [cardPostalCode, setCardPostalCode] = useState(user.payData ? user.payData.cardPostalCode : '');
 
+  const onSubmitHandler = async() => {
+      if(
+        cardNumber !== ''  ||
+        CVV !== '' ||
+        expDate !== '' ||
+        titularName !== '' ||
+        cardType !== '' ||
+        cardAdress !== '' ||
+        cardPostalCode !== '' ||
+        cardNumber.length === 16 ||
+        CVV.length === 3
+      ){
+        const config = {
+            headers: {
+                Authorization: `Bearer ${user.token}`,
+            },
+        }
+        const body = {
+            cardNumber,
+            CVV,
+            expDate,
+            titularName,
+            cardType,
+            cardAdress,
+            cardPostalCode,
+        }
+        const response = await dataFetcher.post(
+         'api/users/payData',
+         body,
+         config)
+        if (response.status === 200) {
+          setUser({...user, payData: body})
+          navigation.goBack()
+        }
+      }
+  }
   return (
     <ScrollView>
       <StatusBar backgroundColor="#000"/>
@@ -39,30 +76,17 @@ const PayInfo = ({navigation}) => {
       </View>
 
       <View style={styles.form}>
-        <FormTextInput placeholder="Escribe tu número de tarjeta" fieldName="Número de tarjeta" fieldNameColor={primaryColor} value={cardNumber} setProp={setcardNumber}/>
-        <FormTextInput placeholder="Escribe el CVV" fieldName="CVV" fieldNameColor={primaryColor} value={CVV} setProp={setCVV}/>
-        <FormTextInput placeholder="Escribe la fecha de expiración" fieldName="Fecha de expiración" fieldNameColor={primaryColor} value={expDate} setProp={setexpDate}/>
-        <FormTextInput placeholder="Escribe el nombre del titular" fieldName="Nombre del titular" fieldNameColor={primaryColor} value={titularName} setProp={settitularName}/>
-        <FormTextInput placeholder="Selecciona el tipo de tarjeta" fieldName="Tipo de tarjeta" fieldNameColor={primaryColor} value={cardType} setProp={setcardType}/>
-        <FormTextInput placeholder="Escribe la dirección de la tarjeta" fieldName="Fecha de nacimiento" fieldNameColor={primaryColor} value={cardAdress} setProp={setcardAdress}/>
-        <FormTextInput placeholder="Escribe el código postal de la tarjeta" fieldName="Número de teléfono" fieldNameColor={primaryColor} value={cardPostalCode} setProp={setcardPostalCode}/>
+        <FormTextInput placeholder="Escribe tu número de tarjeta" maxLength={16} fieldName="Número de tarjeta" fieldNameColor={primaryColor} value={cardNumber} setProp={setCardNumber}/>
+        <FormTextInput placeholder="Escribe el CVV" maxLength={3} fieldName="CVV" fieldNameColor={primaryColor} value={CVV} setProp={setCVV}/>
+        <FormTextInput placeholder="Escribe la fecha de expiración" maxLength={10} fieldName="Fecha de expiración" fieldNameColor={primaryColor} value={expDate} setProp={setExpDate}/>
+        <FormTextInput placeholder="Escribe el nombre del titular" fieldName="Nombre del titular" fieldNameColor={primaryColor} value={titularName} setProp={setTitularName}/>
+        <FormTextInput placeholder="Selecciona el tipo de tarjeta" fieldName="Tipo de tarjeta" fieldNameColor={primaryColor} value={cardType} setProp={setCardType}/>
+        <FormTextInput placeholder="Escribe la dirección de la tarjeta" fieldName="Dirección" fieldNameColor={primaryColor} value={cardAdress} setProp={setCardAdress}/>
+        <FormTextInput placeholder="Escribe el código postal de la tarjeta" maxLength={5} fieldName="Código Postal" fieldNameColor={primaryColor} value={cardPostalCode} setProp={setCardPostalCode}/>
         
         </View>
         <View style={{flexDirection:'column', alignItems:'center', paddingBottom:50}}>
-            <AppButton buttonText="Guardar" onPress={() => {
-                
-                setUser({...user, payInfo:{
-                    cardNumber: cardNumber,
-                    CVV: CVV,
-                    expDate: expDate,
-                    titularName: titularName,
-                    cardType: cardType,
-                    cardAdress: cardAdress,
-                    cardPostalCode: cardPostalCode
-                }
-                })
-                navigation.goBack()
-                }}/>
+            <AppButton buttonText="Guardar" onPress={onSubmitHandler}/>
             <AppButton buttonText="Cancelar" onPress={() => navigation.goBack()}/>
         </View>
       

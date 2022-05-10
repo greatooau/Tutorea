@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image, StatusBar, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Image, StatusBar, ScrollView, Alert } from 'react-native'
 import IonIcon from 'react-native-vector-icons/Ionicons'
 import MatIcon from 'react-native-vector-icons/MaterialIcons'
 import React from 'react'
@@ -7,6 +7,7 @@ import {FormTextInput} from '../../../components/Components'
 import { AppButton } from '../../../components/Components'
 import { AccountContext } from '../../../context/AccountContext';
 import { useContext, useState } from 'react';
+import { dataFetcher } from '../../../constants/dataFetcher'
 const ChangePassword = ({navigation}) => {
 
     const [user, setUser] = useContext(AccountContext);
@@ -14,6 +15,35 @@ const ChangePassword = ({navigation}) => {
     const [actualPassword, setActualPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
+
+    const onSubmitHandler = async() => {
+        if( newPassword === confirmNewPassword && newPassword !== '' && confirmNewPassword !== '' && actualPassword !== '' ) {
+            const config = {
+                headers:{
+                  'Authorization':`Bearer ${user.token}`
+                }
+            }
+            const body = {
+                oldPassword: actualPassword,
+                newPassword
+            }
+
+            const response = await dataFetcher.post(
+             'api/users/password',
+             body,
+             config)
+
+            if (response.status === 200) {
+                Alert.alert('Cambio exitoso', 'El cambio de tu contraseña ha sido exitoso.')
+                setActualPassword('')
+                setNewPassword('')
+                setConfirmNewPassword('')
+            }
+            else {
+                Alert.alert('Error', 'Tu contraseña no ha podido ser cambiada debido a que tu contraseña actual no coincide.')
+            }
+        }
+    }
 
     return (
         <ScrollView>
@@ -41,10 +71,7 @@ const ChangePassword = ({navigation}) => {
                 
             </View>
             <View style={{flexDirection:'column', alignItems:'center'}}>
-                <AppButton buttonText="Guardar" onPress={() => {
-                    setUser({...user, password: newPassword})
-                    navigation.goBack()
-                }}/>
+                <AppButton buttonText="Guardar" onPress={onSubmitHandler}/>
                 <AppButton buttonText="Cancelar" onPress={() => navigation.goBack()}/>
             </View>
         

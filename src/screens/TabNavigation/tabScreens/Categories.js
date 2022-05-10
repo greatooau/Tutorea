@@ -20,20 +20,6 @@ const Categories = ({ navigation, route }) => {
 
     useEffect(() => {
 
-        switch(category){
-            case 'Tecnología':
-                setRequestCategory('tecnology');
-                break;
-            case 'Ciencia':
-                setRequestCategory('science');
-                break;
-            case 'Ciencias sociales':
-                setRequestCategory('social sciences');
-                break;
-            case 'Idiomas':
-                setRequestCategory('languages');
-                break;
-        }
 
         const fetchTutors = async() =>{
             try{
@@ -42,7 +28,7 @@ const Categories = ({ navigation, route }) => {
                         'Authorization': `Bearer ${user.token}`
                     }
                 });
-                setTutors(response.data.tutors)
+                setTutors(response.data)
             }catch(error) {
                 console.log(error)
             }
@@ -97,7 +83,7 @@ const Categories = ({ navigation, route }) => {
     };
 
     return (
-        tutors.length > 0 && requestCategory !== ''?(<>
+        tutors.length > 0 ?(<>
             <StatusBar backgroundColor="black"/>
             <View style={styles.rectangle}>
                 <FlatList

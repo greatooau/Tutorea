@@ -13,37 +13,43 @@ const Login = ({navigation}) => {
     const [ user, setUser ] = useContext(AccountContext)
 
     const onSubmitHandler = async (e) => {
-        setIsLoading(true);
-        try{
-            const response = await dataFetcher.post("api/users/login", {
-                username: username,
-                password: password
-            });
-            if (response.status === 200) {
-                const response2 = await dataFetcher.get("api/users/me", {
-                    headers:{
-                        'Authorization': `Bearer ${response.data.token}`
-                    }
+        
+        if (password === '' || username === '') {
+            Alert.alert("Error", "Introduzca los campos")
+        }else{
+            setIsLoading(true);
+            try{
+                const response = await dataFetcher.post("api/users/login", {
+                    username,
+                    password
                 });
-                setUser({...response2.data, token:response.data.token })
-                setIsLoading(false);
-                navigation.navigate('Tab')
+                if (response.status === 200) {
+                    const response2 = await dataFetcher.get("api/users/me", {
+                        headers:{
+                            'Authorization': `Bearer ${response.data.token}`
+                        }
+                    });
+                    setUser({...response2.data, token:response.data.token })
+                    setIsLoading(false);
+                    navigation.navigate('Tab')
+                }
+                else {
+                    console.log(response.status)
+                }
+            }catch(error){
+                console.log(error)
+                Alert.alert("Credeciales inválidas", "Las credenciales ingresadas son inválidas.", [{}])
+                setIsLoading(false)
             }
-            else {
-                console.log(response.status)
-            }
-        }catch(error){
-            console.log(error)
-            Alert.alert("Credeciales inválidas", "Las credenciales ingresadas son inválidas.", [{}])
-            setIsLoading(false)
         }
+        
     };
 
     return(
         <LinearGradient colors={['rgb(28,50,82)', 'transparent']} style={styles.page}>
             <StatusBar backgroundColor="black"/>
             <View style={styles.arrow}>
-                <TouchableOpacity onPress={() => navigation.popToTop()}>
+                <TouchableOpacity  onPress={() => navigation.popToTop()}>
                     <Arrow color="#fff"/>
                 </TouchableOpacity>
                 

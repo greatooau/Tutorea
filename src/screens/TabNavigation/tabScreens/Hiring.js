@@ -1,31 +1,45 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, Alert } from 'react-native'
-import IonIcon from 'react-native-vector-icons/Ionicons'
-import MatIcon from 'react-native-vector-icons/MaterialIcons'
 import React from 'react'
 import { primaryColor, secondaryColor }from '../../../constants/Colors'
 import { AccountContext } from '../../../context/AccountContext'
 import { useContext, useState } from 'react'
 import { FormTextInput, AppButton, Arrow } from '../../../components/Components'
 import { dataFetcher } from '../../../constants/dataFetcher'
+import { TutorsContext } from '../../../context/TutorsContext'
+
 const Hiring = ({navigation, route}) => {
+
   const [user, setUser] = useContext(AccountContext);
   const tutor = route.params.tutor
   const [sesion, setSesion] = useState('1')
   const [ isLoading, setIsLoading ] = useState(null);
+  const [tutors,setTutors ] = useContext(TutorsContext)
 
   const onSubmitHandler = async (e) => {
       setIsLoading(true);
       try{
-          const response = await dataFetcher.post("api/users/mytutors", {
-              tutorId: tutor._id,
-          },{
+          const config = {
             headers:{
               'Authorization': `Bearer ${user.token}`
             }
-          });
+          }
+          const response = await dataFetcher.post("api/users/mytutors", {
+              tutorId: tutor._id,
+          }, 
+          config);
           if (response.status === 200) {
+              await dataFetcher.post(
+               'api/transactions',
+               { tutor: tutor._id, user: user.id, sesions:sesion, total: `${tutor.fee * parseInt(sesion)} MXN` },
+               config)
+              const response2 = await dataFetcher.get(
+              `api/tutors/${tutor._id}`,
+              config);
+              const data = response2.data;
+              tutors.push(data)
+              user.myTutors.push(tutor._id)
+
               setIsLoading(false);
-              console.log('john')
               navigation.navigate('Home')
           }
           else {
