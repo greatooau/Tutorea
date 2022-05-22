@@ -19,7 +19,7 @@ const PayInfo = ({ navigation }) => {
   const [cardType, setCardType] = useState(user.payData ? user.payData.cardType : '');
   const [cardAdress, setCardAdress] = useState(user.payData ? user.payData.cardAdress : '');
   const [cardPostalCode, setCardPostalCode] = useState(user.payData ? user.payData.cardPostalCode : '');
-
+  console.log(user)
   const onSubmitHandler = async() => {
       if(
         cardNumber !== ''  ||
@@ -45,11 +45,15 @@ const PayInfo = ({ navigation }) => {
             cardType,
             cardAdress,
             cardPostalCode,
+            update:false
         }
-        const response = await dataFetcher.post(
+        const response = user.payData ? await dataFetcher.post(
          'api/users/payData',
-         body,
-         config)
+         { ...body, update:true},
+         config) : await dataFetcher.post(
+          'api/users/payData',
+          body,
+          config)
         if (response.status === 200) {
           setUser({...user, payData: body})
           navigation.goBack()
