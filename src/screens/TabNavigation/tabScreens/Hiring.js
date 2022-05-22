@@ -82,6 +82,7 @@ const Hiring = ({navigation, route}) => {
           
             <View style={card.studyInfo}>
                 <Text style={card.studyInfoText}>Costo por sesión</Text>
+                <Text style={{color:'#707070', marginTop:20, fontSize:20}}>{tutor.fee} MXN</Text>
                 <Text style={{color:'#707070', marginTop:20, fontSize:20}}>TOTAL: {parseInt(sesion) < 1 || isNaN(parseInt(sesion)) || !Number.isInteger(parseInt(sesion)) ? 0 : tutor.fee * sesion} MXN</Text>
             </View>
 

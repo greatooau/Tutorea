@@ -14,3 +14,4 @@ web-build/
 .DS_Store
 src/constants/dataFetcher.js
 src/constants/dataFetcher.js
+yarn-error.log
