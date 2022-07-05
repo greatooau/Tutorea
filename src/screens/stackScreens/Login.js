@@ -61,9 +61,9 @@ const Login = ({navigation}) => {
                     <FormTextInput value={password} setProp={setPassword} placeholder="Escribe tu contraseña" fieldName="Contraseña" isPassword={true}/>
                 </View>
 
-            <TouchableOpacity style={{marginLeft:50, marginVertical:10}} onPress={() => navigation.navigate('ResetPassword')}>
+            {/* <TouchableOpacity style={{marginLeft:50, marginVertical:10}} onPress={() => navigation.navigate('ResetPassword')}>
                 <Text style={styles.link}>¿Olvidaste tu contraseña?</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <View style={{flexDirection:'row', justifyContent:'center'}}>
                 <AppButton buttonText='Ingresar' onPress={onSubmitHandler}/>
             </View>

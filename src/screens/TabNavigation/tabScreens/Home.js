@@ -45,7 +45,7 @@ const Home = ({navigation}) => {
                     </View>
                 </View>
                 <View style={styles.greeting}>
-                    <Text style={[styles.greetingText, {fontSize:14, marginBottom:5}]}>Bienvenid{user.sex.toLowerCase() === 'masculino' ? ''+'o' : ''+'a'},</Text>
+                    <Text style={[styles.greetingText, {fontSize:14, marginBottom:5}]}>Bienvenid@,</Text>
                     <Text style={[styles.greetingText, {fontSize:30}]}>{user.name} {user.lastname} !</Text>
                 </View>
             
