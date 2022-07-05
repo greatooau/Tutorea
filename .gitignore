@@ -13,5 +13,4 @@ web-build/
 
 # macOS
 .DS_Store
-src/constants/dataFetcher.js
 yarn-error.log
