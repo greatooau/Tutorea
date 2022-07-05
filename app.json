@@ -23,7 +23,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#1c3252"
-      }
+      },
+      "package": "com.greatooau.Tutorea"
     },
     "web": {
       "favicon": "./assets/favicon.png"

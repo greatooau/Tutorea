@@ -6,7 +6,7 @@ const FormTextInput = ({ placeholder, fieldName, fieldNameColor, isPassword, val
     /* const [ visible, setVisible ] = useState(false);
     const [text, setText] = useState(''); */
 
-    return(
+    return (
 
         <View style={styles.container}>
             <Text style={[styles.fieldName, {color: fieldNameColor ? fieldNameColor : '#fff',}, {paddingLeft: center == false ? 0 :'13%'}]}>{fieldName ? fieldName : ''}</Text>

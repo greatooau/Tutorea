@@ -21,9 +21,9 @@ const SearchBar = ({ placeholder, setProp, value, onSubmitEditing}) => {
                     <Icon style={styles.searchIcon} name="search" size={20} color="#000"/>
                 </View>
 
-                <TouchableOpacity activeOpacity={0.7} style={styles.filter}>
+                {/* <TouchableOpacity activeOpacity={0.7} style={styles.filter}>
                     <IonIcon name="filter" size={25} color="#fff"/>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
         </View>
         
     );
@@ -35,11 +35,11 @@ const styles = StyleSheet.create({
     container:{
         marginBottom:10,
         flexDirection:'row',
-        justifyContent:'center',
+        padding:'5%',
         alignItems:'center',
     },
     searchSection: {
-        width:'75%',
+        width:'100%',
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',

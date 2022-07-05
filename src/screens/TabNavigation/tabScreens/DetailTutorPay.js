@@ -1,28 +1,40 @@
-import { StyleSheet, Text, View, TouchableOpacity,Image, ImageBackground, StatusBar, FlatList } from 'react-native'
-import React, { useContext, useEffect } from 'react'
+import { StyleSheet, Text, View, TouchableOpacity,Image, ImageBackground, StatusBar, FlatList, ActivityIndicator } from 'react-native'
+import React, { useContext, useEffect, useState } from 'react'
 import IonIcon from 'react-native-vector-icons/Ionicons'
 import { primaryColor } from '../../../constants/Colors'
 import FaIcon from 'react-native-vector-icons/FontAwesome';
 import { TutorsContext } from '../../../context/TutorsContext'
 import { AccountContext } from '../../../context/AccountContext'
 import { Arrow, AppButton, StudyCard, Insights }from '../../../components/Components'
+import {dataFetcher} from '../../../constants/dataFetcher'
 
-const DetailTutorPay = ({navigation, route}) => {
+const DetailTutorPay = ({ navigation, route }) => {
+    const [tutors, setTutors] = useContext(TutorsContext)
+    const [ tutor, setTutor] = useState({insights:[], studies:[], stars:0});
     const [user] = useContext(AccountContext);
-    useFe
-    const tutor = useContext(TutorsContext).filter(tutor => tutor.id === route.params.id)[0];
+
+    useEffect(() => {
+        const fetchTutors = async() =>{
+            const response = await dataFetcher.get(`api/tutors/${route.params.id}`,{
+                headers:{
+                    'Authorization': `Bearer ${user.token}`
+                }
+            });
+            const data = response.data;
+            setTutor(data)
+        };
+        fetchTutors();
+    },[])
+    /* const tutor = useContext(TutorsContext).filter(tutor => tutor.id === route.params.id)[0]; */
 
     const starsDisplayed = [];
-
-    for(let i = 0; i < 5; ++i){
-        if (i < tutor.stars) {
-            starsDisplayed.push(<FaIcon style={{marginHorizontal:1}} key={i} name="star" size={44} color="#f2ae00"/>);
-        } else {
-            starsDisplayed.push(<FaIcon style={{marginHorizontal:1}} key={i} name="star" size={44} color="#6e6e6d"/>);
+        for(let i = 0; i < 5; ++i){
+            if (i < tutor.stars) {
+                starsDisplayed.push(<FaIcon style={{marginHorizontal:1}} key={i} name="star" size={44} color="#f2ae00"/>);
+            } else {
+                starsDisplayed.push(<FaIcon style={{marginHorizontal:1}} key={i} name="star" size={44} color="#6e6e6d"/>);
+            }
         }
-    }
-
-    
     const header = () => {
         return (<>
             <View style={styles.title}>
@@ -47,7 +59,7 @@ const DetailTutorPay = ({navigation, route}) => {
     }
     return (
               
-        <>
+        tutor.insights.length > 0 && tutor.studies.length > 0 ?(<>
             <StatusBar backgroundColor="black"/>
             <View style={styles.rectangle}>
             <FlatList
@@ -65,16 +77,25 @@ const DetailTutorPay = ({navigation, route}) => {
                         {tutor.insights.map(element => <Insights key={element.id} name={element.name}/>)}
                     </View>
                     <Text style={styles.studies}>Tarifa por sesión: {tutor.fee} MXN</Text>
-                    <View style={{paddingBottom:'20%', paddingTop:'10%'}}><AppButton buttonText="Contratar servicios" onPress={() => navigation.navigate('Hiring',{tutor:{...tutor}})} secondary={true}/></View>
+                    <View style={{paddingBottom:'20%', paddingTop:'10%'}}>
+                        {user.myTutors.includes(route.params.id) ? 
+                        (<AppButton buttonText="Contratado" disabled={true} secondary={true}/>) :
+                        (<AppButton buttonText="Contratar servicios" onPress={() => navigation.navigate('Hiring',{tutor:{...tutor}})} secondary={true}/>)}
+                        
+                    </View>
                 </View>)}
                 initialNumToRender={4}
             />
             </View>
-        </>
+        </>) : (
+            <View style={{flex:1, flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                <ActivityIndicator color={primaryColor} size={80}/>
+            </View>
+        
+        )
             
     )
 }
-
 
 
 export default DetailTutorPay
@@ -89,7 +110,7 @@ const styles = StyleSheet.create({
     },
     rectangle:{
         flex:1,
-        backgroundColor:'#ececec',
+        backgroundColor:'#CAD7DF'.toLowerCase(),
     },
     titleText:{
         color:'#fff',

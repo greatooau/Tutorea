@@ -1,15 +1,59 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView } from 'react-native'
-import IonIcon from 'react-native-vector-icons/Ionicons'
-import MatIcon from 'react-native-vector-icons/MaterialIcons'
+import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, Alert } from 'react-native'
 import React from 'react'
 import { primaryColor, secondaryColor }from '../../../constants/Colors'
 import { AccountContext } from '../../../context/AccountContext'
 import { useContext, useState } from 'react'
-import { FormTextInput, AppButton } from '../../../components/Components'
+import { FormTextInput, AppButton, Arrow } from '../../../components/Components'
+import { dataFetcher } from '../../../constants/dataFetcher'
+import { TutorsContext } from '../../../context/TutorsContext'
+
 const Hiring = ({navigation, route}) => {
+
   const [user, setUser] = useContext(AccountContext);
   const tutor = route.params.tutor
   const [sesion, setSesion] = useState('1')
+  const [ isLoading, setIsLoading ] = useState(null);
+  const [tutors,setTutors ] = useContext(TutorsContext)
+
+  const onSubmitHandler = async (e) => {
+      setIsLoading(true);
+      try{
+          const config = {
+            headers:{
+              'Authorization': `Bearer ${user.token}`
+            }
+          }
+          const response = await dataFetcher.post("api/users/mytutors", {
+              tutorId: tutor._id,
+          }, 
+          config);
+          if (response.status === 200) {
+              await dataFetcher.post(
+               'api/transactions',
+               { tutor: tutor._id, user: user.id, sesions:sesion, total: `${tutor.fee * parseInt(sesion)} MXN` },
+               config)
+              const response2 = await dataFetcher.get(
+              `api/tutors/${tutor._id}`,
+              config);
+              const data = response2.data;
+              tutors.push(data)
+              user.myTutors.push(tutor._id)
+
+              setIsLoading(false);
+              navigation.navigate('Home')
+          }
+          else {
+              console.log(response.status)
+          }
+      }catch(error){
+          console.log(error)
+          Alert.alert("Error", "Ha ocurrido un error.", [{}])
+      }
+      finally{
+        setIsLoading(false)
+      }
+  };
+
   return (
     <ScrollView>
       <View style={styles.title}>
@@ -22,6 +66,7 @@ const Hiring = ({navigation, route}) => {
       <View style={styles.rectangle}>
 
         <View style={styles.titleJuan}>
+          <TouchableOpacity onPress={() => navigation.goBack()}><Arrow color={primaryColor}/></TouchableOpacity>
           <Text style={[styles.titleJuanText, {fontSize:30, color:primaryColor, fontFamily:'lato-regular'}]}>Contratación</Text>
           <FormTextInput center={false} maxLength={2} fieldName="Sesiones" fieldNameColor={primaryColor} setProp={setSesion} value={sesion}/>
         </View>
@@ -37,6 +82,7 @@ const Hiring = ({navigation, route}) => {
           
             <View style={card.studyInfo}>
                 <Text style={card.studyInfoText}>Costo por sesión</Text>
+                <Text style={{color:'#707070', marginTop:20, fontSize:20}}>{tutor.fee} MXN</Text>
                 <Text style={{color:'#707070', marginTop:20, fontSize:20}}>TOTAL: {parseInt(sesion) < 1 || isNaN(parseInt(sesion)) || !Number.isInteger(parseInt(sesion)) ? 0 : tutor.fee * sesion} MXN</Text>
             </View>
 
@@ -50,7 +96,7 @@ const Hiring = ({navigation, route}) => {
               <Text style={notice.description}>Al concretarse el pago, un mensaje SMS llegará al número asociado a esta cuenta, con el contacto de tu tutor.</Text>
           </View>
         </View>
-        <View style={{paddingBottom:50}}><AppButton secondary={true} onPress={()=>navigation.navigate('Home')} buttonText="Confirmar pago"/></View>
+        <View style={{paddingBottom:50}}><AppButton secondary={true} onPress={onSubmitHandler} buttonText="Confirmar pago"/></View>
         
       </View>
       
@@ -142,7 +188,7 @@ const styles = StyleSheet.create({
   },
   rectangle:{
     flex:1,
-    backgroundColor:'#ececec',
+    backgroundColor:'#CAD7DF'.toLowerCase(),
   },
   userImage:{
     width:80,

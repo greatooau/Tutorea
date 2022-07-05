@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, FlatList, StatusBar, TouchableOpacity, Image } from 'react-native';
-import React, { useContext } from 'react';
+import { StyleSheet, Text, View, FlatList, StatusBar, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
+import React, { useContext, useState, useEffect } from 'react';
 import { TutorsContext } from '../../../context/TutorsContext';
 import IonIcon from 'react-native-vector-icons/Ionicons'
 import { TutorCard, Arrow } from '../../../components/Components'
@@ -10,9 +10,34 @@ import AntIcon from 'react-native-vector-icons/AntDesign';
 import FaIcon from 'react-native-vector-icons/FontAwesome';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 import MatIcon from 'react-native-vector-icons/MaterialIcons';
-
+import { dataFetcher } from '../../../constants/dataFetcher';
 const Categories = ({ navigation, route }) => {
     let icon;
+    const [user, setUser] = useContext(AccountContext);
+    const [requestCategory, setRequestCategory ] = useState("")
+    const category = route.params.category;
+    const [tutors, setTutors] = useState([])
+
+    useEffect(() => {
+
+
+        const fetchTutors = async() =>{
+            try{
+                const response = await dataFetcher.get(`api/tutors/category/${encodeURI(category === 'Tecnología' ? 'technology' : category === 'Ciencia' ? 'science' : category === 'Ciencias sociales' ? 'social sciences' : category === 'Idiomas' && 'languages')}`,{
+                    headers:{
+                        'Authorization': `Bearer ${user.token}`
+                    }
+                });
+                setTutors(response.data)
+            }catch(error) {
+                console.log(error)
+            }
+            
+    
+            
+        };
+        fetchTutors();
+      },[])
 
     switch(route.params.iconSource){
         case 'fa':
@@ -29,9 +54,9 @@ const Categories = ({ navigation, route }) => {
           break;
     }
 
-    const category = route.params.category;
+    
     const header = () => {
-        const [user, setUser] = useContext(AccountContext);
+        
         return (
             <>
                 <View style={styles.title}>
@@ -57,22 +82,23 @@ const Categories = ({ navigation, route }) => {
         )
     };
 
-    const tutors = useContext(TutorsContext);
-
     return (
-        <>
+        tutors.length > 0 ?(<>
             <StatusBar backgroundColor="black"/>
             <View style={styles.rectangle}>
                 <FlatList
                     nestedScrollEnabled={true}
                     data={ tutors }
-                    renderItem={({ item }) => { return <View style={{flexDirection:'row', justifyContent:'center'}}><TutorCard onPress={()=> navigation.navigate('DetailTutorPay',{id: item.id})} profilePhoto={item.profile_picture} name={item.name} lastname={item.lastname} stars={item.stars} specialization={item.specialization}/></View> }}
-                    keyExtractor={(item) => item.id}
+                    renderItem={({ item }) => { return <View style={{flexDirection:'row', justifyContent:'center'}}><TutorCard onPress={()=> navigation.navigate('DetailTutorPay',{id: item._id})} profilePhoto={item.profile_picture} name={item.name} lastname={item.lastname} stars={item.stars} specialization={item.specialization}/></View> }}
+                    keyExtractor={(item) => item._id}
                     ListHeaderComponent={header}
                     initialNumToRender={4}
                 />
             </View>
-        </>
+        </>) :(
+            <View style={{flex:1, flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                <ActivityIndicator color={primaryColor} size={80}/>
+            </View>)
     );
 
 };
@@ -91,6 +117,7 @@ const headerList = StyleSheet.create({
         fontSize:18,
         marginBottom:10
     },
+    
     icon:{
         flex:1, 
         flexDirection:'row', 
@@ -116,6 +143,10 @@ const styles = StyleSheet.create({
         color:'#fff',
         fontFamily: 'lato-bold',
         fontSize:35
+    },
+    rectangle:{
+        flex:1,
+        backgroundColor:'#CAD7DF'.toLowerCase(),
     },
     userImage:{
       width:40,

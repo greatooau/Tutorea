@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image, StatusBar, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Image, StatusBar, ScrollView, Alert } from 'react-native'
 import IonIcon from 'react-native-vector-icons/Ionicons'
 import MatIcon from 'react-native-vector-icons/MaterialIcons'
 import React from 'react'
@@ -7,6 +7,8 @@ import {FormTextInput} from '../../../components/Components'
 import { AppButton } from '../../../components/Components'
 import { AccountContext } from '../../../context/AccountContext';
 import { useContext, useState } from 'react';
+import { dataFetcher } from '../../../constants/dataFetcher'
+
 const EditProfile = ({navigation}) => {
 
   const [user, setUser] = useContext(AccountContext);
@@ -16,11 +18,47 @@ const EditProfile = ({navigation}) => {
   const [name, setName] = useState(user.name);
   const [lastname, setLastname] = useState(user.lastname);
   const [sex, setSex] = useState(user.sex);
-  const [bornDate, setBornDate] = useState(user.bornDate);
+  const [bornDate, setBornDate] = useState(user.born_date);
   const [phone, setPhone] = useState(user.phone);
+  const onSubmitHandler = async() => {
+    if (
+        name === '' ||
+        username === '' ||
+        email === '' ||
+        lastname === '' ||
+        sex === '' ||
+        bornDate === ''||
+        phone === ''){
+            Alert.alert("Error", "Llene los campos correctamente")
+    }else{
+
+      const config = {
+        headers:{
+          'Authorization':`Bearer ${user.token}`
+        }
+      }
+      const body = {
+          username,
+          email,
+          name,
+          lastname,
+          sex,
+          born_date:bornDate,
+          phone
+      }
+      const response = await dataFetcher.put(
+       'api/users/editUser/' + user.id,
+       body,
+       config
+      )
+      if(response.status === 200) {
+        navigation.navigate('Tab')
+      }
+    }
+  }
 
   return (
-    <ScrollView>
+    <ScrollView style={styles.rectangle}>
       <StatusBar backgroundColor="#000"/>
       <View style={styles.title}>
           <Text style={styles.titleText}>Tutorea</Text>
@@ -50,8 +88,9 @@ const EditProfile = ({navigation}) => {
       </View>
       <View style={{flexDirection:'column', alignItems:'center',  paddingBottom:50}}>
         <AppButton buttonText="Guardar" onPress={() => {
-          
+          onSubmitHandler()
           setUser({...user, username:username, email:email, name:name, lastname: lastname, sex:sex, bornDate: bornDate, phone: phone})
+          
           navigation.goBack()
         }}/>
           <AppButton buttonText="Cancelar" onPress={() => navigation.goBack()}/>
@@ -81,7 +120,7 @@ const styles = StyleSheet.create({
   },
   rectangle:{
     flex:1,
-    backgroundColor:'#ececec',
+    backgroundColor:'#CAD7DF'.toLowerCase(),
   },
   userImage:{
     width:80,

@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     },
     rectangle:{
         flex:1,
-        backgroundColor:'#ececec'
+        backgroundColor:'#CAD7DF'.toLowerCase()
     },
     rectangleText: {
         color:'#1c3252',

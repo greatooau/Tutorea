@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, StatusBar, Image, FlatList, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, Image, FlatList, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
 import React from 'react';
 import {primaryColor} from '../../../constants/Colors';
 import { SearchBar, Category, TutorsList, TutorCard } from '../../../components/Components';
@@ -17,15 +17,21 @@ const Home = ({navigation}) => {
     const [ search, setSearch ] = useState('');
     
     useEffect(() => {
+        let isMounted = true; 
+
         const fetchTutors = async() =>{
+            
             const response = await dataFetcher.get('api/tutors',{
                 headers:{
                     'Authorization': `Bearer ${user.token}`
                 }
             });
-            setTutors(response.data.tutors)
+            if (isMounted){ setTutors(response.data)}
         };
+
         fetchTutors();
+
+        return () => { isMounted = false };
     },[])
     const header = () => {
         
@@ -39,7 +45,7 @@ const Home = ({navigation}) => {
                     </View>
                 </View>
                 <View style={styles.greeting}>
-                    <Text style={[styles.greetingText, {fontSize:14, marginBottom:5}]}>Bienvenido,</Text>
+                    <Text style={[styles.greetingText, {fontSize:14, marginBottom:5}]}>Bienvenid{user.sex.toLowerCase() === 'masculino' ? ''+'o' : ''+'a'},</Text>
                     <Text style={[styles.greetingText, {fontSize:30}]}>{user.name} {user.lastname} !</Text>
                 </View>
             
@@ -53,31 +59,20 @@ const Home = ({navigation}) => {
                         <Category onPress={() => navigation.navigate('Categories', { icon:"book", category:"Ciencias sociales", color:"#2587be", iconSource:"fa" })} categoryName="Ciencias sociales"  iconName="book" iconSource="fa" color="#2587be" />
                         <Category onPress={() => navigation.navigate('Categories', { icon:"language", category:"Idiomas", color:"#9A0D0D", iconSource:"Ent" })} categoryName="Idiomas" iconName="language" iconSource="Ent" color='#9A0D0D'/>
                     </View>
-                    
-                    <Text style={styles.interests}>Tutores que te pueden interesar</Text>
                 </>)}
             </>  
         );
     };
     const [elements, setElements] = useState(null);
-    function onChangeHandler(tutors) {
-        if(tutors.length > 0){
-            setElements(true)
-            return tutors.filter(tutor => (tutor.name + ' ' + tutor.lastname).toLowerCase().includes(search.toLowerCase()) && tutor)
-        }else {
-            setElements(false)
-            return
-        }
-    }
 
     return (
         
-        <>
+        tutors.length > 0 ?(<>
             <StatusBar backgroundColor="black"/>
             <View style={styles.rectangle}>
             <FlatList
                 nestedScrollEnabled={true}
-                data={search === '' ? tutors : onChangeHandler(tutors)}
+                data={search !== '' && tutors.filter(tutor => (tutor.name + ' ' + tutor.lastname).toLowerCase().includes(search.toLowerCase()) && tutor)}
                 renderItem={({item})=>{
                     return (
                         <View style={{flexDirection:'row', justifyContent:'center'}}>
@@ -89,7 +84,10 @@ const Home = ({navigation}) => {
                 initialNumToRender={4}
             />
             </View>
-        </>
+        </>):(
+            <View style={{flex:1, flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                <ActivityIndicator color={primaryColor} size={80}/>
+            </View>)
     )
 };
 
@@ -110,7 +108,7 @@ const styles = StyleSheet.create({
     },
     rectangle:{
         flex:1,
-        backgroundColor:'#ececec',
+        backgroundColor:'#CAD7DF'.toLowerCase(),
     },
     greeting: {
         marginVertical:'5%',
