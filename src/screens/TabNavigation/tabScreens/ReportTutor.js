@@ -54,9 +54,9 @@ const ReportTutor = ({ navigation, route }) => {
                     {/* <TouchableOpacity activeOpacity={0.7}><Image source={{uri: user.profile_picture}} style={styles.userImage}/></TouchableOpacity> */}
                 </View>
             </View>
-            <View>
+            <View style={styles.rectangle}>
                 <TouchableOpacity onPress={() => navigation.goBack()} style={{marginLeft:'10%', marginTop:'10%'}}>
-                  <Arrow color={secondaryColor}/>
+                  <Arrow color={primaryColor}/>
                 </TouchableOpacity>
                 
                 <Text style={rectangle.title}>Reportar</Text>
@@ -66,10 +66,11 @@ const ReportTutor = ({ navigation, route }) => {
                   style={rectangle.textinput}
                   onChange={ text => onChange(text)}
                   />
+                  <View>
+                    <AppButton onPress={onSubmit} buttonText="Enviar reporte" secondary={true}></AppButton>
+                  </View>
             </View>
-            <View>
-              <AppButton onPress={onSubmit} buttonText="Enviar reporte" secondary={true}></AppButton>
-            </View>
+            
         </>
     )
 }
@@ -78,7 +79,7 @@ export default ReportTutor
 
 const rectangle = StyleSheet.create({
     title:{
-        color:secondaryColor,
+        color:primaryColor,
         fontFamily:'lato-regular',
         fontSize:30,
         marginHorizontal:'10%',
@@ -104,7 +105,7 @@ const styles = StyleSheet.create({
         paddingLeft:20,
         paddingTop:20,
         paddingBottom:10,
-        backgroundColor:secondaryColor,
+        backgroundColor:primaryColor,
         flexDirection:'row'
       },
       titleText:{
@@ -117,7 +118,7 @@ const styles = StyleSheet.create({
       },
       rectangle:{
         flex:1,
-        backgroundColor:'#ececec',
+        backgroundColor:'#CAD7DF'.toLowerCase(),
       },
       userImage:{
         width:80,
