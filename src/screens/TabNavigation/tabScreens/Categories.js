@@ -117,6 +117,7 @@ const headerList = StyleSheet.create({
         fontSize:18,
         marginBottom:10
     },
+    
     icon:{
         flex:1, 
         flexDirection:'row', 
@@ -142,6 +143,10 @@ const styles = StyleSheet.create({
         color:'#fff',
         fontFamily: 'lato-bold',
         fontSize:35
+    },
+    rectangle:{
+        flex:1,
+        backgroundColor:'#CAD7DF'.toLowerCase(),
     },
     userImage:{
       width:40,

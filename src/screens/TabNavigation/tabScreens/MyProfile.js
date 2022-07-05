@@ -16,7 +16,7 @@ const MyProfile = ({navigation}) => {
  */}            
           </View>
       </View>
-
+      <View style={styles.rectangle}>
       <View style={styles.profile}>
         <TouchableOpacity activeOpacity={0.7}><Image source={{uri:user.profile_picture}} style={styles.userImage}/></TouchableOpacity>
           <View style={{paddingTop:20}}>
@@ -34,16 +34,16 @@ const MyProfile = ({navigation}) => {
           <IonIcon style={styles.icon} size={50} name="key-outline" color={secondaryColor}/>
           <Text style={styles.secondaryColorText}>Cambiar contraseña</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=> navigation.navigate('PayInfo')} activeOpacity={0.7} style={styles.individualOption}>
+        {/*<TouchableOpacity onPress={()=> navigation.navigate('PayInfo')} activeOpacity={0.7} style={styles.individualOption}>
           <MatIcon style={styles.icon} size={50} name="payment" color={secondaryColor}/>
           <Text style={styles.secondaryColorText}>Información de pago</Text>
-        </TouchableOpacity>
+</TouchableOpacity>*/}
         <TouchableOpacity onPress={()=> navigation.navigate('LoginRegister')} activeOpacity={0.7} style={styles.individualOption}>
           <MatIcon style={styles.icon} size={50} name="logout" color={secondaryColor}/>
           <Text style={styles.secondaryColorText}>Cerrar sesión</Text>
         </TouchableOpacity>
       </View>
-      
+      </View>
     </>  
   )
 }
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   },
   rectangle:{
     flex:1,
-    backgroundColor:'#ececec',
+    backgroundColor:'#CAD7DF'.toLowerCase(),
   },
   userImage:{
     width:80,

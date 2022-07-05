@@ -46,7 +46,7 @@ const ChangePassword = ({navigation}) => {
     }
 
     return (
-        <ScrollView>
+        <ScrollView style={styles.rectangle}>
             <StatusBar backgroundColor="#000"/>
             <View style={styles.title}>
                 <Text style={styles.titleText}>Tutorea</Text>
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     },
     rectangle:{
         flex:1,
-        backgroundColor:'#ececec',
+        backgroundColor:'#CAD7DF'.toLowerCase(),
     },
     userImage:{
         width:80,
