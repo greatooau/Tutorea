@@ -3,8 +3,7 @@ import {
   Register,
   LoginRegister,
   Login,
-  ResetPassword,
-  VerifyEmail,
+  Advertisement
 } from "./src/screens/Screens";
 import {
   EditProfile,
@@ -14,7 +13,7 @@ import {
   DetailTutorPay,
   Hiring,
   Categories,
-  ReportTutor,
+  ReportTutor
 } from "./src/screens/TabNavigation/TabScreens";
 //Navigation
 import { NavigationContainer } from "@react-navigation/native";
@@ -50,10 +49,11 @@ const App = () => {
             <TutorsProvider>
                 <NavigationContainer>
                     <Stack.Navigator screenOptions={{ headerShown: false }}>
-                    <Stack.Screen component={Register} name="Register" />
-                    <Stack.Screen component={LoginRegister} name="LoginRegister" />
-                    
+
+                    <Stack.Screen component={LoginRegister} name="LoginRegister"/>
+                    <Stack.Screen component={Register} name="Register"/>
                     <Stack.Screen component={Login} name="Login" />
+                    <Stack.Screen component={Advertisement} name="Advertisement"/>
                     {/* <Stack.Screen component={ResetPassword} name="ResetPassword" /> */
                     /* <Stack.Screen component={VerifyEmail} name="VerifyEmail" /> */}
                     <Stack.Screen component={BottomBar} name="Tab" />
