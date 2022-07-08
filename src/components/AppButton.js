@@ -1,17 +1,17 @@
 import { TouchableOpacity, Text, StyleSheet, View } from 'react-native'
 import { primaryColor, secondaryColor } from '../constants/Colors';
 
-const AppButton = ({ buttonText, onPress, secondary, disabled}) => {
+const AppButton = ({ buttonText, onPress, secondary, disabled, style}) => {
 
     if (disabled) {
         return (
-        <View style={[styles.button, {backgroundColor: !secondary ? '#063970' : '#ce98bb',}]} onPress={onPress}>
+        <View style={[styles.button, {backgroundColor: !secondary ? '#063970' : '#ce98bb',}, style]} onPress={onPress}>
             <Text style={styles.buttonText}>{buttonText}</Text>
         </View>
         )
     }else {
         return (
-            <TouchableOpacity activeOpacity={0.7} style={[styles.button, {backgroundColor: !secondary ? primaryColor : secondaryColor,}]} onPress={onPress}>
+            <TouchableOpacity activeOpacity={0.7} style={[styles.button, {backgroundColor: !secondary ? primaryColor : secondaryColor,}, style]} onPress={onPress}>
                 <Text style={styles.buttonText}>{buttonText}</Text>
             </TouchableOpacity>
         );

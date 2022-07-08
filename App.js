@@ -1,20 +1,20 @@
 //Screens
 import {
-  Register,
-  LoginRegister,
-  Login,
-  Advertisement
+    Register,
+    LoginRegister,
+    Login,
+    Advertisement,
 } from "./src/screens/Screens";
 import {
-  EditProfile,
-  ChangePassword,
-  PayInfo,
-  DetailTutorNoPay,
-  DetailTutorPay,
-  Hiring,
-  Categories,
-  ReportTutor,
-  MyStudents
+    EditProfile,
+    ChangePassword,
+    PayInfo,
+    DetailTutorNoPay,
+    DetailTutorPay,
+    Hiring,
+    Categories,
+    ReportTutor,
+    EditTutorProfile
 } from "./src/screens/TabNavigation/TabScreens";
 //Navigation
 import { NavigationContainer } from "@react-navigation/native";
@@ -23,7 +23,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useFonts } from "@expo-google-fonts/lato";
 import AppLoading from "expo-app-loading";
 import BottomBar from "./src/screens/TabNavigation/BottomBar";
-import { BottomBarTutors } from "./src/screens/TabNavigation/BottomBarTutors"
+import { BottomBarTutors } from "./src/screens/TabNavigation/BottomBarTutors";
 import { AccountProvider } from "./src/context/AccountContext";
 import { TutorsProvider } from "./src/context/TutorsContext";
 const Stack = createNativeStackNavigator();
@@ -51,42 +51,65 @@ const App = () => {
             <TutorsProvider>
                 <NavigationContainer>
                     <Stack.Navigator screenOptions={{ headerShown: false }}>
-                    <Stack.Screen component={LoginRegister} name="LoginRegister"/>
-                    {/* <Stack.Screen component={MyProfile} name="MiPerfilTutor"/> */}
-                    
-                    <Stack.Screen component={Register} name="Register"/>
-                    <Stack.Screen component={Login} name="Login" />
+                        
+                        <Stack.Screen
+                            component={LoginRegister}
+                            name="LoginRegister"
+                        />
+                        {/* <Stack.Screen component={MyProfile} name="MiPerfilTutor"/> */}
 
-                    <Stack.Screen component={BottomBarTutors} name="TabTutor"/>
-                    <Stack.Screen component={Advertisement} name="Advertisement"/>
-                    {/* <Stack.Screen component={ResetPassword} name="ResetPassword" /> */
-                    /* <Stack.Screen component={VerifyEmail} name="VerifyEmail" /> */}
-                    <Stack.Screen component={BottomBar} name="Tab" />
-                    
-                    <Stack.Screen component={Categories} name="Categories" />
-                    <Stack.Screen component={EditProfile} name="EditProfile" />
-                    <Stack.Screen component={ChangePassword} name="ChangePassword" />
-                    <Stack.Screen component={PayInfo} name="PayInfo" />
-                    <Stack.Screen
-                    component={DetailTutorNoPay}
-                    name="DetailTutorNoPay"
-                    />
-                    <Stack.Screen
-                    component={DetailTutorPay}
-                    name="DetailTutorPay"
-                    getId={({ params }) => params.id}
-                    />
-                    <Stack.Screen
-                    component={Hiring}
-                    name="Hiring"
-                    getId={({ params }) => params.id}
-                    />
-                    <Stack.Screen
-                    component={ReportTutor}
-                    name="ReportTutor"
-                    /* getId={({ params }) => params.id} */
-                    />
-                </Stack.Navigator>
+                        <Stack.Screen component={Register} name="Register" />
+                        <Stack.Screen component={Login} name="Login" />
+
+                        <Stack.Screen
+                            component={BottomBarTutors}
+                            name="TabTutor"
+                        />
+                        <Stack.Screen
+                            component={Advertisement}
+                            name="Advertisement"
+                        />
+                        {/* <Stack.Screen component={ResetPassword} name="ResetPassword" /> */
+                        /* <Stack.Screen component={VerifyEmail} name="VerifyEmail" /> */}
+                        <Stack.Screen component={BottomBar} name="Tab" />
+
+                        <Stack.Screen
+                            component={Categories}
+                            name="Categories"
+                        />
+                        <Stack.Screen
+                            component={EditProfile}
+                            name="EditProfile"
+                        />
+                        <Stack.Screen
+                            component={EditTutorProfile}
+                            name="EditTutorProfile"
+                        />
+                        <Stack.Screen
+                            component={ChangePassword}
+                            name="ChangePassword"
+                        />
+                        <Stack.Screen component={PayInfo} name="PayInfo" />
+                        <Stack.Screen
+                            component={DetailTutorNoPay}
+                            name="DetailTutorNoPay"
+                        />
+                        <Stack.Screen
+                            component={DetailTutorPay}
+                            name="DetailTutorPay"
+                            getId={({ params }) => params.id}
+                        />
+                        <Stack.Screen
+                            component={Hiring}
+                            name="Hiring"
+                            getId={({ params }) => params.id}
+                        />
+                        <Stack.Screen
+                            component={ReportTutor}
+                            name="ReportTutor"
+                            /* getId={({ params }) => params.id} */
+                        />
+                    </Stack.Navigator>
                 </NavigationContainer>
             </TutorsProvider>
         </AccountProvider>

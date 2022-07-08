@@ -5,7 +5,7 @@ export const AccountContext = createContext();
 export const AccountProvider = ({ children }) => {
     
     const [account, setAccount] = useState(
-        /* {
+         {
             "_id": "6265b4675bce7cc5b6b7d342",
             "name": "Luis",
             "lastname": "Flores",
@@ -65,7 +65,7 @@ export const AccountProvider = ({ children }) => {
             "status": "APROBADO",
             "password": "$2a$10$k2Qze.7E8vtMtNZwlBb8vO6U/QD7kW5HL3XeiRxTVJRDFzU67bNaS",
             "username": "juan12345"
-        } */
+        } 
     )
     useEffect(()=>{
         console.log(account)
