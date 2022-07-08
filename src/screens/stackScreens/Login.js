@@ -20,10 +20,11 @@ const Login = ({ navigation }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    const [user, setUser] = useContext(AccountContext);
+    const [account, setAccount] = useContext(AccountContext);
 
     const [isTutorCheck, setIsTutorCheck] = useState(false);
 
+    
     const onSubmitHandler = async (e) => {
         if (password === "" || username === "") {
             Alert.alert("Error", "Introduzca los campos");
@@ -31,26 +32,56 @@ const Login = ({ navigation }) => {
             setIsLoading(true);
 
             try {
-                const response = await dataFetcher.post("api/users/login", {
+                //Hacer la request del login
+                let route = isTutorCheck ? "tutors" : "users";
+                const response = await dataFetcher.post(`api/${route}/login`, {
                     username,
                     password,
                 });
+
                 if (response.status === 200) {
-                    const response2 = await dataFetcher.get("api/users/me", {
+                    //Si la response es exitosa hacer un getme para obtener 
+                    //los datos del usuario/tutor actual
+                    const secResponse = await dataFetcher.get(`api/${route}/me`, {
                         headers: {
                             Authorization: `Bearer ${response.data.token}`,
                         },
                     });
-                    setUser({ ...response2.data, token: response.data.token });
-                    setIsLoading(false);
-                    navigation.navigate("Tab");
+
+                    if(isTutorCheck){
+                        const status = secResponse.data.status
+                        switch(status) {
+                            case 'APROBADO': 
+                                setAccount({ ...secResponse.data, token: response.data.token, role: response.data.role });
+
+                                
+                                //Setear la cuenta en el context
+                                //Hacer que el Loading deje de hacerse
+                                setIsLoading(false);
+                                navigation.navigate("TabTutor");
+                                break;
+                            case 'RECHAZADO': /* navigation.navigate('RejectedTutor') */ break;
+                            case 'PENDIENTE': /* navigation.navigate('RejectedTutor') */ break;
+                        }
+
+                    } else {
+                        setAccount({ ...secResponse.data, token: response.data.token, role: response.data.role });
+                        
+                        //Setear la cuenta en el context
+                        
+                        //Hacer que el Loading deje de hacerse
+                        setIsLoading(false);
+
+                        navigation.navigate("Tab");
+                    }
+                    
                 } else {
                     console.log(response.status);
                 }
             } catch (error) {
                 console.log(error);
                 Alert.alert(
-                    "Credeciales inválidas",
+                    "Credenciales inválidas",
                     "Las credenciales ingresadas son inválidas.",
                     [{}]
                 );

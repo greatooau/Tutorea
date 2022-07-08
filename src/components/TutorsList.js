@@ -2,10 +2,10 @@ import { StyleSheet, Text, View, FlatList } from 'react-native'
 import React from 'react'
 import TutorCard from './TutorCard'
 
-import { TutorProvider, TutorsContext } from '../context/TutorsContext';
+import { TutorProvider, TutorsStudentsContext } from '../context/TutorsContext';
 import { useContext } from 'react';
 const TutorsList = ({ header}) => {
-  const tutors = useContext(TutorsContext)
+  const tutors = useContext(TutorsStudentsContext)
   return (
       <FlatList
         nestedScrollEnabled={true}

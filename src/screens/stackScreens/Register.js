@@ -29,7 +29,7 @@ const Register = ({ navigation }) => {
     const [state, setState] = useState("");
 
     //Para el registro de tutor
-    const [fee, setFee] = useState(null);
+    const [fee, setFee] = useState(0);
     const [category, setCategory] = useState("");
     const [specialization, setSpecialization] = useState("");
 
@@ -144,7 +144,7 @@ const Register = ({ navigation }) => {
         setLastname("");
         setCategory("");
         setSpecialization("");
-        setFee(null)
+        setFee(0)
         setIsTutor(isTutor ? false : true);
     };
     return (
@@ -296,7 +296,7 @@ const Register = ({ navigation }) => {
                         />
                         <FormTextInput
                             placeholder="Escribe tu cuota"
-                            fieldName="Cuota (MXN)"
+                            fieldName="Cuota por sesion (MXN)"
                             maxLength={3}
                             setProp={setFee}
                             value={fee}

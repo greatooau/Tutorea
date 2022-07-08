@@ -3,13 +3,13 @@ import React, { useContext, useEffect, useState } from 'react'
 import IonIcon from 'react-native-vector-icons/Ionicons'
 import { primaryColor } from '../../../constants/Colors'
 import FaIcon from 'react-native-vector-icons/FontAwesome';
-import { TutorsContext } from '../../../context/TutorsContext'
+import { TutorsStudentsContext } from '../../../context/TutorsContext'
 import { AccountContext } from '../../../context/AccountContext'
 import { Arrow, AppButton, StudyCard, Insights }from '../../../components/Components'
 import {dataFetcher} from '../../../constants/dataFetcher'
 
 const DetailTutorPay = ({ navigation, route }) => {
-    const [tutors, setTutors] = useContext(TutorsContext)
+    const [tutors, setTutors] = useContext(TutorsStudentsContext)
     const [ tutor, setTutor] = useState({insights:[], studies:[], stars:0});
     const [user] = useContext(AccountContext);
 

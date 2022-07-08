@@ -32,7 +32,7 @@ const Category = ({iconName, iconSource, categoryName, color, onPress}) => {
   )
 }
 
-export default Category
+export {Category}
 
 const styles = StyleSheet.create({
     card:{

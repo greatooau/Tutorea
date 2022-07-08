@@ -5,7 +5,7 @@ import { AccountContext } from '../../../context/AccountContext'
 import { useContext, useState } from 'react'
 import { FormTextInput, AppButton, Arrow } from '../../../components/Components'
 import { dataFetcher } from '../../../constants/dataFetcher'
-import { TutorsContext } from '../../../context/TutorsContext'
+import { TutorsStudentsContext } from '../../../context/TutorsContext'
 
 const Hiring = ({navigation, route}) => {
 
@@ -13,7 +13,7 @@ const Hiring = ({navigation, route}) => {
   const tutor = route.params.tutor
   const [sesion, setSesion] = useState('1')
   const [ isLoading, setIsLoading ] = useState(null);
-  const [tutors,setTutors ] = useContext(TutorsContext)
+  const [tutors,setTutors ] = useContext(TutorsStudentsContext)
 
   const onSubmitHandler = async (e) => {
       setIsLoading(true);

@@ -2,27 +2,44 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-const StudyCard = ({ name, photo, schoolName }) => {
+const StudentCard = ({
+    name,
+    lastname,
+    phone,
+    profilePhoto,
+    stars,
+    sesions,
+    onPress,
+}) => {
+    
     return (
         <TouchableOpacity
+            onPress={onPress}
             activeOpacity={0.7}
             delayPressIn={100}
             style={styles.card}
         >
             <View style={styles.imageContainer}>
-                <Image source={{ uri: photo }} style={styles.image} />
+                <Image source={{ uri: profilePhoto }} style={styles.image} />
             </View>
 
-            <View style={styles.studyInfo}>
-                <Text style={styles.studyInfoText}>{name}</Text>
-                <Text style={{ color: "#707070", marginTop: 20 }}>Escuela</Text>
-                <Text>{schoolName}</Text>
+            <View style={styles.tutorInfo}>
+                <Text style={styles.tutorInfoText}>
+                    {name} {lastname}
+                </Text>
+                <View style={styles.starsContainer}>
+                    
+                </View>
+                <Text style={{ color: "#707070" }}>Sesiones contratadas</Text>
+                <Text>{sesions}</Text>
+                <Text style={{ color: "#707070" }}>Contacto</Text>
+                <Text> + 52 {phone}</Text>
             </View>
         </TouchableOpacity>
     );
 };
 
-export { StudyCard };
+export {StudentCard};
 
 const styles = StyleSheet.create({
     card: {
@@ -47,14 +64,18 @@ const styles = StyleSheet.create({
         height: "70%",
         borderRadius: 5,
     },
-    studyInfo: {
+    tutorInfo: {
         marginLeft: "3%",
         marginVertical: "6%",
         flexDirection: "column",
     },
-    studyInfoText: {
+    tutorInfoText: {
         fontFamily: "lato-bold",
         fontSize: 20,
-        width: "90%",
+    },
+    starsContainer: {
+        flexDirection: "row",
+        marginTop: "0%",
+        marginBottom: "5%",
     },
 });

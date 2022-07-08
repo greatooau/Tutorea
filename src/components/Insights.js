@@ -10,7 +10,7 @@ const Insights = ({name}) => {
   )
 }
 
-export default Insights
+export {Insights}
 
 const styles = StyleSheet.create({
     badge:{

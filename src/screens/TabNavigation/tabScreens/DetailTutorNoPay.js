@@ -13,7 +13,7 @@ import React, { useContext, useState, useEffect } from "react";
 import IonIcon from "react-native-vector-icons/Ionicons";
 import { primaryColor } from "../../../constants/Colors";
 import FaIcon from "react-native-vector-icons/FontAwesome";
-import { TutorsContext } from "../../../context/TutorsContext";
+import { TutorsStudentsContext } from "../../../context/TutorsContext";
 import { AccountContext } from "../../../context/AccountContext";
 import {
   Arrow,
@@ -25,7 +25,7 @@ import { dataFetcher } from "../../../constants/dataFetcher";
 
 const DetailTutorNoPay = ({ navigation, route }) => {
     const [tutor, setTutor] = useState({ insights: [], studies: [] });
-    const [tutors, setTutors] = useContext(TutorsContext)
+    const [tutors, setTutors] = useContext(TutorsStudentsContext)
     const [user, setUser] = useContext(AccountContext);
     useEffect(() => {
         const fetchTutors = async () => {

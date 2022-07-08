@@ -28,7 +28,7 @@ const TutorCard = ({name, lastname, middleName, profilePhoto, stars, specializat
   )
 }
 
-export default TutorCard;
+export {TutorCard};
 
 const styles = StyleSheet.create({
   card:{

@@ -19,7 +19,7 @@ const AppButton = ({ buttonText, onPress, secondary, disabled}) => {
     
 };
 
-export default AppButton;
+export {AppButton};
 
 const styles = StyleSheet.create({
     button: {

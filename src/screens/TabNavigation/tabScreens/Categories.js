@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, FlatList, StatusBar, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import React, { useContext, useState, useEffect } from 'react';
-import { TutorsContext } from '../../../context/TutorsContext';
+import { TutorsStudentsContext } from '../../../context/TutorsContext';
 import IonIcon from 'react-native-vector-icons/Ionicons'
 import { TutorCard, Arrow } from '../../../components/Components'
 import { primaryColor } from '../../../constants/Colors';

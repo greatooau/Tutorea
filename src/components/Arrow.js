@@ -9,4 +9,4 @@ const Arrow = ({ color }) => {
     </View>
   );
 }
-export default Arrow;
+export {Arrow};

@@ -4,14 +4,14 @@ import {primaryColor} from '../../../constants/Colors';
 import { SearchBar, Category, TutorCard } from '../../../components/Components';
 
 import { useContext, useState, useEffect } from 'react';
-import { TutorsContext } from '../../../context/TutorsContext';
+import { TutorsStudentsContext } from '../../../context/TutorsContext';
 import { AccountContext } from '../../../context/AccountContext';
 import {dataFetcher} from '../../../constants/dataFetcher'
 
 
 const MyTutors = ({navigation}) => {
   const [user, setUser] = useContext(AccountContext)
-  const [tutors, setTutors] = useContext(TutorsContext)
+  const [tutors, setTutors] = useContext(TutorsStudentsContext)
   useEffect(() => {
     let isMounted = true; 
     const fetchTutors = async() =>{

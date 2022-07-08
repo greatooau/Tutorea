@@ -7,12 +7,12 @@ import IonIcon from 'react-native-vector-icons/Ionicons'
 import { useContext, useState, useEffect } from 'react';
 import { AccountContext } from '../../../context/AccountContext';
 
-import { TutorsContext } from '../../../context/TutorsContext';
+import { TutorsStudentsContext } from '../../../context/TutorsContext';
 import { dataFetcher } from '../../../constants/dataFetcher';
 
 const Home = ({navigation}) => {
 
-    const [ user, setUser ] = useContext(AccountContext)
+    const [ account, setUser ] = useContext(AccountContext)
     const [tutors, setTutors] = useState([])
     const [ search, setSearch ] = useState('');
     
@@ -23,7 +23,7 @@ const Home = ({navigation}) => {
             
             const response = await dataFetcher.get('api/tutors',{
                 headers:{
-                    'Authorization': `Bearer ${user.token}`
+                    'Authorization': `Bearer ${account.token}`
                 }
             });
             if (isMounted){ setTutors(response.data)}
@@ -41,12 +41,12 @@ const Home = ({navigation}) => {
                     <Text style={styles.titleText}>Tutorea</Text>
                     <View style={{flexDirection:'row',flex:1, justifyContent:'flex-end', alignItems:'center'}}>
                         {/* <TouchableOpacity onPress={() => navigation.navigate('Notifications')} activeOpacity={0.7}><IonIcon style={{marginRight:10}} size={30} name="notifications-outline" color="#fff"/></TouchableOpacity> */}
-                        <TouchableOpacity activeOpacity={0.7}><Image source={{uri: user.profile_picture}} style={styles.userImage}/></TouchableOpacity>
+                        <TouchableOpacity activeOpacity={0.7}><Image source={{uri: account.profile_picture}} style={styles.userImage}/></TouchableOpacity>
                     </View>
                 </View>
                 <View style={styles.greeting}>
                     <Text style={[styles.greetingText, {fontSize:14, marginBottom:5}]}>Bienvenid@,</Text>
-                    <Text style={[styles.greetingText, {fontSize:30}]}>{user.name} {user.lastname} !</Text>
+                    <Text style={[styles.greetingText, {fontSize:30}]}>{account.name} {account.lastname} !</Text>
                 </View>
             
                 <SearchBar placeholder="Busque un tutor" value={search} setProp={setSearch}/>
