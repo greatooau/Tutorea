@@ -28,7 +28,7 @@ const EditTutorProfile = ({ navigation }) => {
     const [sex, setSex] = useState(account.sex ? account.sex : '');
     const [bornDate, setBornDate] = useState(account.born_date ? account.born_date : '');
     const [category, setCategory] = useState(account.category ? account.category : '');
-    const [fee, setFee] = useState(account.fee ? account.fee : 0);
+    const [fee, setFee] = useState(account.fee ? account.fee : '');
     const [specialization, setSpecialization] = useState(account.specialization ? account.specialization : '');
     const [bankAccount, setBankAccount] = useState(account.bank_account ? account.bank_account : '');
 
@@ -182,15 +182,16 @@ const EditTutorProfile = ({ navigation }) => {
                     value={bankAccount}
                     setProp={setBankAccount}
                     maxLength={20}
+                    numeric={true}
                 />
             </View>
             
                 <Text style={styles.sections}>Estudios</Text>
-                <AppButton secondary={true} buttonText="Agregar"/>
+                <AppButton secondary={true} buttonText="Agregar" onPress={() => navigation.navigate('AddStudies')}/>
                 <Text style={[styles.sections, {marginTop:20}]}>Conocimientos</Text>
-                <AppButton secondary={true} buttonText="Agregar"/>
+                <AppButton secondary={true} buttonText="Agregar" onPress={() => navigation.navigate('AddInsights')}/>
                 <Text style={[styles.sections, {marginTop:20}]}>Contactos</Text>
-                <AppButton style={{marginBottom:60}} secondary={true} buttonText="Agregar"/>
+                <AppButton style={{marginBottom:60}} secondary={true} buttonText="Agregar" onPress={() => navigation.navigate('AddContacts')}/>
             
             <View
                 style={{

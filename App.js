@@ -14,7 +14,10 @@ import {
     Hiring,
     Categories,
     ReportTutor,
-    EditTutorProfile
+    EditTutorProfile,
+    AddInsights,
+    AddContacts,
+    AddStudies
 } from "./src/screens/TabNavigation/TabScreens";
 //Navigation
 import { NavigationContainer } from "@react-navigation/native";
@@ -51,7 +54,7 @@ const App = () => {
             <TutorsProvider>
                 <NavigationContainer>
                     <Stack.Navigator screenOptions={{ headerShown: false }}>
-                        
+
                         <Stack.Screen
                             component={LoginRegister}
                             name="LoginRegister"
@@ -85,6 +88,9 @@ const App = () => {
                             component={EditTutorProfile}
                             name="EditTutorProfile"
                         />
+                        <Stack.Screen component={AddStudies} name="AddStudies"/>
+                        <Stack.Screen component={AddContacts} name="AddContacts"/>
+                        <Stack.Screen component={AddInsights} name="AddInsights"/>
                         <Stack.Screen
                             component={ChangePassword}
                             name="ChangePassword"

@@ -9,8 +9,11 @@ import DetailTutorPay from "./tabScreens/DetailTutorPay";
 import Hiring from "./tabScreens/Hiring";
 import Categories from "./tabScreens/Categories";
 import ReportTutor from "./tabScreens/ReportTutor";
-export { MyStudents } from "./tutorTabScreens/MyStudents"
-export { EditTutorProfile } from "./tutorTabScreens/EditTutorProfile"
+export { MyStudents } from "./tutorTabScreens/MyStudents";
+export { EditTutorProfile } from "./tutorTabScreens/EditTutorProfile";
+export { AddInsights } from "./tutorTabScreens/AddInsights";
+export { AddContacts } from "./tutorTabScreens/AddContacts";
+export { AddStudies } from "./tutorTabScreens/AddStudies";
 
 export {
     ReportTutor,
