@@ -29,7 +29,7 @@ const EditTutorProfile = ({ navigation }) => {
     const [lastname, setLastname] = useState(
         account.lastname ? account.lastname : ""
     );
-    const [sex, setSex] = useState(account.sex ? account.sex : "");
+    const [sex, setSex] = useState(account.sex ? account.sex : "default");
     const [bornDate, setBornDate] = useState(
         account.born_date ? account.born_date : ""
     );
@@ -50,7 +50,7 @@ const EditTutorProfile = ({ navigation }) => {
             username === "" ||
             email === "" ||
             lastname === "" ||
-            sex === "" ||
+            sex === "default" ||
             bornDate === "" ||
             category === ""
         ) {
@@ -79,6 +79,7 @@ const EditTutorProfile = ({ navigation }) => {
                 config
             );
             if (response.status === 200) {
+                
                 navigation.navigate("TabTutor");
             }
         }
@@ -157,7 +158,7 @@ const EditTutorProfile = ({ navigation }) => {
                     setProp={setSex}
                     value={sex}
                     items={[
-                        { id: 1, name: "Selecciona tu sexo", value: "" },
+                        { id: 1, name: "Selecciona tu sexo", value: "default" },
                         { id: 2, name: "masculino", value: "masculino" },
                         { id: 3, name: "femenino", value: "femenino" },
                     ]}
@@ -251,7 +252,6 @@ const EditTutorProfile = ({ navigation }) => {
                             lastname,
                             sex,
                             born_date: bornDate,
-                            phone,
                             specialization,
                             fee,
                             category,

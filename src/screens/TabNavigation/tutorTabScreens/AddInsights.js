@@ -49,6 +49,7 @@ const AddInsights = ({ navigation }) => {
                     id:ObjectId,
                     name
                 })
+                setName("");
             } else {
                 Alert.alert("Error", "El conocimiento no pudo ser agregado con éxito");
             }

@@ -65,7 +65,7 @@ export const AccountProvider = ({ children }) => {
             "status": "APROBADO",
             "password": "$2a$10$k2Qze.7E8vtMtNZwlBb8vO6U/QD7kW5HL3XeiRxTVJRDFzU67bNaS",
             "username": "juan12345"
-        }  */
+        }  *//* 
 
         {
             "id": "62c2fc9557bdd3750b4a9484",
@@ -78,11 +78,11 @@ export const AccountProvider = ({ children }) => {
             "born_date": "21/05/2002",
             "phone": "8121809293",
             "myTutors": []
-        }
+        } */
     )
-    /* useEffect(()=>{
+    useEffect(()=>{
         console.log(account)
-      },[account]) */
+      },[account])
     return(
         <AccountContext.Provider value={[account, setAccount]}>
             { children }

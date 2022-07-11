@@ -22,7 +22,7 @@ import { primaryColor, secondaryColor } from "../../constants/Colors";
 import * as DocumentPicker from 'expo-document-picker';
 import AntIcon from "react-native-vector-icons/AntDesign";
 
-const Advertisement = ({ navigation, route }) => {
+const PendingTutor = ({ navigation, route }) => {
     //Estos son los datos del usuario que se pasaron a través de react navigation.
     //const { tutorData } = route.params;
 
@@ -46,18 +46,17 @@ const Advertisement = ({ navigation, route }) => {
                     </TouchableOpacity>
 
                     <Text style={[styles.text, styles.h1]}>
-                        {"Pre-registro"}
+                        {"En revisión"}
                     </Text>
                     {/* Cambiar el texto segun sea tutor o estudiante */}
-                    <Text style={[styles.text, {fontFamily:'lato-regular'}]}>
-                        {"Sube los archivos que avalen tus estudios."}
-                    </Text>
+                    
                 </View>
                 <View
                     style={{
                         flex: 1,
                         flexDirection: "row",
                         justifyContent: "center",
+                        alignItems:'center',
                         marginVertical: 30,
                     }}
                 >
@@ -69,12 +68,13 @@ const Advertisement = ({ navigation, route }) => {
                             borderRadius: 12,
                             flexDirection: "column",
                             alignItems: "center",
+                            justifyContent:'center'
                         }}
                     >
                         <AntIcon
-                            style={{ marginVertical: 30 }}
+                            style={{ marginBottom: 30 }}
                             color={primaryColor}
-                            name="checkcircle"
+                            name="clockcircle"
                             size={70}
                         />
                         <Text
@@ -86,18 +86,12 @@ const Advertisement = ({ navigation, route }) => {
                                 fontFamily:'lato-regular'
                             }}
                         >
-                            Tu pre-registro concluyó con éxito.
+                            Tu registro se encuentra en revisión.
                         </Text>
-                        <Text
-                            style={[styles.textInSquare, {fontSize:20, marginTop:30, marginBottom:10}]}
-                        >
-                            RECUERDA!
-                        </Text>
+                        
                         <Text style={styles.textInSquare}>
-                            Necesitas enviar los documentos que avalen tu conocimiento para que sean evaluados por un pedagogo al siguiente correo: 
+                            Serás evaluado por  un pedagogo para tu alta en la aplicación.
                         </Text>
-                        <Text style={[styles.textInSquare, { marginVertical:20,color:secondaryColor, fontSize:19, fontFamily:'lato-bold'}]}>sergioarangag@gmail.com</Text> 
-                        <Text style={[styles.textInSquare, {color:secondaryColor, fontFamily:'lato-bold', marginTop:20}]}>Tus documentos tienen que ser enviados con el correo que hiciste tu pre-registro.</Text>
                     </View>
                 </View>
 
@@ -107,8 +101,8 @@ const Advertisement = ({ navigation, route }) => {
                     style={{ flexDirection: "row", justifyContent: "center" }}
                 >
                     <AppButton
-                        onPress={() => navigation.popToTop()}
-                        buttonText="Continuar"
+                        onPress={() => navigation.goBack()}
+                        buttonText="Regresar"
                     />
                 </View>
 
@@ -151,7 +145,8 @@ const styles = StyleSheet.create({
         textAlign: "center",
         color: primaryColor,
         fontSize: 15,
-        fontFamily:'lato-regular'
+        fontFamily:'lato-regular',
+        marginTop: '5%'
     },
     link: {
         color: "#1c3252",
@@ -209,4 +204,4 @@ const tutorOrStudent = StyleSheet.create({
     },
 });
 
-export { Advertisement };
+export { PendingTutor };

@@ -20,9 +20,9 @@ import { dataFetcher } from "../../constants/dataFetcher";
 import { primaryColor, secondaryColor } from "../../constants/Colors";
 //import DocPicker, { types } from "react-native-document-picker";
 import * as DocumentPicker from 'expo-document-picker';
-import AntIcon from "react-native-vector-icons/AntDesign";
+import MatIcon from "react-native-vector-icons/MaterialIcons";
 
-const Advertisement = ({ navigation, route }) => {
+const RejectedTutor = ({ navigation, route }) => {
     //Estos son los datos del usuario que se pasaron a través de react navigation.
     //const { tutorData } = route.params;
 
@@ -46,18 +46,17 @@ const Advertisement = ({ navigation, route }) => {
                     </TouchableOpacity>
 
                     <Text style={[styles.text, styles.h1]}>
-                        {"Pre-registro"}
+                        {"Rechazado"}
                     </Text>
                     {/* Cambiar el texto segun sea tutor o estudiante */}
-                    <Text style={[styles.text, {fontFamily:'lato-regular'}]}>
-                        {"Sube los archivos que avalen tus estudios."}
-                    </Text>
+                    
                 </View>
                 <View
                     style={{
                         flex: 1,
                         flexDirection: "row",
                         justifyContent: "center",
+                        alignItems:'center',
                         marginVertical: 30,
                     }}
                 >
@@ -69,12 +68,13 @@ const Advertisement = ({ navigation, route }) => {
                             borderRadius: 12,
                             flexDirection: "column",
                             alignItems: "center",
+                            justifyContent:'center'
                         }}
                     >
-                        <AntIcon
-                            style={{ marginVertical: 30 }}
+                        <MatIcon
+                            style={{ marginBottom: 30 }}
                             color={primaryColor}
-                            name="checkcircle"
+                            name="error"
                             size={70}
                         />
                         <Text
@@ -86,18 +86,14 @@ const Advertisement = ({ navigation, route }) => {
                                 fontFamily:'lato-regular'
                             }}
                         >
-                            Tu pre-registro concluyó con éxito.
+                            Hubo un error con tu registro.
                         </Text>
-                        <Text
-                            style={[styles.textInSquare, {fontSize:20, marginTop:30, marginBottom:10}]}
-                        >
-                            RECUERDA!
-                        </Text>
+                        
                         <Text style={styles.textInSquare}>
-                            Necesitas enviar los documentos que avalen tu conocimiento para que sean evaluados por un pedagogo al siguiente correo: 
-                        </Text>
+                        No cubriste los puntos necesarios para ser registrado exitosamente como tutor.
+                        </Text >
+                        <Text style={styles.textInSquare}>Si crees que esto es un error, ponte en contacto <Text style={{fontFamily:'lato-bold'}}>{"al siguiente correo".toUpperCase()}</Text> con nosotros para poder ayudarte.</Text>
                         <Text style={[styles.textInSquare, { marginVertical:20,color:secondaryColor, fontSize:19, fontFamily:'lato-bold'}]}>sergioarangag@gmail.com</Text> 
-                        <Text style={[styles.textInSquare, {color:secondaryColor, fontFamily:'lato-bold', marginTop:20}]}>Tus documentos tienen que ser enviados con el correo que hiciste tu pre-registro.</Text>
                     </View>
                 </View>
 
@@ -107,8 +103,8 @@ const Advertisement = ({ navigation, route }) => {
                     style={{ flexDirection: "row", justifyContent: "center" }}
                 >
                     <AppButton
-                        onPress={() => navigation.popToTop()}
-                        buttonText="Continuar"
+                        onPress={() => navigation.goBack()}
+                        buttonText="Regresar"
                     />
                 </View>
 
@@ -151,7 +147,8 @@ const styles = StyleSheet.create({
         textAlign: "center",
         color: primaryColor,
         fontSize: 15,
-        fontFamily:'lato-regular'
+        fontFamily:'lato-regular',
+        marginTop: '5%'
     },
     link: {
         color: "#1c3252",
@@ -209,4 +206,4 @@ const tutorOrStudent = StyleSheet.create({
     },
 });
 
-export { Advertisement };
+export { RejectedTutor };

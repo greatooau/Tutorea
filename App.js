@@ -4,6 +4,8 @@ import {
     LoginRegister,
     Login,
     Advertisement,
+    PendingTutor,
+    RejectedTutor
 } from "./src/screens/Screens";
 import {
     EditProfile,
@@ -17,7 +19,7 @@ import {
     EditTutorProfile,
     AddInsights,
     AddContacts,
-    AddStudies
+    AddStudies,
 } from "./src/screens/TabNavigation/TabScreens";
 //Navigation
 import { NavigationContainer } from "@react-navigation/native";
@@ -63,7 +65,15 @@ const App = () => {
 
                         <Stack.Screen component={Register} name="Register" />
                         <Stack.Screen component={Login} name="Login" />
+                        <Stack.Screen
+                            component={PendingTutor}
+                            name="PendingTutor"
+                        />
 
+                        <Stack.Screen
+                            component={RejectedTutor}
+                            name="RejectedTutor"
+                        />
                         <Stack.Screen
                             component={BottomBarTutors}
                             name="TabTutor"

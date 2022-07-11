@@ -31,7 +31,7 @@ const Register = ({ navigation }) => {
     //Para el registro de tutor
     const [fee, setFee] = useState("");
     const [category, setCategory] = useState("");
-    const [specialization, setSpecialization] = useState("");
+    const [specialization, setSpecialization] = useState("default");
 
     const onSubmitHandler = async (e) => {
         if (password !== confirmPassword) {
@@ -42,8 +42,7 @@ const Register = ({ navigation }) => {
             name === "" ||
             username === "" ||
             email === "" ||
-            lastname === "" ||
-            category === "" /* ||
+            lastname === "" /* ||
             sex === '' ||
             bornDate === ''||
             phone === '' */
@@ -141,9 +140,10 @@ const Register = ({ navigation }) => {
         setUserName("");
         setEmail("");
         setPassword("");
+        setConfirmPassword("");
         setName("");
         setLastname("");
-        setCategory("");
+        setCategory("default");
         setSpecialization("");
         setFee("")
         setIsTutor(isTutor ? false : true);
@@ -307,8 +307,9 @@ const Register = ({ navigation }) => {
                             fieldName='Categoria'
                             setProp={setCategory}
                             value={category}
+                            customPrompt="Selecciona una categoría"
                             items={[
-                                { id: 45, name: "Selecciona tu categoria", value: "" },
+                                { id: 8, name: "Seleccione una categoría", value: "default" },
                                 { id: 1, name: "Ciencias Sociales", value: "social sciences" },
                                 { id: 2, name: "Ciencia", value: "science" },
                                 { id: 3, name: "Tecnología", value: "technology" },

@@ -10,7 +10,8 @@ const Dropdown = ({
     value,
     setProp,
     center,
-    items
+    items,
+    customPrompt
 }) => {
     /* const [ visible, setVisible ] = useState(false);
     const [text, setText] = useState(''); */
@@ -34,7 +35,10 @@ const Dropdown = ({
             >
                 <View style={[styles.form]}>
                 <Picker
-                    style={{width:'100%'}}
+                    
+                    mode="dialog"
+                    prompt={customPrompt}
+                    style={{width:'100%', color:'#707070', fontFamily:'lato-regular'}}
                     dropdownIconColor={primaryColor}
                     //ref={pickerRef}
                     selectedValue={value}

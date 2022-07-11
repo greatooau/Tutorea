@@ -31,6 +31,7 @@ const ChangePassword = ({ navigation }) => {
             confirmNewPassword !== "" &&
             actualPassword !== ""
         ) {
+            console.log('pipi')
             const config = {
                 headers: {
                     Authorization: `Bearer ${account.token}`,

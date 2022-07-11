@@ -50,7 +50,8 @@ const AddContacts = ({ navigation }) => {
                 Alert.alert("Enhorabuena", "El contacto ha sido agregado con éxito");
                 account.contacts.push({
                     id:ObjectId,
-                    name: type
+                    type,
+                    contact
                 })
                 setContact('')
                 setType('')

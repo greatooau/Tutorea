@@ -51,7 +51,8 @@ const AddStudies = ({ navigation }) => {
                 Alert.alert("Enhorabuena", "El estudio ha sido agregado con éxito");
                 account.contacts.push({
                     id:ObjectId,
-                    name: study
+                    study,
+                    school
                 })
                 setSchool('');
                 setStudy('');

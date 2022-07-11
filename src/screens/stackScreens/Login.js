@@ -40,6 +40,8 @@ const Login = ({ navigation }) => {
                 });
 
                 if (response.status === 200) {
+
+                    setIsLoading(false);
                     //Si la response es exitosa hacer un getme para obtener 
                     //los datos del usuario/tutor actual
                     const secResponse = await dataFetcher.get(`api/${route}/me`, {
@@ -60,8 +62,8 @@ const Login = ({ navigation }) => {
                                 setIsLoading(false);
                                 navigation.navigate("TabTutor");
                                 break;
-                            case 'RECHAZADO': /* navigation.navigate('RejectedTutor') */ break;
-                            case 'PENDIENTE': /* navigation.navigate('RejectedTutor') */ break;
+                            case 'RECHAZADO': navigation.navigate('RejectedTutor'); break;
+                            case 'PENDIENTE': navigation.navigate('PendingTutor'); break;
                         }
 
                     } else {
