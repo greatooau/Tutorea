@@ -13,7 +13,7 @@ import MatIcon from "react-native-vector-icons/MaterialIcons";
 import React from "react";
 import { primaryColor, secondaryColor } from "../../../constants/Colors";
 import { FormTextInput } from "../../../components/Components";
-import { AppButton } from "../../../components/Components";
+import { AppButton, Dropdown } from "../../../components/Components";
 import { AccountContext } from "../../../context/AccountContext";
 import { useContext, useState } from "react";
 import { dataFetcher } from "../../../constants/dataFetcher";
@@ -21,16 +21,28 @@ import { dataFetcher } from "../../../constants/dataFetcher";
 const EditTutorProfile = ({ navigation }) => {
     const [account, setAccount] = useContext(AccountContext);
 
-    const [username, setUserName] = useState(account.username ? account.username : '');
-    const [email, setEmail] = useState(account.email ? account.email : '');
-    const [name, setName] = useState(account.name ? account.name : '');
-    const [lastname, setLastname] = useState(account.lastname ? account.lastname : '');
-    const [sex, setSex] = useState(account.sex ? account.sex : '');
-    const [bornDate, setBornDate] = useState(account.born_date ? account.born_date : '');
-    const [category, setCategory] = useState(account.category ? account.category : '');
-    const [fee, setFee] = useState(account.fee ? account.fee : '');
-    const [specialization, setSpecialization] = useState(account.specialization ? account.specialization : '');
-    const [bankAccount, setBankAccount] = useState(account.bank_account ? account.bank_account : '');
+    const [username, setUserName] = useState(
+        account.username ? account.username : ""
+    );
+    const [email, setEmail] = useState(account.email ? account.email : "");
+    const [name, setName] = useState(account.name ? account.name : "");
+    const [lastname, setLastname] = useState(
+        account.lastname ? account.lastname : ""
+    );
+    const [sex, setSex] = useState(account.sex ? account.sex : "");
+    const [bornDate, setBornDate] = useState(
+        account.born_date ? account.born_date : ""
+    );
+    const [category, setCategory] = useState(
+        account.category ? account.category : ""
+    );
+    const [fee, setFee] = useState(account.fee ? `${account.fee}` : "");
+    const [specialization, setSpecialization] = useState(
+        account.specialization ? account.specialization : ""
+    );
+    const [bankAccount, setBankAccount] = useState(
+        account.bank_account ? account.bank_account : ""
+    );
 
     const onSubmitHandler = async () => {
         if (
@@ -59,7 +71,7 @@ const EditTutorProfile = ({ navigation }) => {
                 category,
                 specialization,
                 fee,
-                bank_account:bankAccount
+                bank_account: bankAccount,
             };
             const response = await dataFetcher.put(
                 "api/tutors/" + account.id,
@@ -108,6 +120,8 @@ const EditTutorProfile = ({ navigation }) => {
             </View>
 
             <View style={styles.form}>
+                
+                
                 <FormTextInput
                     placeholder="Escribe tu nombre de usuario"
                     fieldName="Nombre de usuario"
@@ -137,19 +151,36 @@ const EditTutorProfile = ({ navigation }) => {
                     setProp={setLastname}
                 />
 
-                <FormTextInput
-                    placeholder="Selecciona tu sexo"
-                    fieldName="Sexo"
+                <Dropdown
+                    fieldName='Sexo'
                     fieldNameColor={primaryColor}
-                    value={sex}
                     setProp={setSex}
+                    value={sex}
+                    items={[
+                        { id: 1, name: "Selecciona tu sexo", value: "" },
+                        { id: 2, name: "masculino", value: "masculino" },
+                        { id: 3, name: "femenino", value: "femenino" },
+                    ]}
                 />
+                
                 <FormTextInput
                     placeholder="Selecciona tu fecha de nacimiento"
                     fieldName="Fecha de nacimiento"
                     fieldNameColor={primaryColor}
                     value={bornDate}
                     setProp={setBornDate}
+                />
+                <Dropdown
+                    fieldName='Categoria'
+                    fieldNameColor={primaryColor}
+                    setProp={setCategory}
+                    value={category}
+                    items={[
+                        { id: 1, name: "Ciencias Sociales", value: "social sciences" },
+                        { id: 2, name: "Ciencia", value: "science" },
+                        { id: 3, name: "Tecnología", value: "technology" },
+                        { id: 4, name: "Idiomas", value: "languages" },
+                    ]}
                 />
                 <FormTextInput
                     placeholder="Escribe tu especializacion"
@@ -167,14 +198,7 @@ const EditTutorProfile = ({ navigation }) => {
                     numeric={true}
                     maxLength={3}
                 />
-                <FormTextInput
-                    placeholder="Escribe tu categoría"
-                    fieldName="Categoría"
-                    fieldNameColor={primaryColor}
-                    value={category}
-                    setProp={setCategory}
-                    maxLength={20}
-                />
+
                 <FormTextInput
                     placeholder="Escribe tu cuenta bancaria"
                     fieldName="Cuenta bancaria"
@@ -185,14 +209,29 @@ const EditTutorProfile = ({ navigation }) => {
                     numeric={true}
                 />
             </View>
-            
-                <Text style={styles.sections}>Estudios</Text>
-                <AppButton secondary={true} buttonText="Agregar" onPress={() => navigation.navigate('AddStudies')}/>
-                <Text style={[styles.sections, {marginTop:20}]}>Conocimientos</Text>
-                <AppButton secondary={true} buttonText="Agregar" onPress={() => navigation.navigate('AddInsights')}/>
-                <Text style={[styles.sections, {marginTop:20}]}>Contactos</Text>
-                <AppButton style={{marginBottom:60}} secondary={true} buttonText="Agregar" onPress={() => navigation.navigate('AddContacts')}/>
-            
+
+            <Text style={styles.sections}>Estudios</Text>
+            <AppButton
+                secondary={true}
+                buttonText="Agregar"
+                onPress={() => navigation.navigate("AddStudies")}
+            />
+            <Text style={[styles.sections, { marginTop: 20 }]}>
+                Conocimientos
+            </Text>
+            <AppButton
+                secondary={true}
+                buttonText="Agregar"
+                onPress={() => navigation.navigate("AddInsights")}
+            />
+            <Text style={[styles.sections, { marginTop: 20 }]}>Contactos</Text>
+            <AppButton
+                style={{ marginBottom: 60 }}
+                secondary={true}
+                buttonText="Agregar"
+                onPress={() => navigation.navigate("AddContacts")}
+            />
+
             <View
                 style={{
                     flexDirection: "column",
@@ -204,7 +243,20 @@ const EditTutorProfile = ({ navigation }) => {
                     buttonText="Guardar"
                     onPress={() => {
                         onSubmitHandler();
-                        setAccount({...account, username, email, name, lastname, sex, born_date: bornDate, phone, specialization, fee, category, bank_account:bankAccount})
+                        setAccount({
+                            ...account,
+                            username,
+                            email,
+                            name,
+                            lastname,
+                            sex,
+                            born_date: bornDate,
+                            phone,
+                            specialization,
+                            fee,
+                            category,
+                            bank_account: bankAccount,
+                        });
 
                         navigation.goBack();
                     }}
@@ -228,7 +280,7 @@ const styles = StyleSheet.create({
         backgroundColor: primaryColor,
         flexDirection: "row",
     },
-    sections: {marginLeft:'15%', fontFamily:'lato-regular', fontSize:15},
+    sections: { marginLeft: "15%", fontFamily: "lato-regular", fontSize: 15 },
     titleText: {
         color: "#fff",
         fontFamily: "lato-bold",

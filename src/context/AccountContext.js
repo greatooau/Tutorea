@@ -5,7 +5,7 @@ export const AccountContext = createContext();
 export const AccountProvider = ({ children }) => {
     
     const [account, setAccount] = useState(
-         {
+         /* {
             "_id": "6265b4675bce7cc5b6b7d342",
             "name": "Luis",
             "lastname": "Flores",
@@ -65,11 +65,24 @@ export const AccountProvider = ({ children }) => {
             "status": "APROBADO",
             "password": "$2a$10$k2Qze.7E8vtMtNZwlBb8vO6U/QD7kW5HL3XeiRxTVJRDFzU67bNaS",
             "username": "juan12345"
-        } 
+        }  */
+
+        {
+            "id": "62c2fc9557bdd3750b4a9484",
+            "name": "Pedro",
+            "lastname": "Rodriguez",
+            "email": "juan2@gmail.com",
+            "profile_picture": "https://imgs.search.brave.com/GBLxonEYI_OAMfApYU2-OV4YFKkMARAbq8mFZoscPbo/rs:fit:1200:1200:1/g:ce/aHR0cHM6Ly9jZWFj/b3BpbmlvbmVzLmVz/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDE5/LzAzL3VzZXItNi5w/bmc",
+            "username": "juan12345",
+            "sex": "masculino",
+            "born_date": "21/05/2002",
+            "phone": "8121809293",
+            "myTutors": []
+        }
     )
-    useEffect(()=>{
+    /* useEffect(()=>{
         console.log(account)
-      },[account])
+      },[account]) */
     return(
         <AccountContext.Provider value={[account, setAccount]}>
             { children }

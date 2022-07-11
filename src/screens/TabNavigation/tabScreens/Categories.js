@@ -26,6 +26,9 @@ const Categories = ({ navigation, route }) => {
                 const response = await dataFetcher.get(`api/tutors/category/${encodeURI(category === 'Tecnología' ? 'technology' : category === 'Ciencia' ? 'science' : category === 'Ciencias sociales' ? 'social sciences' : category === 'Idiomas' && 'languages')}`,{
                     headers:{
                         'Authorization': `Bearer ${user.token}`
+                    },
+                    params:{
+                        status:"APROBADO"
                     }
                 });
                 setTutors(response.data)

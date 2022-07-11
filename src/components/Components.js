@@ -7,3 +7,4 @@ export { TutorCard } from "./TutorCard";
 export { StudyCard } from "./StudyCard";
 export { Insights } from "./Insights";
 export { StudentCard } from "./StudentCard";
+export { Dropdown } from './DropdownComponent'

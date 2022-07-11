@@ -6,11 +6,11 @@ import {
     ScrollView,
     StatusBar,
     ActivityIndicator,
-    Alert,
+    Alert
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
-import { Arrow, AppButton, FormTextInput } from "../../components/Components";
+import { Arrow, AppButton, FormTextInput, Dropdown } from "../../components/Components";
 import { dataFetcher } from "../../constants/dataFetcher";
 import { primaryColor } from "../../constants/Colors";
 
@@ -29,7 +29,7 @@ const Register = ({ navigation }) => {
     const [state, setState] = useState("");
 
     //Para el registro de tutor
-    const [fee, setFee] = useState(0);
+    const [fee, setFee] = useState("");
     const [category, setCategory] = useState("");
     const [specialization, setSpecialization] = useState("");
 
@@ -42,7 +42,8 @@ const Register = ({ navigation }) => {
             name === "" ||
             username === "" ||
             email === "" ||
-            lastname === "" /* ||
+            lastname === "" ||
+            category === "" /* ||
             sex === '' ||
             bornDate === ''||
             phone === '' */
@@ -81,7 +82,7 @@ const Register = ({ navigation }) => {
                     //MENTIRA HAY QUE CAMBIAR ESTA MADRE PORQUE SIGUEN MAS PANTALLAS
                     const tutorData = {
                         ...commonData,
-                        fee: 0,
+                        fee,
                         category,
                         specialization
                     };
@@ -144,7 +145,7 @@ const Register = ({ navigation }) => {
         setLastname("");
         setCategory("");
         setSpecialization("");
-        setFee(0)
+        setFee("")
         setIsTutor(isTutor ? false : true);
     };
     return (
@@ -302,11 +303,17 @@ const Register = ({ navigation }) => {
                             value={fee}
                             numeric={true}
                         />
-                        <FormTextInput
-                            placeholder="Selecciona tu categoria"
-                            fieldName="Categoría"
+                        <Dropdown
+                            fieldName='Categoria'
                             setProp={setCategory}
                             value={category}
+                            items={[
+                                { id: 45, name: "Selecciona tu categoria", value: "" },
+                                { id: 1, name: "Ciencias Sociales", value: "social sciences" },
+                                { id: 2, name: "Ciencia", value: "science" },
+                                { id: 3, name: "Tecnología", value: "technology" },
+                                { id: 4, name: "Idiomas", value: "languages" },
+                            ]}
                         />
                         <FormTextInput
                             placeholder="Selecciona tu especializacion"

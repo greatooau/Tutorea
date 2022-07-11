@@ -30,7 +30,7 @@ const Hiring = ({navigation, route}) => {
           if (response.status === 200) {
               await dataFetcher.post(
                'api/transactions',
-               { tutor: tutor._id, user: user.id, sesions:sesion, total: `${tutor.fee * parseInt(sesion)} MXN` },
+               { tutor: tutor._id, user: user.id, sesions:sesion, total: `${tutor.fee * parseInt(sesion)} MXN`, activo:1 },
                config)
               const response2 = await dataFetcher.get(
               `api/tutors/${tutor._id}`,
@@ -48,9 +48,6 @@ const Hiring = ({navigation, route}) => {
       }catch(error){
           console.log(error)
           Alert.alert("Error", "Ha ocurrido un error.", [{}])
-      }
-      finally{
-        setIsLoading(false)
       }
   };
 

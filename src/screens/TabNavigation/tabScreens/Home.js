@@ -24,6 +24,9 @@ const Home = ({navigation}) => {
             const response = await dataFetcher.get('api/tutors',{
                 headers:{
                     'Authorization': `Bearer ${account.token}`
+                },
+                params:{
+                    status:"APROBADO"
                 }
             });
             if (isMounted){ setTutors(response.data)}

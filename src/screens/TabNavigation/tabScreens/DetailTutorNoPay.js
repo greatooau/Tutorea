@@ -76,7 +76,9 @@ const DetailTutorNoPay = ({ navigation, route }) => {
             tutorId:`${route.params.id}`
         }
         const response = await dataFetcher.post(`/api/users/mytutors/delete`, body, config)
-        
+        //if (response.status)
+        //TODO: HACER QUE SE INACTIVE EN TRANSACCIONES PARA QUE YA NO LE APA
+        //REZCA AL OTRO MENSO EN LA PANTALLA
             setTutors(tutors.length > 1  ? tutors.filter(item => item._id !== route.params.id): [])
             const newMyTutors = user.myTutors.filter(item => item !== route.params.id)
             setUser({...user, myTutors: newMyTutors})

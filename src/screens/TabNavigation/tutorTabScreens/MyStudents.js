@@ -15,6 +15,8 @@ import { useContext, useState, useEffect } from "react";
 import { TutorsStudentsContext } from "../../../context/TutorsContext";
 import { AccountContext } from "../../../context/AccountContext";
 import { dataFetcher } from "../../../constants/dataFetcher";
+import MaIcon from 'react-native-vector-icons/MaterialIcons'
+
 
 const MyStudents = ({ navigation }) => {
     const [account, setUser] = useContext(AccountContext);
@@ -66,7 +68,31 @@ const MyStudents = ({ navigation }) => {
                     <Text style={[styles.greetingText, {fontSize:30}]}>{account.name} {account.lastname} !</Text>
                     <Text style={{marginTop:30, fontFamily:'lato-bold', fontSize:26, color:primaryColor}}>Mis alumnos</Text>
                 </View>
-
+                {students.length < 1 && 
+                <View
+                    style={{
+                        flexDirection: "column",
+                        flex: 1,
+                        alignItems: "center",
+                        marginTop:'15%',
+                        
+                    }}
+                >
+                    <MaIcon name="mood-bad" size={100} color={primaryColor}/>
+                    <Text
+                        style={{
+                            fontFamily: "lato-regular",
+                            fontSize: 20,
+                            width:'60%',
+                            textAlign:'center',
+                            color:primaryColor
+                        }}
+                    >
+                        Usted no cuenta con alumnos actualmente.
+                    </Text>
+                    
+                </View>}
+                
             </>
         );
     };

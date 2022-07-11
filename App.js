@@ -54,7 +54,7 @@ const App = () => {
             <TutorsProvider>
                 <NavigationContainer>
                     <Stack.Navigator screenOptions={{ headerShown: false }}>
-
+                        
                         <Stack.Screen
                             component={LoginRegister}
                             name="LoginRegister"

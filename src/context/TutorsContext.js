@@ -56,9 +56,9 @@ export const TutorsProvider = ({ children }) => {
   } */
   ])
 
-  useEffect(()=>{
+  /* useEffect(()=>{
     console.log(tutors)
-  },[tutors])
+  },[tutors]) */
   return (
     <TutorsStudentsContext.Provider value={[tutors, setTutors]}>
       { children }
