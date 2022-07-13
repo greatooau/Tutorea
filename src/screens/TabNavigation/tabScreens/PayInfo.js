@@ -61,7 +61,7 @@ const PayInfo = ({ navigation }) => {
       }
   }
   return (
-    <ScrollView>
+    <ScrollView style={styles.rectangle}>
       <StatusBar backgroundColor="#000"/>
       <View style={styles.title}>
           <Text style={styles.titleText}>Tutorea</Text>
