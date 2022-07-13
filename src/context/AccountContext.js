@@ -80,9 +80,9 @@ export const AccountProvider = ({ children }) => {
             "myTutors": []
         } */
     )
-    useEffect(()=>{
+    /* useEffect(()=>{
         console.log(account)
-      },[account])
+      },[account]) */
     return(
         <AccountContext.Provider value={[account, setAccount]}>
             { children }
