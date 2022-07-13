@@ -7,11 +7,20 @@ import { TutorsStudentsContext } from '../../../context/TutorsContext'
 import { AccountContext } from '../../../context/AccountContext'
 import { Arrow, AppButton, StudyCard, Insights }from '../../../components/Components'
 import {dataFetcher} from '../../../constants/dataFetcher'
-
+import { Alert } from 'react-native';
 const DetailTutorPay = ({ navigation, route }) => {
     const [tutors, setTutors] = useContext(TutorsStudentsContext)
     const [ tutor, setTutor] = useState({insights:[], studies:[], stars:0});
     const [user] = useContext(AccountContext);
+
+    const onNavigate = () => {
+        if(user.payData){
+            navigation.navigate('Hiring',{tutor:{...tutor}})
+        }else{
+            Alert.alert("Error", "Llene su info de pago primero.");
+        }
+        
+    }
 
     useEffect(() => {
         const fetchTutors = async() =>{
@@ -80,7 +89,7 @@ const DetailTutorPay = ({ navigation, route }) => {
                     <View style={{paddingBottom:'20%', paddingTop:'10%'}}>
                         {user.myTutors.includes(route.params.id) ? 
                         (<AppButton buttonText="Contratado" disabled={true} secondary={true}/>) :
-                        (<AppButton buttonText="Contratar servicios" onPress={() => navigation.navigate('Hiring',{tutor:{...tutor}})} secondary={true}/>)}
+                        (<AppButton buttonText="Contratar servicios" onPress={onNavigate} secondary={true}/>)}
                         
                     </View>
                 </View>)}
