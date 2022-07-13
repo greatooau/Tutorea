@@ -79,10 +79,15 @@ const MyProfile = ({ navigation }) => {
                             Cambiar contraseña
                         </Text>
                     </TouchableOpacity>
-                    {/*<TouchableOpacity onPress={()=> navigation.navigate('PayInfo')} activeOpacity={0.7} style={styles.individualOption}>
-          <MatIcon style={styles.icon} size={50} name="payment" color={secondaryColor}/>
-          <Text style={styles.secondaryColorText}>Información de pago</Text>
-</TouchableOpacity>*/}
+                    {
+                        account.role === "user" && (
+                            <TouchableOpacity onPress={()=> navigation.navigate('PayInfo')} activeOpacity={0.7} style={styles.individualOption}>
+                                <MatIcon style={styles.icon} size={50} name="payment" color={secondaryColor}/>
+                                <Text style={styles.secondaryColorText}>Información de pago</Text>
+                            </TouchableOpacity>
+                        )
+                    }
+                    
                     <TouchableOpacity
                         onPress={() => navigation.navigate("LoginRegister")}
                         activeOpacity={0.7}
