@@ -1,28 +1,55 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, Alert } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { primaryColor, secondaryColor }from '../../../constants/Colors'
 import { AccountContext } from '../../../context/AccountContext'
 import { useContext, useState } from 'react'
-import { FormTextInput, AppButton, Arrow } from '../../../components/Components'
+import { FormTextInput, AppButton, Arrow, Dropdown } from '../../../components/Components'
 import { dataFetcher } from '../../../constants/dataFetcher'
 import { TutorsStudentsContext } from '../../../context/TutorsContext'
 
 const Hiring = ({navigation, route}) => {
 
-  const [user, setUser] = useContext(AccountContext);
-  const tutor = route.params.tutor
-  const [sesion, setSesion] = useState('1')
-  const [ isLoading, setIsLoading ] = useState(null);
-  const [tutors,setTutors ] = useContext(TutorsStudentsContext)
-
-  const onSubmitHandler = async (e) => {
+    const [schedule, setSchedule] = useState({});
+    const [user, setUser] = useContext(AccountContext);
+    const tutor = route.params.tutor
+    const [sesion, setSesion] = useState('1')
+    const [ isLoading, setIsLoading ] = useState(null);
+    const [tutors,setTutors ] = useContext(TutorsStudentsContext)
+    const [hours, setHours] = useState([
+        { id: 99, name: "Seleccione una hora", value: "default" },
+        { id: 1, name: "8:00 - 9:00", value: "H1" },
+        { id: 2, name: "9:00 - 10:00", value: "H2" },
+        { id: 3, name: "10:00 - 11:00", value: "H3" },
+        { id: 4, name: "11:00 - 12:00", value: "H4" },
+        { id: 5, name: "12:00 - 13:00", value: "H5" },
+        { id: 6, name: "13:00 - 14:00", value: "H6" },
+        { id: 7, name: "14:00 - 15:00", value: "H7" },
+        { id: 8, name: "15:00 - 16:00", value: "H8" },
+        { id: 9, name: "16:00 - 17:00", value: "H9" },
+        { id: 10, name: "17:00 - 18:00", value: "H10" },
+        { id: 11, name: "18:00 - 19:00", value: "H11" },
+        { id: 12, name: "19:00 - 20:00", value: "H12"}]);
+    const [sessions, setSessions] = useState([]);
+    useEffect(() => {
+        setIsLoading(true);
+        const getSessions = async() => {
+            const response = await dataFetcher.get("api/tutors/"+ tutor._id + "/sessions")
+            if(response.status === 200) {
+                setIsLoading(false)
+                setSessions(response.data)
+            }
+        }
+        getSessions()
+    },
+    [])
+    const onSubmitHandler = async (e) => {
       setIsLoading(true);
       try{
-          const config = {
-            headers:{
-              'Authorization': `Bearer ${user.token}`
+            const config = {
+                headers:{
+                'Authorization': `Bearer ${user.token}`
+                }
             }
-          }
           const response = await dataFetcher.post("api/users/mytutors", {
               tutorId: tutor._id,
           }, 
@@ -38,7 +65,11 @@ const Hiring = ({navigation, route}) => {
               const data = response2.data;
               tutors.push(data)
               user.myTutors.push(tutor._id)
-
+              console.log(schedule)
+              await dataFetcher.post('api/tutors/sessions',{
+                  code:schedule,
+                  tutor:tutor._id
+              })
               setIsLoading(false);
               navigation.navigate('Home')
           }
@@ -52,7 +83,7 @@ const Hiring = ({navigation, route}) => {
   };
 
   return (
-    <ScrollView>
+    <ScrollView style={styles.rectangle}>
       <View style={styles.title}>
           <Text style={styles.titleText}>Tutorea</Text>
           <View style={{flexDirection:'row',flex:1, justifyContent:'flex-end', alignItems:'center'}}>
@@ -60,15 +91,22 @@ const Hiring = ({navigation, route}) => {
             <TouchableOpacity activeOpacity={0.7}><Image source={{uri: user.profile_picture}} style={styles.userImage}/></TouchableOpacity>
           </View>
       </View>
-      <View style={styles.rectangle}>
+      <View >
 
         <View style={styles.titleJuan}>
-          <TouchableOpacity onPress={() => navigation.goBack()}><Arrow color={primaryColor}/></TouchableOpacity>
-          <Text style={[styles.titleJuanText, {fontSize:30, color:primaryColor, fontFamily:'lato-regular'}]}>Contratación</Text>
-          <FormTextInput center={false} maxLength={2} fieldName="Sesiones" fieldNameColor={primaryColor} setProp={setSesion} value={sesion}/>
+            <TouchableOpacity onPress={() => navigation.goBack()}><Arrow color={primaryColor}/></TouchableOpacity>
+            <Text style={[styles.titleJuanText, {fontSize:30, color:primaryColor, marginBottom:20, fontFamily:'lato-regular'}]}>Contratación</Text>
+                <Dropdown
+                    fieldName='Hora'
+                    setProp={setSchedule}
+                    value={schedule}
+                    customPrompt="Selecciona el horario de tu sesion"
+                    items={hours}
+                    fieldNameColor={primaryColor}
+                    //TODO: FALTA MANDAR LA POST REQUEST PARA HACER UNA ASIGNACION DE HORARIO
+                />
         </View>
         <View style={{flexDirection:'row', justifyContent:'center'}}>
-
           <View style={card.card}>
             <View style={card.imageContainer}>
               <Image 
@@ -87,13 +125,13 @@ const Hiring = ({navigation, route}) => {
          
         </View>
         <View style={{flexDirection:'row',justifyContent:'center'}}>
-          <View style={notice.noticeContainer}>
+          {/* <View style={notice.noticeContainer}>
               <Text style={notice.noticeHey}>Hey!</Text>
               <Image source={require('../../../../assets/img/png/sms.png')} style={notice.noticeImage}/>
               <Text style={notice.description}>Al concretarse el pago, un mensaje SMS llegará al número asociado a esta cuenta, con el contacto de tu tutor.</Text>
-          </View>
+          </View> */}
         </View>
-        <View style={{paddingBottom:50}}><AppButton secondary={true} onPress={onSubmitHandler} buttonText="Confirmar pago"/></View>
+        <View style={{paddingBottom:50, marginTop:30}}><AppButton secondary={true} onPress={onSubmitHandler} buttonText="Confirmar pago"/></View>
         
       </View>
       
@@ -186,6 +224,7 @@ const styles = StyleSheet.create({
   rectangle:{
     flex:1,
     backgroundColor:'#CAD7DF'.toLowerCase(),
+    borderWidth:1
   },
   userImage:{
     width:80,

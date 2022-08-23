@@ -35,12 +35,10 @@ const Dropdown = ({
             >
                 <View style={[styles.form]}>
                 <Picker
-                    
                     mode="dialog"
                     prompt={customPrompt}
                     style={{width:'100%', color:'#707070', fontFamily:'lato-regular'}}
                     dropdownIconColor={primaryColor}
-                    //ref={pickerRef}
                     selectedValue={value}
                     onValueChange={(itemValue, itemIndex) =>
                         setProp(itemValue)
