@@ -6,37 +6,29 @@ import { useContext, useState } from 'react'
 import { FormTextInput, AppButton, Arrow, Dropdown } from '../../../components/Components'
 import { dataFetcher } from '../../../constants/dataFetcher'
 import { TutorsStudentsContext } from '../../../context/TutorsContext'
+import { HoursContext } from '../../../context/HoursContext'
 
 const Hiring = ({navigation, route}) => {
 
+    const date = new Date()
+    const day = date.getDate() + 1
+    const month = date.getMonth()
+    const year = date.getFullYear()
     const [schedule, setSchedule] = useState({});
     const [user, setUser] = useContext(AccountContext);
     const tutor = route.params.tutor
     const [sesion, setSesion] = useState('1')
     const [ isLoading, setIsLoading ] = useState(null);
-    const [tutors,setTutors ] = useContext(TutorsStudentsContext)
-    const [hours, setHours] = useState([
-        { id: 99, name: "Seleccione una hora", value: "default" },
-        { id: 1, name: "8:00 - 9:00", value: "H1" },
-        { id: 2, name: "9:00 - 10:00", value: "H2" },
-        { id: 3, name: "10:00 - 11:00", value: "H3" },
-        { id: 4, name: "11:00 - 12:00", value: "H4" },
-        { id: 5, name: "12:00 - 13:00", value: "H5" },
-        { id: 6, name: "13:00 - 14:00", value: "H6" },
-        { id: 7, name: "14:00 - 15:00", value: "H7" },
-        { id: 8, name: "15:00 - 16:00", value: "H8" },
-        { id: 9, name: "16:00 - 17:00", value: "H9" },
-        { id: 10, name: "17:00 - 18:00", value: "H10" },
-        { id: 11, name: "18:00 - 19:00", value: "H11" },
-        { id: 12, name: "19:00 - 20:00", value: "H12"}]);
-    const [sessions, setSessions] = useState([]);
+    const [tutors, setTutors ] = useContext(TutorsStudentsContext)
+    const [hours, setHours] = useContext(HoursContext);
     useEffect(() => {
         setIsLoading(true);
         const getSessions = async() => {
             const response = await dataFetcher.get("api/tutors/"+ tutor._id + "/sessions")
             if(response.status === 200) {
                 setIsLoading(false)
-                setSessions(response.data)
+                const newArr = hours.filter(ar => !response.data.find(rm => (rm.code === ar.value) ))
+                setHours(newArr)
             }
         }
         getSessions()
@@ -59,17 +51,23 @@ const Hiring = ({navigation, route}) => {
                'api/transactions',
                { tutor: tutor._id, user: user.id, sesions:sesion, total: `${tutor.fee * parseInt(sesion)} MXN`, activo:1 },
                config)
-              const response2 = await dataFetcher.get(
-              `api/tutors/${tutor._id}`,
-              config);
-              const data = response2.data;
-              tutors.push(data)
-              user.myTutors.push(tutor._id)
-              console.log(schedule)
-              await dataFetcher.post('api/tutors/sessions',{
+              
+
+              if (!user.myTutors.includes(tutor._id)) {
+                const { data } = await dataFetcher.get(`api/tutors/${tutor._id}`,config);
+                tutors.push(data)
+                user.myTutors.push(tutor._id)
+              }
+
+              const response3 = await dataFetcher.post('api/tutors/sessions',{
                   code:schedule,
                   tutor:tutor._id
               })
+              if(response3.status === 200) {
+                const { data } = await dataFetcher.get("api/tutors/"+ tutor._id + "/sessions")
+                const newArr = hours.filter(ar => !data.find(rm => (rm.code === ar.value) ))
+                setHours(newArr)
+              }
               setIsLoading(false);
               navigation.navigate('Home')
           }
@@ -100,7 +98,7 @@ const Hiring = ({navigation, route}) => {
                     fieldName='Hora'
                     setProp={setSchedule}
                     value={schedule}
-                    customPrompt="Selecciona el horario de tu sesion"
+                    customPrompt={"Selecciona el horario de tu sesion para el " + day + '/' + month + '/' + year}
                     items={hours}
                     fieldNameColor={primaryColor}
                     //TODO: FALTA MANDAR LA POST REQUEST PARA HACER UNA ASIGNACION DE HORARIO

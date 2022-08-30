@@ -153,7 +153,7 @@ const DetailTutorNoPay = ({ navigation, route }) => {
                     </View>
                     );
                 }}
-                keyExtractor={(item) => item.id}
+                keyExtractor={(item) => item.id === undefined ? item._id : item.id}
                 ListHeaderComponent={header}
                 ListFooterComponent={
                         <View>
@@ -164,7 +164,7 @@ const DetailTutorNoPay = ({ navigation, route }) => {
                             <Text style={styles.studies}>Conocimientos</Text>
                             <View style={styles.insights}>
                                 {tutor.insights.map((element) => (
-                                <Insights key={element.id} name={element.name} />
+                                <Insights key={element.id === undefined ? element._id : element.id} name={element.name} />
                                 ))}
                             </View>
                             <View style={{paddingBottom:'20%', paddingTop:'10%'}}>

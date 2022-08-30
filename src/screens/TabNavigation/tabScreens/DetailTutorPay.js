@@ -75,7 +75,7 @@ const DetailTutorPay = ({ navigation, route }) => {
                 nestedScrollEnabled={true}
                 data={tutor.studies}
                 renderItem={({item})=>{return <View style={{flexDirection:'row', justifyContent:'center'}}><StudyCard photo={item.img} name={item.study} schoolName={item.school}/></View>}}
-                keyExtractor={(item) => item.id}
+                keyExtractor={(item) => item.id === undefined ? item._id : item.id}
                 ListHeaderComponent={header}
                 ListFooterComponent={(
                 <View>
@@ -83,14 +83,14 @@ const DetailTutorPay = ({ navigation, route }) => {
                     <View style={styles.starsContainer}>{starsDisplayed.map(element => element)}</View>
                     <Text style={styles.studies}>Conocimientos</Text>
                     <View style={styles.insights}>
-                        {tutor.insights.map(element => <Insights key={element.id} name={element.name}/>)}
+                        {tutor.insights.map(element => <Insights key={element.id === undefined ? element._id : element.id} name={element.name}/>)}
                     </View>
                     <Text style={styles.studies}>Tarifa por sesión: {tutor.fee} MXN</Text>
                     <View style={{paddingBottom:'20%', paddingTop:'10%'}}>
-                        {user.myTutors.includes(route.params.id) ? 
+                        {/* {user.myTutors.includes(route.params.id) ? 
                         (<AppButton buttonText="Contratado" disabled={true} secondary={true}/>) :
-                        (<AppButton buttonText="Contratar servicios" onPress={onNavigate} secondary={true}/>)}
-                        
+                        (<AppButton buttonText="Contratar servicios" onPress={onNavigate} secondary={true}/>)} */}
+                        <AppButton buttonText="Contratar servicios" onPress={onNavigate} secondary={true}/>
                     </View>
                 </View>)}
                 initialNumToRender={4}
