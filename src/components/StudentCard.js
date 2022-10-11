@@ -7,9 +7,10 @@ const StudentCard = ({
     lastname,
     phone,
     profilePhoto,
-    stars,
+    schedule,
     sesions,
     onPress,
+
 }) => {
     
     return (
@@ -34,6 +35,9 @@ const StudentCard = ({
                 <Text>{sesions}</Text>
                 <Text style={{ color: "#707070" }}>Contacto</Text>
                 <Text> + 52 {phone}</Text>
+                <Text>{schedule !== null ? "Fecha:" + schedule.split("##")[0] : ""}</Text>
+                <Text>{schedule !== null ? "Hora: " + schedule.split("##")[1] : ""}</Text>
+                
             </View>
         </TouchableOpacity>
     );
@@ -45,7 +49,7 @@ const styles = StyleSheet.create({
     card: {
         backgroundColor: "#fff",
         width: "90%",
-        height: 150,
+        height: 180,
         borderRadius: 9,
         flexDirection: "row",
         marginTop: 30,

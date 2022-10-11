@@ -127,6 +127,7 @@ const MyStudents = ({ navigation }) => {
                                     /* stars={item.stars} */
                                     sesions={item.sesions}
                                     phone={item.student.phone}
+                                    schedule = {item.session.schedule}
                                 />
                             </View>
                         );

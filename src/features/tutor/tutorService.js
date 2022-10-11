@@ -54,7 +54,6 @@ const addToMyTutors = async (token, tutorId) => {
 }
 // Login user
 const getOneTutor = async (token, tutorId) => {
-    console.log(tutorId)
     const config = {
         headers: {
             'Authorization':`Bearer ${token}`

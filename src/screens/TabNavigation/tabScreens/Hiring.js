@@ -47,11 +47,6 @@ const Hiring = ({navigation, route}) => {
           }, 
           config);
           if (response.status === 200) {
-              await dataFetcher.post(
-               'api/transactions',
-               { tutor: tutor._id, user: user.id, sesions:sesion, total: `${tutor.fee * parseInt(sesion)} MXN`, activo:1 },
-               config)
-              
 
               if (!user.myTutors.includes(tutor._id)) {
                 const { data } = await dataFetcher.get(`api/tutors/${tutor._id}`,config);
@@ -63,11 +58,19 @@ const Hiring = ({navigation, route}) => {
                   code:schedule,
                   tutor:tutor._id
               })
+
               if(response3.status === 200) {
+                
+                await dataFetcher.post(
+                  'api/transactions',
+                  { tutor: tutor._id, user: user.id, sesions:sesion, total: `${tutor.fee * parseInt(sesion)} MXN`, activo:1, session: response3.data.session_id},
+                  config)
+
                 const { data } = await dataFetcher.get("api/tutors/"+ tutor._id + "/sessions")
                 const newArr = hours.filter(ar => !data.find(rm => (rm.code === ar.value) ))
                 setHours(newArr)
               }
+              
               setIsLoading(false);
               navigation.navigate('Home')
           }
